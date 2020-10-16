@@ -1,21 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
+  View,
   StyleSheet,
   Text,
   ActivityIndicator,
-} from "react-native";
+} from 'react-native';
 
-import Button from "../components/Button";
-import mapStyle from "./../config/mapStyle";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import useAuth from "../auth/useAuth";
-import usersApi from "../api/users";
+import Button from '../components/Button';
+import useAuth from '../auth/useAuth';
+import usersApi from '../api/users';
+import useLocation from '../hooks/useLocation';
+import Map from '../components/Map';
 
 function HomeScreen(props) {
   const { user, logOut } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState();
+  const location = useLocation();
+
+  const deltas = {
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.0121,
+  };
+
+  const region = {
+    ...location,
+    ...deltas,
+  };
 
   const getUserData = async () => {
     const data = await usersApi.getUser(user.uid);
@@ -33,30 +45,25 @@ function HomeScreen(props) {
         {isLoading ? (
           <ActivityIndicator />
         ) : (
-          <>
-            <Text>Welcome {userData["username"]}</Text>
+          <View style={styles.welcome}>
+            <Text>Welcome {userData['username']}</Text>
             <Button title="Logout" onPress={() => logOut()} />
-          </>
+          </View>
         )}
+        <Map region={region}></Map>
       </SafeAreaView>
-      <MapView
-        style={styles.map}
-        provider={PROVIDER_GOOGLE}
-        initialRegion={{
-          latitude: 57.70547,
-          longitude: 11.968415,
-          latitudeDelta: 0.015, //avgör hur inzoomat det ska vara från början
-          longitudeDelta: 0.0121,
-        }}
-        customMapStyle={mapStyle}
-      ></MapView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  map: {
+  container: {
     flex: 1,
+  },
+  welcome: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '30%',
   },
 });
 
