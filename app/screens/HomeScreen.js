@@ -7,7 +7,6 @@ import {
 } from "react-native";
 
 import Button from "../components/Button";
-import getEnvVars from "../../environment";
 import mapStyle from "./../config/mapStyle";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import useAuth from "../auth/useAuth";
@@ -17,8 +16,6 @@ function HomeScreen(props) {
   const { user, logOut } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState();
-  const [locationList, setLocationList] = useState();
-  const { googlePlacesApiKey } = getEnvVars();
 
   const getUserData = async () => {
     const data = await usersApi.getUser(user.uid);
@@ -26,19 +23,8 @@ function HomeScreen(props) {
     setIsLoading(false);
   };
 
-  const getLocationList = async () => {
-    const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=formatted_address,name,rating,opening_hours,geometry&key=${googlePlacesApiKey}`
-    );
-    const json = await response.json();
-    setLocationList(json);
-  };
-
   useEffect(() => {
     getUserData();
-    getLocationList();
-
-    console.log(locationList);
   }, []);
 
   return (
