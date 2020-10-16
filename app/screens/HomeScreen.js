@@ -9,6 +9,8 @@ import {
 import useAuth from "../auth/useAuth";
 import Button from "../components/Button";
 import usersApi from "../api/users";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import mapStyle from "./../config/mapStyle";
 
 function HomeScreen(props) {
   const { user, logOut } = useAuth();
@@ -43,6 +45,17 @@ function HomeScreen(props) {
         <>
           <Text>Welcome {userData["username"]}</Text>
           <Button title="Logout" onPress={() => logOut()} />
+          <MapView
+            style={styles.map}
+            provider={PROVIDER_GOOGLE}
+            initialRegion={{
+              latitude: 57.70547,
+              longitude: 11.968415,
+              latitudeDelta: 0.015, //avgör hur inzoomat det ska vara från början
+              longitudeDelta: 0.0121,
+            }}
+            customMapStyle={mapStyle}
+          ></MapView>
         </>
       )}
     </SafeAreaView>
@@ -50,7 +63,9 @@ function HomeScreen(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  map: {
+    flex: 1,
+  },
 });
 
 export default HomeScreen;
