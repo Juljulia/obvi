@@ -12,17 +12,27 @@ import usersApi from "../api/users";
 
 function HomeScreen(props) {
   const { user, logOut } = useAuth();
-  const [userData, setUserData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [userData, setUserData] = useState();
+  const [locationList, setLocationList] = useState();
 
-  const getData = async () => {
+  const getUserData = async () => {
     const data = await usersApi.getUser(user.uid);
     setUserData(data);
     setIsLoading(false);
   };
 
+  const getLocationList = async () => {
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon/ditto");
+    const json = await response.json();
+    setLocationList(json);
+  };
+
   useEffect(() => {
-    getData();
+    getUserData();
+    getLocationList();
+
+    console.log(locationList);
   }, []);
 
   return (
