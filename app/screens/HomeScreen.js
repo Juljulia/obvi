@@ -6,10 +6,22 @@ import Button from '../components/Button';
 import usersApi from '../api/users';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import mapStyle from './../config/mapStyle';
+import useLocation from '../hooks/useLocation';
 
 function HomeScreen(props) {
   const { user, logOut } = useAuth();
   const [userData, setUserData] = useState();
+  const location = useLocation();
+
+  const deltas = {
+    latitudeDelta: 0.015, //avgör hur inzoomat det ska vara från början
+    longitudeDelta: 0.0121,
+  };
+
+  const region = {
+    ...location,
+    ...deltas,
+  };
 
   const getData = async () => {
     const data = await usersApi.getUser(user.uid);
@@ -37,13 +49,10 @@ function HomeScreen(props) {
       <MapView
         style={styles.map}
         provider={PROVIDER_GOOGLE}
-        initialRegion={{
-          latitude: 57.70547,
-          longitude: 11.968415,
-          latitudeDelta: 0.015, //avgör hur inzoomat det ska vara från början
-          longitudeDelta: 0.0121,
-        }}
+        region={region}
         customMapStyle={mapStyle}
+        showsMyLocationButton
+        showsUserLocation
       ></MapView>
     </>
   );
