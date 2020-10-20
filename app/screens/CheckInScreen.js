@@ -41,6 +41,7 @@ function CheckInScreen() {
 
   useEffect(() => {
     getPlaces();
+    getCheckIns();
   }, [location]);
 
   const searchPlaces = async (value) => {
@@ -78,8 +79,6 @@ function CheckInScreen() {
     };
 
     db.collection("checkIns")
-      .doc(user.uid)
-      .collection("userCheckIns")
       .doc()
       .set(place)
       .then(function () {
@@ -89,6 +88,19 @@ function CheckInScreen() {
         console.error("Error writing document: ", error);
       });
     navigation.navigate(routes.HOME);
+  };
+
+  const getCheckIns = async () => {
+    const docRef = await db
+      .collection("checkIns")
+      .where("userId", "==", user.uid)
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+        });
+      });
   };
 
   return (
