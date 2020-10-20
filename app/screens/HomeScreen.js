@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   View,
   StyleSheet,
   Text,
   ActivityIndicator,
-} from 'react-native';
+} from "react-native";
 
-import Button from '../components/Button';
-import useAuth from '../auth/useAuth';
-import usersApi from '../api/users';
-import useLocation from '../hooks/useLocation';
-import Map from '../components/Map';
+import Button from "../components/Button";
+import useAuth from "../auth/useAuth";
+import usersApi from "../api/users";
+import useLocation from "../hooks/useLocation";
+import Map from "../components/Map";
 
 function HomeScreen(props) {
   const { user, logOut } = useAuth();
@@ -19,7 +19,6 @@ function HomeScreen(props) {
   const [userData, setUserData] = useState();
   const location = useLocation();
   const [region, setRegion] = useState();
-
   const deltas = {
     latitudeDelta: 0.015,
     longitudeDelta: 0.0121,
@@ -31,6 +30,15 @@ function HomeScreen(props) {
     setIsLoading(false);
   };
 
+  // useEffect(() => {
+  //   if (location) {
+  //     setRegion({
+  //       ...location,
+  //       ...deltas,
+  //     });
+  //   }
+  // }, [location]);
+
   useEffect(() => {
     if (location) {
       setRegion({
@@ -38,14 +46,12 @@ function HomeScreen(props) {
         ...deltas,
       });
     }
+
+    getUserData();
   }, [location]);
 
-  console.log(location);
   console.log(region);
-
-  useEffect(() => {
-    getUserData();
-  }, []);
+  console.log(location);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -53,7 +59,7 @@ function HomeScreen(props) {
         <ActivityIndicator />
       ) : (
         <View style={styles.welcome}>
-          <Text>Welcome {userData['username']}</Text>
+          <Text>Welcome {userData["username"]}</Text>
           <Button title="Logout" onPress={() => logOut()} />
         </View>
       )}
@@ -68,9 +74,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   welcome: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '30%',
+    alignItems: "center",
+    justifyContent: "center",
+    height: "30%",
   },
 });
 
