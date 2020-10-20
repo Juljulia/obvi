@@ -18,15 +18,11 @@ function HomeScreen(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState();
   const location = useLocation();
+  const [region, setRegion] = useState();
 
   const deltas = {
     latitudeDelta: 0.015,
     longitudeDelta: 0.0121,
-  };
-
-  const region = {
-    ...location,
-    ...deltas,
   };
 
   const getUserData = async () => {
@@ -36,23 +32,34 @@ function HomeScreen(props) {
   };
 
   useEffect(() => {
+    if (location) {
+      setRegion({
+        ...location,
+        ...deltas,
+      });
+    }
+  }, [location]);
+
+  console.log(location);
+  console.log(region);
+
+  useEffect(() => {
     getUserData();
   }, []);
 
   return (
-    <>
-      <SafeAreaView style={styles.container}>
-        {isLoading ? (
-          <ActivityIndicator />
-        ) : (
-          <View style={styles.welcome}>
-            <Text>Welcome {userData['username']}</Text>
-            <Button title="Logout" onPress={() => logOut()} />
-          </View>
-        )}
-        <Map region={region}></Map>
-      </SafeAreaView>
-    </>
+    <SafeAreaView style={styles.container}>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <View style={styles.welcome}>
+          <Text>Welcome {userData['username']}</Text>
+          <Button title="Logout" onPress={() => logOut()} />
+        </View>
+      )}
+
+      {region && <Map style={styles.map} region={region}></Map>}
+    </SafeAreaView>
   );
 }
 
