@@ -2,6 +2,7 @@
 export default Object.freeze({
   LOGIN: "Login",
   HOME: "Home",
+  MAP: "Map",
   REGISTER: "Register",
   REGISTERRULES: "Register Rules",
   REGISTERNAME: "Register Name",

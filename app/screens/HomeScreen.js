@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
 import Button from "../components/Button";
+import mapStyle from "./../config/mapStyle";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import navigation from "../navigation/rootNavigation";
+import routes from "../navigation/routes";
+import Screen from "../components/Screen";
 import useAuth from "../auth/useAuth";
 import usersApi from "../api/users";
 import useLocation from "../hooks/useLocation";
-import Map from "../components/Map";
-import Screen from "../components/Screen";
 
 function HomeScreen(props) {
   const { user, logOut } = useAuth();
@@ -14,6 +17,7 @@ function HomeScreen(props) {
   const [userData, setUserData] = useState();
   const location = useLocation();
   const [region, setRegion] = useState();
+
   const deltas = {
     latitudeDelta: 0.015,
     longitudeDelta: 0.0121,
@@ -24,15 +28,6 @@ function HomeScreen(props) {
     setUserData(data);
     setIsLoading(false);
   };
-
-  // useEffect(() => {
-  //   if (location) {
-  //     setRegion({
-  //       ...location,
-  //       ...deltas,
-  //     });
-  //   }
-  // }, [location]);
 
   useEffect(() => {
     if (location) {
@@ -55,14 +50,27 @@ function HomeScreen(props) {
           <Button title="Logout" onPress={() => logOut()} />
         </View>
       )}
-
-      {region && <Map style={styles.map} region={region}></Map>}
+      {region && (
+        <MapView
+          style={styles.map}
+          provider={PROVIDER_GOOGLE}
+          region={region}
+          customMapStyle={mapStyle}
+          showsMyLocationButton
+          showsUserLocation
+          region={region}
+          onPress={() => navigation.navigate(routes.MAP)}
+        ></MapView>
+      )}
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  map: {
     flex: 1,
   },
   welcome: {

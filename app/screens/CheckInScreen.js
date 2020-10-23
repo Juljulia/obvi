@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
   View,
   Alert,
-} from "react-native";
-import * as firebase from "firebase";
-import "firebase/firestore";
+} from 'react-native';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
 
-import colors from "../config/colors";
-import getEnvVars from "../../environment";
-import ListItemSeparator from "../components/lists/ListItemSeparator";
-import navigation from "../navigation/rootNavigation";
-import routes from "../navigation/routes";
-import Screen from "../components/Screen";
-import Text from "../components/Text";
-import TextInput from "../components/TextInput";
-import useAuth from "../auth/useAuth";
-import useLocation from "../hooks/useLocation";
+import getEnvVars from '../../environment';
+import ListItemSeparator from '../components/lists/ListItemSeparator';
+import navigation from '../navigation/rootNavigation';
+import routes from '../navigation/routes';
+import Screen from '../components/Screen';
+import Text from '../components/Text';
+import TextInput from '../components/TextInput';
+import useAuth from '../auth/useAuth';
+import useLocation from '../hooks/useLocation';
 
 function CheckInScreen() {
   const { user } = useAuth();
@@ -31,7 +30,7 @@ function CheckInScreen() {
   const getPlaces = async () => {
     if (location) {
       const response = await fetch(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location["latitude"]},${location["longitude"]}&radius=1000&key=${googlePlacesApiKey}`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location['latitude']},${location['longitude']}&radius=1000&key=${googlePlacesApiKey}`
       );
       const json = await response.json();
       setPlaces(json.results);
@@ -51,54 +50,57 @@ function CheckInScreen() {
     const json = await response.json();
     setPlaces(json.candidates);
     setShowPlaces(true);
-    if (json.status === "INVALID_REQUEST") {
+    if (json.status === 'INVALID_REQUEST') {
       setShowPlaces(false);
       getPlaces();
     }
   };
 
   const handlePress = (item) => {
-    Alert.alert("Check-in", "Are you sure you want to check-in?", [
+    Alert.alert('Check-in', 'Are you sure you want to check-in?', [
       {
-        text: "No",
-        style: "cancel",
+        text: 'No',
+        style: 'cancel',
       },
-      { text: "Yes", onPress: () => storeCheckIn(item) },
+      { text: 'Yes', onPress: () => storeCheckIn(item) },
     ]);
   };
 
   const storeCheckIn = (item) => {
-    console.log(item);
+    // console.log(item);
     const place = {
       name: item.name,
-      geometry: item.geometry,
+      location: {
+        latitude: item.geometry.location.lat,
+        longitude: item.geometry.location.lng,
+      },
       // adress: item.formatted_address,
       placeId: item.place_id,
       categories: item.types,
       userId: user.uid,
     };
 
-    db.collection("checkIns")
+    db.collection('checkIns')
       .doc()
       .set(place)
       .then(function () {
-        console.log("Document successfully written!");
+        console.log('Document successfully written!');
       })
       .catch(function (error) {
-        console.error("Error writing document: ", error);
+        console.error('Error writing document: ', error);
       });
     navigation.navigate(routes.HOME);
   };
 
   const getCheckIns = async () => {
     const docRef = await db
-      .collection("checkIns")
-      .where("userId", "==", user.uid)
+      .collection('checkIns')
+      .where('userId', '==', user.uid)
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, " => ", doc.data());
+          // console.log(doc.id, ' => ', doc.data());
         });
       });
   };
