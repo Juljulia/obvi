@@ -1,62 +1,103 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import mapStyle from './../config/mapStyle';
+import React, { useState, useEffect } from 'react';
+import { Image, StyleSheet } from 'react-native';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
-const places = [
-  {
-    title: 'Julia',
-    description: 'Nordic Wellness 1',
-    coords: {
-      latitude: 57.700153,
-      longitude: 11.984456,
-    },
-  },
-  {
-    title: 'Emelie',
-    description: 'Nordic Wellness 2',
-    coords: {
-      latitude: 57.69906,
-      longitude: 11.974119,
-    },
-  },
-  {
-    title: 'Sally',
-    description: 'Nordic Wellness 3',
-    coords: {
-      latitude: 57.704691,
-      longitude: 11.969216,
-    },
-  },
-  {
-    title: 'Glenn',
-    description: 'Nordic Wellness 4',
-    coords: {
-      latitude: 57.704079,
-      longitude: 11.959517,
-    },
-  },
-];
+import usersApi from '../api/users';
+import mapStyle from './../config/mapStyle';
+import MarkerModal from '../components/MarkerModal';
+import useLocation from '../hooks/useLocation';
 
-function Map({ region }) {
+const deltas = {
+  latitudeDelta: 0.015,
+  longitudeDelta: 0.0121,
+};
+
+function Map(props) {
+  const [checkIns, setCheckIns] = useState([]);
+  const db = firebase.firestore();
+  const location = useLocation();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalInfo, setModalInfo] = useState();
+  const [region, setRegion] = useState();
+
+  const getCheckIns = async () => {
+    let places = [];
+    await db
+      .collection('checkIns')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // console.log(doc.id, ' => ', doc.data());
+          places.push(doc.data());
+        });
+      });
+    setCheckIns(places);
+  };
+
+  const getMarkerInfo = async (checkIn) => {
+    const location = checkIn.location;
+    const user = await usersApi.getUser(checkIn.userId);
+    setRegion({
+      ...location,
+      ...deltas,
+    });
+    setModalInfo({ ...user, ...checkIn });
+    setModalVisible(true);
+  };
+
+  useEffect(() => {
+    if (location) {
+      setRegion({
+        ...location,
+        ...deltas,
+      });
+    }
+
+    getCheckIns();
+  }, [location]);
+
   return (
-    <MapView
-      style={styles.map}
-      provider={PROVIDER_GOOGLE}
-      region={region}
-      customMapStyle={mapStyle}
-      showsMyLocationButton
-      showsUserLocation
-    >
-      {places &&
-        places.map((place, i) => (
-          <Marker key={i} title={place.name} coordinate={place.coords} />
-        ))}
-    </MapView>
+    <>
+      <MapView
+        style={styles.map}
+        provider={PROVIDER_GOOGLE}
+        region={region}
+        customMapStyle={mapStyle}
+        showsMyLocationButton
+        showsUserLocation
+        onPanDrag={() => setModalVisible(false)}
+      >
+        {checkIns &&
+          checkIns.map((checkIn, i) => (
+            <Marker
+              key={i}
+              coordinate={checkIn.location}
+              onPress={() => getMarkerInfo(checkIn)}
+            >
+              <Image
+                source={require('../assets/profile_image.png')}
+                style={{ height: 35, width: 35 }}
+              />
+            </Marker>
+          ))}
+      </MapView>
+      {modalVisible && (
+        <MarkerModal
+          modalVisible={modalVisible}
+          name={modalInfo.name}
+          username={modalInfo.username}
+        ></MarkerModal>
+      )}
+    </>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   map: {
     flex: 1,
   },
