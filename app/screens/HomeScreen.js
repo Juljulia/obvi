@@ -46,7 +46,7 @@ function HomeScreen(props) {
         <ActivityIndicator />
       ) : (
         <View style={styles.welcome}>
-          <Text>Welcome {/*userData["username"]*/}</Text>
+          <Text>Welcome {userData["username"]}</Text>
           <Button title="Logout" onPress={() => logOut()} />
         </View>
       )}
