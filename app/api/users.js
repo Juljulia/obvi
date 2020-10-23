@@ -8,7 +8,6 @@ const getUser = async (userId) => {
     const docRef = await db.collection("users").doc(userId).get();
     if (docRef.exists) {
       data = docRef.data();
-      // console.log("Document data:", data);
     } else {
       console.log("No such document!");
       data = null;
