@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  SafeAreaView,
-  View,
-  StyleSheet,
-  Text,
-  ActivityIndicator,
-} from "react-native";
+import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 
 import Button from "../components/Button";
 import useAuth from "../auth/useAuth";
 import usersApi from "../api/users";
 import useLocation from "../hooks/useLocation";
 import Map from "../components/Map";
+import Screen from "../components/Screen";
 
 function HomeScreen(props) {
   const { user, logOut } = useAuth();
@@ -50,22 +45,19 @@ function HomeScreen(props) {
     getUserData();
   }, [location]);
 
-  console.log(region);
-  console.log(location);
-
   return (
-    <SafeAreaView style={styles.container}>
-      {isLoading ? (
+    <Screen style={styles.container}>
+      {isLoading && !userData ? (
         <ActivityIndicator />
       ) : (
         <View style={styles.welcome}>
-          <Text>Welcome {userData["username"]}</Text>
+          <Text>Welcome {/*userData["username"]*/}</Text>
           <Button title="Logout" onPress={() => logOut()} />
         </View>
       )}
 
       {region && <Map style={styles.map} region={region}></Map>}
-    </SafeAreaView>
+    </Screen>
   );
 }
 
