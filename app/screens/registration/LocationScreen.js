@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import * as Location from "expo-location";
 import * as firebase from "firebase";
