@@ -51,7 +51,7 @@ function AppPicker({
           />
         </View>
       </TouchableWithoutFeedback>
-      <Modal visible={modalVisible} animationType="slide">
+      <Modal visible={modalVisible} animationType="fade">
         <Screen>
           <Button title="Close" onPress={() => setModalVisible(false)} />
           <FlatList
