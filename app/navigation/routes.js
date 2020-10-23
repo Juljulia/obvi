@@ -2,7 +2,8 @@
 export default Object.freeze({
   // LISTING_DETAILS: "ListingDetails",
   // LISTING_EDIT: "ListingEdit",
-  LOGIN: "Login",
-  HOME: "Home",
-  REGISTER: "Register",
+  LOGIN: 'Login',
+  HOME: 'Home',
+  REGISTER: 'Register',
+  MAP: 'Map',
 });
