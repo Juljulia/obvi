@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
-import Button from '../components/Button';
-import mapStyle from './../config/mapStyle';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import routes from '../navigation/routes';
-import useAuth from '../auth/useAuth';
-import usersApi from '../api/users';
-import useLocation from '../hooks/useLocation';
-import navigation from '../navigation/rootNavigation';
+import Button from "../components/Button";
+import mapStyle from "./../config/mapStyle";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import navigation from "../navigation/rootNavigation";
+import routes from "../navigation/routes";
+import Screen from "../components/Screen";
+import useAuth from "../auth/useAuth";
+import usersApi from "../api/users";
+import useLocation from "../hooks/useLocation";
 
 function HomeScreen(props) {
   const { user, logOut } = useAuth();
@@ -46,12 +41,12 @@ function HomeScreen(props) {
   }, [location]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      {isLoading ? (
+    <Screen style={styles.container}>
+      {isLoading && !userData ? (
         <ActivityIndicator />
       ) : (
         <View style={styles.welcome}>
-          <Text>Welcome {userData['username']}</Text>
+          <Text>Welcome {/*userData["username"]*/}</Text>
           <Button title="Logout" onPress={() => logOut()} />
         </View>
       )}
@@ -67,7 +62,7 @@ function HomeScreen(props) {
           onPress={() => navigation.navigate(routes.MAP)}
         ></MapView>
       )}
-    </SafeAreaView>
+    </Screen>
   );
 }
 
@@ -79,9 +74,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   welcome: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '30%',
+    alignItems: "center",
+    justifyContent: "center",
+    height: "30%",
   },
 });
 

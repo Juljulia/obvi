@@ -11,6 +11,7 @@ const getUser = async (userId) => {
       // console.log("Document data:", data);
     } else {
       console.log("No such document!");
+      data = null;
     }
   } catch (error) {
     console.log("Error getting document:", error);
