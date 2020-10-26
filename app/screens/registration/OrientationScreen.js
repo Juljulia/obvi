@@ -23,7 +23,7 @@ function OrientationScreen({ navigation, route }) {
       }
     >
       <TextInput
-        value={orientation}
+        value={orientation["orientation"]}
         onChangeText={(orientation) => setOrientation({ orientation })}
         placeholder={"Start typing"}
       />
