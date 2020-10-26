@@ -6,11 +6,6 @@ import AuthContext from "./context";
 export default useAuth = () => {
   const { user, setUser } = useContext(AuthContext);
 
-  const logIn = () => {
-    const user = firebase.auth().currentUser;
-    setUser(user);
-  };
-
   const logOut = () => {
     setUser(null);
     firebase
@@ -19,5 +14,5 @@ export default useAuth = () => {
       .then(() => console.log("User signed out!"));
   };
 
-  return { user, logIn, logOut };
+  return { user, logOut };
 };

@@ -17,16 +17,12 @@ import Screen from "./app/components/Screen";
 export default function App() {
   const [user, setUser] = useState();
   const [userData, setUserData] = useState();
-  const [initializing, setInitializing] = useState(true);
   const db = firebase.firestore();
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       setUser(user);
-    } else {
-      setUser(null);
     }
-    if (initializing) setInitializing(false);
   });
 
   const getUserData = () => {
@@ -38,7 +34,7 @@ export default function App() {
             let data = doc.data();
             setUserData(data);
           } else {
-            setUserData(null);
+            setUserData("");
           }
         });
     } else {
@@ -50,13 +46,13 @@ export default function App() {
     getUserData();
   }, [user]);
 
-  if (initializing) {
+  if (user && userData === null) {
     return (
       <Screen>
         <ActivityIndicator size="large" />
       </Screen>
     );
-  } else if (user && userData === null) {
+  } else if (user && userData === "") {
     return (
       <AuthContext.Provider value={{ user, setUser }}>
         <NavigationContainer ref={navigationRef} theme={NavigationTheme}>
@@ -68,7 +64,7 @@ export default function App() {
     return (
       <AuthContext.Provider value={{ user, setUser }}>
         <NavigationContainer ref={navigationRef} theme={NavigationTheme}>
-          {user ? <AppNavigator /> : <AuthNavigator />}
+          {user && userData !== null ? <AppNavigator /> : <AuthNavigator />}
         </NavigationContainer>
       </AuthContext.Provider>
     );
