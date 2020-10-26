@@ -24,7 +24,7 @@ function PassionsScreen({ navigation, route }) {
       }
     >
       <TextInput
-        value={passions}
+        value={passions["passions"]}
         onChangeText={(passions) => setPassions({ passions })}
         placeholder={"Start typing"}
       />

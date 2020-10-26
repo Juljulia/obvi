@@ -8,9 +8,12 @@ import routes from "../../navigation/routes";
 function PhotoScreen({ navigation, route }) {
   const { username, pronoun, orientation, passions } = route.params;
   const [image, setImage] = useState();
+  //Pass an empty string if the user doesn't choose an image
+  const [imageData, setImageData] = useState("");
 
   const handleImage = (uri) => {
     setImage(uri);
+    setImageData(uri);
   };
 
   return (
@@ -24,7 +27,7 @@ function PhotoScreen({ navigation, route }) {
           pronoun,
           orientation,
           passions,
-          image,
+          imageData,
         })
       }
     >

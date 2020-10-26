@@ -22,7 +22,7 @@ function PronounScreen({ navigation, route }) {
       }
     >
       <TextInput
-        value={pronoun}
+        value={pronoun["pronoun"]}
         onChangeText={(pronoun) => setPronoun({ pronoun })}
         placeholder={"Start typing"}
       />
