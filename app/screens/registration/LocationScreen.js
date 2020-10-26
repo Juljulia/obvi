@@ -10,7 +10,7 @@ import Text from "../../components/Text";
 import useAuth from "../../auth/useAuth";
 
 function LocationScreen({ route }) {
-  const { orientation, passions, pronoun, username, image } = route.params;
+  const { orientation, passions, pronoun, username, imageData } = route.params;
   const { user } = useAuth();
   const db = firebase.firestore();
 
@@ -19,7 +19,7 @@ function LocationScreen({ route }) {
     passions,
     pronoun,
     username,
-    image,
+    imageData,
     email: user.email,
     uid: user.uid,
   };
