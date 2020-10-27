@@ -18,7 +18,9 @@ function FormScreen({ title, onPress, page, totalPages, children }) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    paddingTop: 64,
+  },
 });
 
 export default FormScreen;

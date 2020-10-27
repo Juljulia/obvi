@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { StyleSheet } from "react-native";
 import * as firebase from "firebase";
 import "firebase/storage";
@@ -8,6 +8,7 @@ import ImagePicker from "../../components/ImagePicker";
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
 import useAuth from "../../auth/useAuth";
+import NavArrow from "../../components/NavArrow";
 
 function PhotoScreen({ navigation, route }) {
   const { username, pronoun, orientation, passions } = route.params;
@@ -15,6 +16,24 @@ function PhotoScreen({ navigation, route }) {
   const [image, setImage] = useState();
   //Pass an empty string if the user doesn't choose an image
   const [imageData, setImageData] = useState("");
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <NavArrow
+          onPress={() =>
+            navigation.navigate(routes.REGISTERLOCATION, {
+              username,
+              pronoun,
+              orientation,
+              passions,
+              imageData,
+            })
+          }
+        />
+      ),
+    });
+  }, [navigation]);
 
   const handleImage = (uri) => {
     setImage(uri);
