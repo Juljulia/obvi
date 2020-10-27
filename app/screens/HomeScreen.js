@@ -4,14 +4,13 @@ import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import Button from "../components/Button";
 import mapStyle from "./../config/mapStyle";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-import navigation from "../navigation/rootNavigation";
 import routes from "../navigation/routes";
 import Screen from "../components/Screen";
 import useAuth from "../auth/useAuth";
 import usersApi from "../api/users";
 import useLocation from "../hooks/useLocation";
 
-function HomeScreen(props) {
+function HomeScreen({ navigation }) {
   const { user, logOut } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState();

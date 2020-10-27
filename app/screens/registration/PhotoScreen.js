@@ -18,6 +18,7 @@ function PhotoScreen({ navigation, route }) {
 
   const handleImage = (uri) => {
     setImage(uri);
+    setImageData(uri);
   };
 
   const uploadImage = async () => {
