@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { StyleSheet } from "react-native";
 
 import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import Text from "../../components/Text";
+import PopUp from "../../components/PopUp";
+import Screen from "../../components/Screen";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import NavArrow from "../../components/NavArrow";
 
 function NameScreen({ navigation }) {
   const [username, setUsername] = useState("");
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <NavArrow
+          onPress={() =>
+            navigation.navigate(routes.REGISTERPRONOUN, { ...username })
+          }
+        />
+      ),
+    });
+  }, [navigation]);
 
   return (
     <FormScreen
@@ -18,6 +34,10 @@ function NameScreen({ navigation }) {
       page="2"
       totalPages="7"
     >
+      <PopUp
+        text="Whatever you don't care to answer, you skip."
+        style={styles.popUp}
+      />
       <TextInput
         placeholder={"Name"}
         onChangeText={(username) => setUsername({ username })}
@@ -30,7 +50,10 @@ function NameScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  popUp: {
+    position: "absolute",
+    right: 54,
+  },
 });
 
 export default NameScreen;
