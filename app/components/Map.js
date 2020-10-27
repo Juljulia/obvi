@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Image, StyleSheet } from 'react-native';
-import * as firebase from 'firebase';
-import 'firebase/firestore';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import React, { useState, useEffect } from "react";
+import { Image, StyleSheet } from "react-native";
+import * as firebase from "firebase";
+import "firebase/firestore";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
-import usersApi from '../api/users';
-import mapStyle from './../config/mapStyle';
-import MarkerModal from '../components/MarkerModal';
-import useLocation from '../hooks/useLocation';
+import usersApi from "../api/users";
+import mapStyle from "./../config/mapStyle";
+import MarkerModal from "../components/MarkerModal";
+import useLocation from "../hooks/useLocation";
 
 const deltas = {
   latitudeDelta: 0.015,
@@ -19,13 +19,13 @@ function Map(props) {
   const db = firebase.firestore();
   const location = useLocation();
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalInfo, setModalInfo] = useState();
+  const [modalInfo, setModalInfo] = useState({});
   const [region, setRegion] = useState();
 
   const getCheckIns = async () => {
     let places = [];
     await db
-      .collection('checkIns')
+      .collection("checkIns")
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -45,6 +45,7 @@ function Map(props) {
     });
     setModalInfo({ ...user, ...checkIn });
     setModalVisible(true);
+    console.log(modalInfo);
   };
 
   useEffect(() => {
@@ -77,7 +78,7 @@ function Map(props) {
               onPress={() => getMarkerInfo(checkIn)}
             >
               <Image
-                source={require('../assets/profile_image.png')}
+                source={require("../assets/profile_image.png")}
                 style={{ height: 35, width: 35 }}
               />
             </Marker>
@@ -88,6 +89,8 @@ function Map(props) {
           modalVisible={modalVisible}
           name={modalInfo.name}
           username={modalInfo.username}
+          orientation={modalInfo.orientation}
+          adress={modalInfo.adress}
         ></MarkerModal>
       )}
     </>
