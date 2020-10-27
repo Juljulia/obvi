@@ -11,7 +11,6 @@ import "firebase/firestore";
 
 import getEnvVars from "../../environment";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
-import navigation from "../navigation/rootNavigation";
 import routes from "../navigation/routes";
 import Screen from "../components/Screen";
 import Text from "../components/Text";
@@ -19,7 +18,7 @@ import TextInput from "../components/TextInput";
 import useAuth from "../auth/useAuth";
 import useLocation from "../hooks/useLocation";
 
-function CheckInScreen() {
+function CheckInScreen({ navigation }) {
   const { user } = useAuth();
   const location = useLocation();
   const [places, setPlaces] = useState();
@@ -40,7 +39,6 @@ function CheckInScreen() {
 
   useEffect(() => {
     getPlaces();
-    getCheckIns();
   }, [location]);
 
   const searchPlaces = async (value) => {
@@ -91,19 +89,6 @@ function CheckInScreen() {
         console.error("Error writing document: ", error);
       });
     navigation.navigate(routes.HOME);
-  };
-
-  const getCheckIns = async () => {
-    const docRef = await db
-      .collection("checkIns")
-      .where("userId", "==", user.uid)
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          // doc.data() is never undefined for query doc snapshots
-          // console.log(doc.id, ' => ', doc.data());
-        });
-      });
   };
 
   return (

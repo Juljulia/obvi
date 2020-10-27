@@ -19,10 +19,10 @@ function NameScreen({ navigation }) {
       totalPages="7"
     >
       <TextInput
-        value={username}
-        onChangeText={(username) => setUsername({ username })}
         placeholder={"Name"}
+        onChangeText={(username) => setUsername({ username })}
         icon="account-outline"
+        value={username["username"]}
       />
       <Text>The choosen name will appear in you profile</Text>
     </FormScreen>
