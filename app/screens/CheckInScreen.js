@@ -17,6 +17,7 @@ import Text from "../components/Text";
 import TextInput from "../components/TextInput";
 import useAuth from "../auth/useAuth";
 import useLocation from "../hooks/useLocation";
+import usersApi from "../api/users";
 
 function CheckInScreen({ navigation }) {
   const { user } = useAuth();
@@ -64,9 +65,10 @@ function CheckInScreen({ navigation }) {
     ]);
   };
 
-  const storeCheckIn = (item) => {
-    // console.log(item);
+  const storeCheckIn = async (item) => {
+    const { imageData } = await usersApi.getUser(user.uid);
     const adress = item.formatted_address;
+
     const place = {
       name: item.name,
       location: {
@@ -76,6 +78,7 @@ function CheckInScreen({ navigation }) {
       ...(adress && { adress }),
       placeId: item.place_id,
       categories: item.types,
+      imageUrl: imageData,
       userId: user.uid,
     };
 
@@ -88,7 +91,7 @@ function CheckInScreen({ navigation }) {
       .catch(function (error) {
         console.error("Error writing document: ", error);
       });
-    navigation.navigate(routes.HOME);
+    navigation.navigate(routes.MAP);
   };
 
   return (

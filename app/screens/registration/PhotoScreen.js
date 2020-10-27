@@ -47,8 +47,8 @@ function PhotoScreen({ navigation, route }) {
         xhr.onload = function () {
           resolve(xhr.response);
         };
-        xhr.onerror = function (e) {
-          console.log(e);
+        xhr.onerror = function (err) {
+          console.log(err);
           reject(new TypeError("Network request failed"));
         };
         xhr.responseType = "blob";
@@ -75,7 +75,7 @@ function PhotoScreen({ navigation, route }) {
         function progress(snapshot) {
           // Observe state change events such as progress, pause, and resume
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-          var progress =
+          let progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log("Upload is " + progress + "% done");
         },
