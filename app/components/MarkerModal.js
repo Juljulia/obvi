@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { Animated, View, StyleSheet } from 'react-native';
+import React, { useEffect } from "react";
+import { Animated, View, StyleSheet } from "react-native";
 
-import Text from '../components/Text';
-import colors from '../config/colors';
+import Text from "../components/Text";
+import colors from "../config/colors";
 
 const value = new Animated.Value(0);
 
@@ -11,7 +11,7 @@ const saveModalTranslationY = value.interpolate({
   outputRange: [600, 0],
 });
 
-function MarkerModal({ modalVisible, name, username }) {
+function MarkerModal({ adress, modalVisible, name, orientation, username }) {
   useEffect(() => {
     Animated.timing(value, {
       toValue: modalVisible ? 1 : 0,
@@ -25,6 +25,8 @@ function MarkerModal({ modalVisible, name, username }) {
       <Animated.View style={styles.innerContainer}>
         <Text>{name}</Text>
         <Text>{username}</Text>
+        {adress ? <Text>{adress}</Text> : <Text>No adress</Text>}
+        <Text>{orientation}</Text>
       </Animated.View>
     </View>
   );
@@ -33,11 +35,11 @@ function MarkerModal({ modalVisible, name, username }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     right: 0,
     left: 0,
-    height: '50%',
+    height: "50%",
   },
   innerContainer: {
     transform: [
@@ -45,12 +47,12 @@ const styles = StyleSheet.create({
         translateY: saveModalTranslationY,
       },
     ],
-    position: 'relative',
-    width: '100%',
-    height: '100%',
+    position: "relative",
+    width: "100%",
+    height: "100%",
     backgroundColor: colors.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
