@@ -55,7 +55,6 @@ function Map(props) {
         ...deltas,
       });
     }
-
     getCheckIns();
   }, [location]);
 
@@ -77,10 +76,19 @@ function Map(props) {
               coordinate={checkIn.location}
               onPress={() => getMarkerInfo(checkIn)}
             >
-              <Image
-                source={require("../assets/profile_image.png")}
-                style={{ height: 35, width: 35 }}
-              />
+              {checkIn.imageUrl ? (
+                <Image
+                  source={{
+                    uri: checkIn.imageUrl,
+                  }}
+                  style={styles.profileIcon}
+                />
+              ) : (
+                <Image
+                  source={require("../assets/profile_image.png")}
+                  style={styles.defaultMarker}
+                />
+              )}
             </Marker>
           ))}
       </MapView>
@@ -101,8 +109,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  defaultMarker: {
+    height: 35,
+    width: 35,
+  },
   map: {
     flex: 1,
+  },
+  profileIcon: {
+    height: 35,
+    width: 35,
+    borderRadius: 35,
   },
 });
 
