@@ -7,7 +7,7 @@ import colors from "../config/colors";
 function NavArrow({ goBack = false, onPress }) {
   if (goBack) {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container]}>
         <Image
           style={styles.arrow(goBack)}
           source={require("../assets/arrow.png")}
@@ -37,6 +37,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 50,
+    marginHorizontal: 30,
   },
   arrow: (goBack) => ({
     transform: goBack ? [{ rotate: "180deg" }] : [],
