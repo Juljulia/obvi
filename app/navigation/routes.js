@@ -1,7 +1,8 @@
 //To prevent other modules from modifying these properties we use Object.freeze
 export default Object.freeze({
-  LOGIN: "Login",
+  ACCOUNT: "Account",
   HOME: "Home",
+  LOGIN: "Login",
   MAP: "Map",
   REGISTER: "Register",
   REGISTERRULES: "Register Rules",

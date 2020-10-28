@@ -83,7 +83,7 @@ function PhotoScreen({ navigation, route }) {
           console.log(`Error uploading photo: ${error}`);
         },
         function complete() {
-          console.log("Upload image completed");
+          console.log("Upload is completed");
 
           blob.close();
 

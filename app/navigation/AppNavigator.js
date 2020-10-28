@@ -2,6 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import AccountScreen from "../screens/AccountScreen";
 import CheckInScreen from "../screens/CheckInScreen";
 import HomeScreen from "../screens/HomeScreen";
 import MapScreen from "../screens/MapScreen";
@@ -39,6 +40,15 @@ const AppNavigator = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="map" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Account"
+        component={AccountScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
         }}
       />
