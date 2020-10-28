@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { Image, View, StyleSheet } from "react-native";
+
+import Text from "../components/Text";
 import Screen from "../components/Screen";
 import routes from "../navigation/routes";
 import usersApi from "../api/users";
@@ -21,11 +23,10 @@ function AccountScreen({ navigation }) {
   return (
     <Screen>
       <View style={styles.container}>
-        <ListItem
-          title={userData.username}
-          subTitle={userData.pronoun}
-          image={userData.imageData}
-        ></ListItem>
+        <Text>{userData.username}</Text>
+        {userData.imageData && (
+          <Image source={{ uri: userData.imageData }}></Image>
+        )}
       </View>
     </Screen>
   );

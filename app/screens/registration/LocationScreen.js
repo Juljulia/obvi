@@ -8,6 +8,7 @@ import Button from "../../components/Button";
 import Pagination from "../../components/Pagination";
 import Text from "../../components/Text";
 import useAuth from "../../auth/useAuth";
+import Screen from "../../components/Screen";
 
 function LocationScreen({ route }) {
   const { orientation, passions, pronoun, username, imageData } = route.params;
@@ -48,16 +49,16 @@ function LocationScreen({ route }) {
   };
 
   return (
-    <View style={styles.container}>
+    <Screen style={styles.container}>
       <Text>Enable Location</Text>
       <Button title="Allow location" onPress={getLocation} />
       <Pagination page="7" totalPages="7" />
-    </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: { paddingTop: 160 },
 });
 
 export default LocationScreen;
