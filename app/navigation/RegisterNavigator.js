@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import RulesScreen from "../screens/registration/RulesScreen";
@@ -9,19 +8,24 @@ import OrientationScreen from "../screens/registration/OrientationScreen";
 import PassionsScreen from "../screens/registration/PassionsScreen";
 import PhotoScreen from "../screens/registration/PhotoScreen";
 import LocationScreen from "../screens/registration/LocationScreen";
-import navigation from "../navigation/rootNavigation";
-import routes from "../navigation/routes";
 import NavArrow from "../components/NavArrow";
+import Text from "../components/Text";
 
 const Stack = createStackNavigator();
 
 const RegisterNavigator = () => {
   const headerOptions = {
-    title: "Registration",
+    headerTitle: () => <Text>Registration</Text>,
     headerBackTitleVisible: false,
-    // headerRight: () => <NavArrow />,
-    // headerLeft: () => <NavArrow goBack={true} />,
     headerBackImage: () => <NavArrow goBack={true} />,
+    headerTransparent: true,
+    headerStyle: {
+      height: 120,
+      shadowRadius: 0,
+      shadowOffset: {
+        height: 0,
+      },
+    },
   };
 
   return (
@@ -29,7 +33,7 @@ const RegisterNavigator = () => {
       <Stack.Screen
         name="Register Rules"
         component={RulesScreen}
-        options={{ headerShown: false }}
+        options={headerOptions}
       />
       <Stack.Screen
         name="Register Name"
