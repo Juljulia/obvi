@@ -5,6 +5,7 @@ import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
 import NavArrow from "../../components/NavArrow";
+import PopUp from "../../components/PopUp";
 
 function PronounScreen({ navigation, route }) {
   const { username } = route.params;
@@ -37,6 +38,10 @@ function PronounScreen({ navigation, route }) {
         })
       }
     >
+      <PopUp
+        text="Whatever you don't care to answer, you skip."
+        style={styles.popUp}
+      />
       <TextInput
         value={pronoun["pronoun"]}
         onChangeText={(pronoun) => setPronoun({ pronoun })}
@@ -47,7 +52,11 @@ function PronounScreen({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  popUp: {
+    position: "absolute",
+    right: 60,
+    top: 90,
+  },
 });
 
 export default PronounScreen;
