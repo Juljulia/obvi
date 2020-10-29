@@ -15,7 +15,7 @@ function LocationScreen({ navigation, route }) {
   const { orientation, passions, pronoun, username, imageData } = route.params;
   const { user } = useAuth();
   const db = firebase.firestore();
-  console.log(userInfo);
+
   const userInfo = {
     orientation,
     passions,
