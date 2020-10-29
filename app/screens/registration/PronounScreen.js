@@ -1,15 +1,32 @@
 import React, { useState, useLayoutEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
 import NavArrow from "../../components/NavArrow";
 import PopUp from "../../components/PopUp";
+import SelectMultiple from "../../components/SelectMultiple";
 
 function PronounScreen({ navigation, route }) {
   const { username } = route.params;
+  const [input, setInput] = useState("");
   const [pronoun, setPronoun] = useState("");
+
+  const pronouns = [
+    { value: "Female" },
+    { value: "Binarism" },
+    { value: "Nonbinary" },
+    { value: "Polygender" },
+    { value: "Third gender" },
+    { value: "Transmasculine" },
+  ];
+
+  let searchPronouns = [];
+
+  if (searchPronouns.length <= 3) {
+    searchPronouns = pronouns.filter((el) => el.value.includes(input["input"]));
+  }
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -18,7 +35,7 @@ function PronounScreen({ navigation, route }) {
           onPress={() =>
             navigation.navigate(routes.REGISTERORIENTATION, {
               username,
-              ...pronoun,
+              pronoun,
             })
           }
         />
@@ -34,7 +51,7 @@ function PronounScreen({ navigation, route }) {
       onPress={() =>
         navigation.navigate(routes.REGISTERORIENTATION, {
           username,
-          ...pronoun,
+          pronoun,
         })
       }
     >
@@ -43,10 +60,18 @@ function PronounScreen({ navigation, route }) {
         style={styles.popUp}
       />
       <TextInput
-        value={pronoun["pronoun"]}
-        onChangeText={(pronoun) => setPronoun({ pronoun })}
+        value={input["input"]}
+        onChangeText={(input) => setInput({ input })}
         placeholder={"Start typing"}
       />
+      <Text>Pronouns</Text>
+      <SelectMultiple
+        group={searchPronouns}
+        // singleTap={(valueTap) => console.log(pronoun)}
+        onSelectedValuesChange={(selectedValues) =>
+          setPronoun(selectedValues.join(", "))
+        }
+      ></SelectMultiple>
     </FormScreen>
   );
 }
