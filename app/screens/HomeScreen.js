@@ -45,7 +45,7 @@ function HomeScreen({ navigation }) {
         <ActivityIndicator />
       ) : (
         <View style={styles.welcome}>
-          <Text>Welcome {userData["username"]}</Text>
+          <Text>Hello {userData["username"]}</Text>
           <Button title="Logout" onPress={() => logOut()} />
         </View>
       )}

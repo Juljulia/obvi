@@ -5,10 +5,30 @@ import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
 import NavArrow from "../../components/NavArrow";
+import SelectMultiple from "../../components/SelectMultiple";
 
 function OrientationScreen({ navigation, route }) {
   const { username, pronoun } = route.params;
+  const [input, setInput] = useState("");
   const [orientation, setOrientation] = useState("");
+
+  const orientations = [
+    { value: "Allosexual" },
+    { value: "Gay" },
+    { value: "Queer" },
+    { value: "Homosexual" },
+    { value: "Coming out" },
+    { value: "Heterosexual" },
+  ];
+
+  let searchOrientations = [];
+
+  if (searchOrientations.length <= 3) {
+    searchOrientations = orientations.filter((el) =>
+      el.value.includes(input["input"])
+    );
+  }
+  console.log(orientation);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -18,7 +38,7 @@ function OrientationScreen({ navigation, route }) {
             navigation.navigate(routes.REGISTERPASSIONS, {
               username,
               pronoun,
-              ...orientation,
+              orientation,
             })
           }
         />
@@ -35,15 +55,22 @@ function OrientationScreen({ navigation, route }) {
         navigation.navigate(routes.REGISTERPASSIONS, {
           username,
           pronoun,
-          ...orientation,
+          orientation,
         })
       }
     >
       <TextInput
-        value={orientation["orientation"]}
-        onChangeText={(orientation) => setOrientation({ orientation })}
+        value={input["input"]}
+        onChangeText={(input) => setInput({ input })}
         placeholder={"Start typing"}
       />
+      <SelectMultiple
+        group={searchOrientations}
+        // singleTap={(valueTap) => console.log(pronoun)}
+        onSelectedValuesChange={(selectedValues) =>
+          setOrientation(selectedValues.join(", "))
+        }
+      ></SelectMultiple>
     </FormScreen>
   );
 }

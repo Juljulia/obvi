@@ -3,9 +3,7 @@ import { Image, View, StyleSheet } from "react-native";
 
 import Text from "../components/Text";
 import Screen from "../components/Screen";
-import routes from "../navigation/routes";
 import usersApi from "../api/users";
-import ListItem from "../components/lists/ListItem";
 
 function AccountScreen({ navigation }) {
   const { user } = useAuth();
@@ -23,10 +21,18 @@ function AccountScreen({ navigation }) {
   return (
     <Screen>
       <View style={styles.container}>
-        <Text>{userData.username}</Text>
-        {userData.imageData && (
-          <Image source={{ uri: userData.imageData }}></Image>
+        {userData.imageData ? (
+          <Image
+            source={{ uri: userData.imageData }}
+            style={styles.image}
+          ></Image>
+        ) : (
+          <Image
+            source={require("../assets/default.png")}
+            style={styles.image}
+          ></Image>
         )}
+        <Text style={styles.text}>{userData.username}</Text>
       </View>
     </Screen>
   );
@@ -34,12 +40,16 @@ function AccountScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: "center",
   },
   image: {
     width: 145,
     height: 145,
     borderRadius: 70,
+  },
+  text: {
+    marginTop: 15,
   },
 });
 

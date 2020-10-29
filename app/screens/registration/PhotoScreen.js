@@ -1,9 +1,10 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import * as firebase from "firebase";
 import "firebase/storage";
 
+import Button from "../../components/Button";
 import colors from "../../config/colors";
 import ImagePicker from "../../components/ImagePicker";
 import FormScreen from "../../components/multiScreenForm/FormScreen";
@@ -19,11 +20,27 @@ function PhotoScreen({ navigation, route }) {
   //Pass false if the user doesn't choose an image
   const [imageData, setImageData] = useState(false);
 
+  const navigate = () => {
+    navigation.navigate(routes.REGISTERLOCATION, {
+      username,
+      pronoun,
+      orientation,
+      passions,
+      imageData,
+    });
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <NavArrow onPress={uploadImage} />,
+      headerRight: () => <NavArrow onPress={navigate} />,
     });
   }, [navigation]);
+
+  useEffect(() => {
+    if (imageData) {
+      navigate();
+    }
+  }, [imageData]);
 
   const handleImage = (uri) => {
     setImage(uri);
@@ -73,7 +90,6 @@ function PhotoScreen({ navigation, route }) {
         function complete() {
           console.log("Upload is completed");
           setProgress(0);
-
           blob.close();
 
           storageRef.getDownloadURL().then(function (url) {
@@ -82,14 +98,6 @@ function PhotoScreen({ navigation, route }) {
         }
       );
     }
-
-    navigation.navigate(routes.REGISTERLOCATION, {
-      username,
-      pronoun,
-      orientation,
-      passions,
-      imageData,
-    });
   };
 
   return (

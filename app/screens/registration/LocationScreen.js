@@ -1,5 +1,5 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useLayoutEffect } from "react";
+import { StyleSheet } from "react-native";
 import * as Location from "expo-location";
 import * as firebase from "firebase";
 import "firebase/firestore";
@@ -9,12 +9,13 @@ import Pagination from "../../components/Pagination";
 import Text from "../../components/Text";
 import useAuth from "../../auth/useAuth";
 import Screen from "../../components/Screen";
+import NavArrow from "../../components/NavArrow";
 
-function LocationScreen({ route }) {
+function LocationScreen({ navigation, route }) {
   const { orientation, passions, pronoun, username, imageData } = route.params;
   const { user } = useAuth();
   const db = firebase.firestore();
-
+  console.log(userInfo);
   const userInfo = {
     orientation,
     passions,
@@ -24,6 +25,12 @@ function LocationScreen({ route }) {
     email: user.email,
     uid: user.uid,
   };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <NavArrow onPress={addUserInfo} />,
+    });
+  }, [navigation]);
 
   const getLocation = async () => {
     try {
@@ -35,6 +42,8 @@ function LocationScreen({ route }) {
 
     addUserInfo();
   };
+
+  console.log(userInfo);
 
   const addUserInfo = () => {
     db.collection("users")
