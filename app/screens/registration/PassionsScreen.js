@@ -26,7 +26,6 @@ function PassionsScreen({ navigation, route }) {
       ),
     });
   }, [navigation]);
-
   return (
     <FormScreen
       title="Passions"
