@@ -17,8 +17,8 @@ function PhotoScreen({ navigation, route }) {
   const { user } = useAuth();
   const [image, setImage] = useState();
   const [progress, setProgress] = useState(0);
-  //Pass false if the user doesn't choose an image
-  const [imageData, setImageData] = useState(false);
+  //Pass null if the user doesn't choose an image
+  const [imageData, setImageData] = useState(null);
 
   const navigate = () => {
     navigation.navigate(routes.REGISTERLOCATION, {

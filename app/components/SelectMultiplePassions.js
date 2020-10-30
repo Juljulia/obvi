@@ -4,17 +4,15 @@ import { SelectMultipleGroupButton } from "react-native-selectmultiple-button";
 
 import colors from "../config/colors";
 
-function SelectMultiple({ group, onSelectedValuesChange }) {
+function SelectMultiplePassions({ group, onSelectedValuesChange }) {
   return (
     <SelectMultipleGroupButton
       buttonViewStyle={{
-        margin: 5,
-        borderRadius: 20,
-        alignItems: "flex-start",
-        height: 44,
-        paddingLeft: 40,
-        width: "70%",
-        marginVertical: 10,
+        margin: 8,
+        borderRadius: 16,
+        padding: 4,
+        maxWidth: 150,
+        alignItems: "center",
         shadowColor: "#bdcde1",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 1, //drop shadow offset
@@ -41,8 +39,4 @@ function SelectMultiple({ group, onSelectedValuesChange }) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-});
-
-export default SelectMultiple;
+export default SelectMultiplePassions;
