@@ -61,15 +61,13 @@ function Map({ region, pins }) {
             </Marker>
           ))}
       </MapView>
-      {modalVisible && (
-        <MarkerModal
-          modalVisible={modalVisible}
-          name={modalInfo.name}
-          username={modalInfo.username}
-          orientation={modalInfo.orientation}
-          adress={modalInfo.adress}
-        ></MarkerModal>
-      )}
+      <MarkerModal
+        visible={modalVisible}
+        name={modalInfo.name}
+        username={modalInfo.username}
+        orientation={modalInfo.orientation}
+        adress={modalInfo.adress}
+      ></MarkerModal>
     </>
   );
 }
