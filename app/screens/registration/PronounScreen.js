@@ -6,27 +6,17 @@ import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
 import NavArrow from "../../components/NavArrow";
 import PopUp from "../../components/PopUp";
+import pronouns from "../../assets/arrays/pronouns";
 import SelectMultiple from "../../components/SelectMultiple";
 
 function PronounScreen({ navigation, route }) {
   const { username } = route.params;
   const [input, setInput] = useState("");
-  const [pronoun, setPronoun] = useState("");
-
-  const pronouns = [
-    { value: "Female" },
-    { value: "Binarism" },
-    { value: "Nonbinary" },
-    { value: "Polygender" },
-    { value: "Third gender" },
-    { value: "Transmasculine" },
-  ];
+  const [pronoun, setPronoun] = useState(null);
 
   let searchPronouns = [];
-
-  if (searchPronouns.length <= 3) {
-    searchPronouns = pronouns.filter((el) => el.value.includes(input["input"]));
-  }
+  searchPronouns = pronouns.filter((el) => el.value.includes(input["input"]));
+  searchPronouns = searchPronouns.slice(0, 3);
 
   useLayoutEffect(() => {
     navigation.setOptions({
