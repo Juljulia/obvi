@@ -1,14 +1,16 @@
 import React, { useState, useLayoutEffect } from "react";
 import { StyleSheet } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
-import TextInput from "../../components/TextInput";
 import NavArrow from "../../components/NavArrow";
+import passionsArr from "../../assets/arrays/passionsArr";
+import SelectMultiplePassions from "../../components/SelectMultiplePassions";
 
 function PassionsScreen({ navigation, route }) {
   const { username, orientation, pronoun } = route.params;
-  const [passions, setPassions] = useState("");
+  const [passions, setPassions] = useState(null);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -19,13 +21,14 @@ function PassionsScreen({ navigation, route }) {
               username,
               pronoun,
               orientation,
-              ...passions,
+              passions,
             })
           }
         />
       ),
     });
   }, [navigation]);
+
   return (
     <FormScreen
       title="Passions"
@@ -36,21 +39,28 @@ function PassionsScreen({ navigation, route }) {
           username,
           pronoun,
           orientation,
-          ...passions,
+          passions,
         })
       }
     >
-      <TextInput
-        value={passions["passions"]}
-        onChangeText={(passions) => setPassions({ passions })}
-        placeholder={"Start typing"}
-      />
+      <ScrollView contentContainerStyle={styles.passionsContainer}>
+        <SelectMultiplePassions
+          group={passionsArr}
+          onSelectedValuesChange={(selectedValues) =>
+            setPassions(selectedValues)
+          }
+        ></SelectMultiplePassions>
+      </ScrollView>
     </FormScreen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {},
+  passionsContainer: {
+    flex: 1,
+    display: "flex",
+  },
 });
 
 export default PassionsScreen;
