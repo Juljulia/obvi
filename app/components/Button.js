@@ -8,6 +8,7 @@ function AppButton({
   onPress,
   color = "primary",
   disabledStyle = false,
+  textColor = "white",
   ...otherProps
 }) {
   return (
@@ -20,7 +21,13 @@ function AppButton({
       onPress={onPress}
       {...otherProps}
     >
-      <Text style={[styles.text, styles.disabledText(disabledStyle)]}>
+      <Text
+        style={[
+          styles.text,
+          styles.disabledText(disabledStyle),
+          { color: colors[textColor] },
+        ]}
+      >
         {title}
       </Text>
     </TouchableOpacity>
