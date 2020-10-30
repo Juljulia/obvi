@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Image, StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+  ScrollView,
+  View,
+} from "react-native";
 
+import Avatars from "../components/Avatars";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import mapStyle from "./../config/mapStyle";
@@ -11,7 +18,6 @@ import Screen from "../components/Screen";
 import useAuth from "../auth/useAuth";
 import usersApi from "../api/users";
 import useLocation from "../hooks/useLocation";
-import { ScrollView } from "react-native-gesture-handler";
 import colors from "../config/colors";
 
 function HomeScreen({ navigation }) {
@@ -46,62 +52,75 @@ function HomeScreen({ navigation }) {
   return (
     <ScrollView>
       <Screen style={styles.container}>
+        <Image
+          source={require("../assets/logo-small.png")}
+          style={styles.logo}
+        ></Image>
         {isLoading && !userData ? (
           <ActivityIndicator />
         ) : (
           <View style={styles.welcome}>
-            <Text>Hello {userData["username"]}</Text>
+            <Text>Hello </Text>
+            <Text>{userData["username"]}</Text>
             <Button title="Logout" onPress={() => logOut()} />
           </View>
         )}
-        <Card
-          title="The Obvi map"
-          // image={require("../assets/union.png")}
-          subTitle="Show friends within the community"
-        >
-          {region && (
-            <MapView
-              style={styles.map}
-              provider={PROVIDER_GOOGLE}
-              region={region}
-              customMapStyle={mapStyle}
-              showsUserLocation
-              region={region}
-              onPress={() => navigation.navigate(routes.MAP)}
-            ></MapView>
-          )}
-          <Image
-            source={require("../assets/wave.png")}
-            style={styles.wave}
-          ></Image>
-        </Card>
-        <Card
-          title="Check in"
-          image={require("../assets/union.png")}
-          subTitle="Show friends your exact location"
-        ></Card>
-        <Card
-          title="Calendar"
-          image={require("../assets/union.png")}
-          subTitle="See upcoming events"
-        ></Card>
+        <Avatars />
+        <View style={styles.cardContainer}>
+          <Card
+            title="The Obvi map"
+            subTitle="Show friends within the community"
+          >
+            {region && (
+              <MapView
+                style={styles.map}
+                provider={PROVIDER_GOOGLE}
+                region={region}
+                customMapStyle={mapStyle}
+                showsUserLocation
+                region={region}
+                onPress={() => navigation.navigate(routes.MAP)}
+              ></MapView>
+            )}
+            <Image
+              source={require("../assets/wave.png")}
+              style={styles.wave}
+            ></Image>
+          </Card>
+          <Card
+            title="Check in"
+            image={require("../assets/union.png")}
+            subTitle="Show friends your exact location"
+            onPress={() => navigation.navigate(routes.CHECKIN)}
+          ></Card>
+          <Card
+            title="Calendar"
+            image={require("../assets/union.png")}
+            subTitle="See upcoming events"
+          ></Card>
+        </View>
       </Screen>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  cardContainer: {
+    alignItems: "center",
+  },
   container: {
     flex: 1,
-    alignItems: "center",
   },
   map: {
     flex: 1,
   },
+  logo: {
+    alignSelf: "center",
+    marginTop: 32,
+    marginBottom: 24,
+  },
   welcome: {
-    alignItems: "center",
-    justifyContent: "center",
-    height: "30%",
+    paddingHorizontal: 32,
   },
   wave: {
     position: "absolute",
