@@ -1,9 +1,11 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect } from "react";
 import { StyleSheet } from "react-native";
+import ProgressBar from "react-native-progress/Bar";
 import * as firebase from "firebase";
 import "firebase/storage";
 
 import Button from "../../components/Button";
+import colors from "../../config/colors";
 import ImagePicker from "../../components/ImagePicker";
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
@@ -14,30 +16,34 @@ function PhotoScreen({ navigation, route }) {
   const { username, pronoun, orientation, passions } = route.params;
   const { user } = useAuth();
   const [image, setImage] = useState();
-  //Pass an empty string if the user doesn't choose an image
-  const [imageData, setImageData] = useState("");
+  const [progress, setProgress] = useState(0);
+  //Pass null if the user doesn't choose an image
+  const [imageData, setImageData] = useState(null);
+
+  const navigate = () => {
+    navigation.navigate(routes.REGISTERLOCATION, {
+      username,
+      pronoun,
+      orientation,
+      passions,
+      imageData,
+    });
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <NavArrow
-          onPress={() =>
-            navigation.navigate(routes.REGISTERLOCATION, {
-              username,
-              pronoun,
-              orientation,
-              passions,
-              imageData,
-            })
-          }
-        />
-      ),
+      headerRight: () => <NavArrow onPress={navigate} />,
     });
   }, [navigation]);
 
+  useEffect(() => {
+    if (imageData) {
+      navigate();
+    }
+  }, [imageData]);
+
   const handleImage = (uri) => {
     setImage(uri);
-    setImageData(uri);
   };
 
   const uploadImage = async () => {
@@ -75,16 +81,15 @@ function PhotoScreen({ navigation, route }) {
         function progress(snapshot) {
           // Observe state change events such as progress, pause, and resume
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-          let progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
+          let progress = snapshot.bytesTransferred / snapshot.totalBytes;
+          setProgress(progress);
         },
         function (error) {
           console.log(`Error uploading photo: ${error}`);
         },
         function complete() {
           console.log("Upload is completed");
-
+          setProgress(0);
           blob.close();
 
           storageRef.getDownloadURL().then(function (url) {
@@ -94,23 +99,13 @@ function PhotoScreen({ navigation, route }) {
       );
     }
   };
+
   return (
-    <FormScreen
-      title="Add photo"
-      page="6"
-      totalPages="7"
-      onPress={() =>
-        navigation.navigate(routes.REGISTERLOCATION, {
-          username,
-          pronoun,
-          orientation,
-          passions,
-          imageData,
-        })
-      }
-    >
+    <FormScreen title="Add photo" page="6" totalPages="7" onPress={uploadImage}>
       <ImagePicker imageUri={image} onChangeImage={handleImage} />
-      <Button title="Upload" onPress={uploadImage}></Button>
+      {progress > 0 && (
+        <ProgressBar color={colors.primary} progress={progress} width={200} />
+      )}
     </FormScreen>
   );
 }

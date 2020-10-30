@@ -1,15 +1,22 @@
 import React, { useState, useLayoutEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
 import NavArrow from "../../components/NavArrow";
 import PopUp from "../../components/PopUp";
+import pronouns from "../../assets/arrays/pronouns";
+import SelectMultiple from "../../components/SelectMultiple";
 
 function PronounScreen({ navigation, route }) {
   const { username } = route.params;
-  const [pronoun, setPronoun] = useState("");
+  const [input, setInput] = useState("");
+  const [pronoun, setPronoun] = useState(null);
+
+  let searchPronouns = [];
+  searchPronouns = pronouns.filter((el) => el.value.includes(input["input"]));
+  searchPronouns = searchPronouns.slice(0, 3);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -18,7 +25,7 @@ function PronounScreen({ navigation, route }) {
           onPress={() =>
             navigation.navigate(routes.REGISTERORIENTATION, {
               username,
-              ...pronoun,
+              pronoun,
             })
           }
         />
@@ -34,7 +41,7 @@ function PronounScreen({ navigation, route }) {
       onPress={() =>
         navigation.navigate(routes.REGISTERORIENTATION, {
           username,
-          ...pronoun,
+          pronoun,
         })
       }
     >
@@ -43,10 +50,18 @@ function PronounScreen({ navigation, route }) {
         style={styles.popUp}
       />
       <TextInput
-        value={pronoun["pronoun"]}
-        onChangeText={(pronoun) => setPronoun({ pronoun })}
+        value={input["input"]}
+        onChangeText={(input) => setInput({ input })}
         placeholder={"Start typing"}
       />
+      <Text>Pronouns</Text>
+      <SelectMultiple
+        group={searchPronouns}
+        // singleTap={(valueTap) => console.log(pronoun)}
+        onSelectedValuesChange={(selectedValues) =>
+          setPronoun(selectedValues.join(", "))
+        }
+      ></SelectMultiple>
     </FormScreen>
   );
 }
