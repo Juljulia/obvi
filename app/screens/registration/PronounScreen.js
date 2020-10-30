@@ -16,7 +16,7 @@ function PronounScreen({ navigation, route }) {
 
   let searchPronouns = [];
   searchPronouns = pronouns.filter((el) => el.value.includes(input["input"]));
-  searchPronouns = searchPronouns.slice(0, 3);
+  // searchPronouns = searchPronouns.slice(0, 3);
 
   useLayoutEffect(() => {
     navigation.setOptions({

@@ -1,6 +1,4 @@
 export default [
-  { value: "Queer" },
-  { value: "Questioning" },
   { value: "Allosexual" },
   { value: "Allosexism" },
   { value: "Androsexual" },
@@ -33,6 +31,8 @@ export default [
   { value: "Polysexual" },
   { value: "Pomosexual" },
   { value: "Passing" },
+  { value: "Queer" },
+  { value: "Questioning" },
   { value: "Romantic attraction" },
   { value: "Romantic orientation" },
   { value: "Sapiosexual" },
