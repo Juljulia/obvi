@@ -111,7 +111,7 @@ function CheckInScreen({ navigation }) {
     setCloseList(false);
     resetForm();
 
-    navigation.navigate(routes.MAP);
+    navigation.navigate(routes.MAP, { update: true });
   };
 
   return (
