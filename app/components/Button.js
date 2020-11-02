@@ -10,6 +10,7 @@ function AppButton({
   color = "primary",
   disabledStyle = false,
   textColor = "white",
+  style,
   ...otherProps
 }) {
   return (
@@ -18,6 +19,7 @@ function AppButton({
         styles.button,
         { backgroundColor: colors[color] },
         styles.disabledButton(disabledStyle),
+        style,
       ]}
       onPress={onPress}
       {...otherProps}
@@ -52,6 +54,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.8,
     shadowRadius: 10,
+    alignSelf: "center",
   },
   text: {
     fontFamily: "Inter_600SemiBold",

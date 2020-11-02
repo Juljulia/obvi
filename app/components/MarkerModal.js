@@ -3,13 +3,15 @@ import {
   Animated,
   View,
   StyleSheet,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
   Image,
+  ScrollView,
 } from "react-native";
 
 import Button from "../components/Button";
 import Text from "../components/typography/Text";
 import colors from "../config/colors";
+import MessageBubble from "./MessageBubble";
 import ProfileImage from "./ProfileImage";
 import H2 from "./typography/H2";
 import Subheading from "./typography/Subheading";
@@ -28,8 +30,10 @@ function MarkerModal({
   username,
   pronoun,
   imageData,
+  message,
 }) {
   const [showModal, setShowModal] = useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     setShowModal(visible);
@@ -38,15 +42,20 @@ function MarkerModal({
       duration: 300,
       useNativeDriver: true,
     }).start();
+
+    if (!visible) setShowMore(false);
   }, [visible]);
 
   if (showModal) {
     return (
       <View style={styles.container}>
         <Animated.View style={styles.innerContainer}>
-          <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
+          <TouchableOpacity
+            style={{ position: "absolute", top: 15, height: 20, width: 50 }}
+            onPress={() => setShowModal(false)}
+          >
             <View style={styles.closeButton} />
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
           <ProfileImage
             style={styles.profileImg}
             imageUrl={imageData}
@@ -56,22 +65,37 @@ function MarkerModal({
             bgWidth={72}
             bgHeight={72}
           />
-          <View style={styles.info}>
-            <View style={styles.userInfo}>
-              <H2 style={styles.h2}>{username}</H2>
-              <Text style={{ lineHeight: 20 }}>{pronoun}</Text>
-              <Text style={{ lineHeight: 20 }}>{orientation}</Text>
-              <Text style={{ lineHeight: 20 }}>3 kilometers away</Text>
-            </View>
-            <View style={styles.checkinInfo}>
-              <View style={styles.checkedIn}>
-                <Subheading>Now checked in</Subheading>
-                <Image source={require("../assets/checked-in.png")} />
+          <ScrollView
+            style={{ width: "100%" }}
+            contentContainerStyle={styles.scrollView}
+          >
+            <View style={styles.info}>
+              <View style={styles.userInfo}>
+                <H2 style={styles.h2}>{username}</H2>
+                <Text style={{ lineHeight: 20 }}>{pronoun}</Text>
+                <Text style={{ lineHeight: 20 }}>{orientation}</Text>
+                <Text style={{ lineHeight: 20 }}>3 kilometers away</Text>
               </View>
-              <Text style={{ textDecorationLine: "underline" }}>{name}</Text>
+              <View style={styles.checkinInfo}>
+                <View style={styles.checkedIn}>
+                  <TouchableOpacity onPress={() => setShowMore(true)}>
+                    <Subheading>Now checked in</Subheading>
+                  </TouchableOpacity>
+                  <Image source={require("../assets/checked-in.png")} />
+                </View>
+                <Text style={{ textDecorationLine: "underline" }}>{name}</Text>
+              </View>
             </View>
-          </View>
-          <Button title="Visit Profile" />
+            {showMore && (
+              <>
+                {message && <MessageBubble text={message} />}
+                <H2 style={{ width: "100%", marginTop: 8 }}>Stay</H2>
+                <Image source={require("../assets/counter.png")} />
+              </>
+            )}
+
+            <Button style={{ marginTop: 30 }} title="Visit Profile" />
+          </ScrollView>
         </Animated.View>
       </View>
     );
@@ -87,15 +111,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-    maxHeight: "70%",
+    maxHeight: 430,
   },
   closeButton: {
     backgroundColor: colors.mediumGrey,
     height: 5,
     width: 35,
     borderRadius: 5,
-    position: "absolute",
-    top: 15,
   },
   innerContainer: {
     transform: [
@@ -107,9 +129,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: colors.basicGrey,
-    paddingHorizontal: 22,
     paddingTop: 50,
-    marginBottom: 132,
     borderTopRightRadius: 30,
     shadowColor: "#88A0B7",
     shadowOffset: {
@@ -132,13 +152,17 @@ const styles = StyleSheet.create({
     borderRadius: 58,
   },
   info: {
+    width: "100%",
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-between",
-    marginBottom: 41,
+  },
+  userInfo: {
+    width: "49%",
   },
   checkinInfo: {
     marginTop: 22,
+    width: "49%",
   },
   checkedIn: {
     flexDirection: "row",
@@ -146,6 +170,11 @@ const styles = StyleSheet.create({
   },
   h2: {
     marginBottom: 8,
+  },
+  scrollView: {
+    alignItems: "center",
+    paddingHorizontal: 22,
+    paddingBottom: 50,
   },
 });
 
