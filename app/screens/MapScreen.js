@@ -1,18 +1,18 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import * as firebase from "firebase";
 
 import Map from "../components/Map";
 import Screen from "../components/Screen";
 import useLocation from "../hooks/useLocation";
+import NavArrow from "../components/NavArrow";
 
 const deltas = {
   latitudeDelta: 0.015,
   longitudeDelta: 0.0121,
 };
 
-function MapScreen({ route }) {
+function MapScreen({ navigation, route }) {
   const [checkIns, setCheckIns] = useState([]);
   const [region, setRegion] = useState();
   const db = firebase.firestore();
@@ -52,26 +52,12 @@ function MapScreen({ route }) {
     <Screen style={styles.container}>
       <View style={styles.container}>
         <Map style={styles.map} region={region} pins={checkIns}></Map>
-=======
-import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-
-import NavArrow from "../components/NavArrow";
-import Map from "../components/Map";
-import Screen from "../components/Screen";
-
-function MapScreen({ navigation }) {
-  return (
-    <Screen style={styles.container}>
-      <View style={styles.container}>
-        <Map style={styles.map}></Map>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={styles.arrow}
         >
           <NavArrow goBack={true}></NavArrow>
         </TouchableOpacity>
->>>>>>> 5e5320270063cf4ae5dea88d8eb4394f510f6c71
       </View>
     </Screen>
   );
