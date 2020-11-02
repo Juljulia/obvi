@@ -7,11 +7,12 @@ import {
   Image,
 } from "react-native";
 
+import Button from "../components/Button";
 import Text from "../components/typography/Text";
 import colors from "../config/colors";
-import usersApi from "../api/users";
 import ProfileImage from "./ProfileImage";
-import H1 from "./typography/H1";
+import H2 from "./typography/H2";
+import Subheading from "./typography/Subheading";
 
 const value = new Animated.Value(0);
 
@@ -21,7 +22,6 @@ const saveModalTranslationY = value.interpolate({
 });
 
 function MarkerModal({
-  adress,
   visible,
   name,
   orientation,
@@ -58,16 +58,20 @@ function MarkerModal({
           />
           <View style={styles.info}>
             <View style={styles.userInfo}>
-              <Text>{username}</Text>
-              <Text>{pronoun}</Text>
-              <Text>{orientation}</Text>
+              <H2 style={styles.h2}>{username}</H2>
+              <Text style={{ lineHeight: 20 }}>{pronoun}</Text>
+              <Text style={{ lineHeight: 20 }}>{orientation}</Text>
+              <Text style={{ lineHeight: 20 }}>3 kilometers away</Text>
             </View>
             <View style={styles.checkinInfo}>
-              <Text>Now checked in</Text>
-              <Text>{name}</Text>
-              {/* {adress ? <Text>{adress}</Text> : <Text>No adress</Text>} */}
+              <View style={styles.checkedIn}>
+                <Subheading>Now checked in</Subheading>
+                <Image source={require("../assets/checked-in.png")} />
+              </View>
+              <Text style={{ textDecorationLine: "underline" }}>{name}</Text>
             </View>
           </View>
+          <Button title="Visit Profile" />
         </Animated.View>
       </View>
     );
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-    height: "70%",
+    maxHeight: "70%",
   },
   closeButton: {
     backgroundColor: colors.mediumGrey,
@@ -92,7 +96,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     position: "absolute",
     top: 15,
-    left: "45%",
   },
   innerContainer: {
     transform: [
@@ -104,7 +107,18 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: colors.basicGrey,
+    paddingHorizontal: 22,
     paddingTop: 50,
+    marginBottom: 132,
+    borderTopRightRadius: 30,
+    shadowColor: "#88A0B7",
+    shadowOffset: {
+      width: 4,
+      height: 4,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    alignItems: "center",
   },
   profileImg: {
     alignItems: "center",
@@ -119,6 +133,19 @@ const styles = StyleSheet.create({
   },
   info: {
     flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    marginBottom: 41,
+  },
+  checkinInfo: {
+    marginTop: 22,
+  },
+  checkedIn: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  h2: {
+    marginBottom: 8,
   },
 });
 
