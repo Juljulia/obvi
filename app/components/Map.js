@@ -106,9 +106,6 @@ function Map(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   defaultMarker: {
     height: 35,
     width: 35,
