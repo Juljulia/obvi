@@ -38,6 +38,7 @@ function PronounScreen({ navigation, route }) {
       title="My pronoun is"
       page="3"
       totalPages="7"
+      isActive={pronoun}
       onPress={() =>
         navigation.navigate(routes.REGISTERORIENTATION, {
           username,

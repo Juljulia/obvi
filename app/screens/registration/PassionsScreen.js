@@ -1,6 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
-import { StyleSheet } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { StyleSheet, ScrollView } from "react-native";
 
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
@@ -34,6 +33,7 @@ function PassionsScreen({ navigation, route }) {
       title="Passions"
       page="5"
       totalPages="7"
+      isActive={passions}
       onPress={() =>
         navigation.navigate(routes.REGISTERPHOTO, {
           username,

@@ -5,11 +5,11 @@ import * as firebase from "firebase";
 import "firebase/firestore";
 
 import Button from "../../components/Button";
+import NavArrow from "../../components/NavArrow";
 import Pagination from "../../components/Pagination";
+import Screen from "../../components/Screen";
 import Text from "../../components/Text";
 import useAuth from "../../auth/useAuth";
-import Screen from "../../components/Screen";
-import NavArrow from "../../components/NavArrow";
 
 function LocationScreen({ navigation, route }) {
   const { orientation, passions, pronoun, username, imageData } = route.params;
