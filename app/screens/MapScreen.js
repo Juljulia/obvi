@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import * as firebase from "firebase";
@@ -51,13 +52,40 @@ function MapScreen({ route }) {
     <Screen style={styles.container}>
       <View style={styles.container}>
         <Map style={styles.map} region={region} pins={checkIns}></Map>
+=======
+import React from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+
+import NavArrow from "../components/NavArrow";
+import Map from "../components/Map";
+import Screen from "../components/Screen";
+
+function MapScreen({ navigation }) {
+  return (
+    <Screen style={styles.container}>
+      <View style={styles.container}>
+        <Map style={styles.map}></Map>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.arrow}
+        >
+          <NavArrow goBack={true}></NavArrow>
+        </TouchableOpacity>
+>>>>>>> 5e5320270063cf4ae5dea88d8eb4394f510f6c71
       </View>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: {
+    flex: 1,
+  },
+  arrow: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+  },
 });
 
 export default MapScreen;

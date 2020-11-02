@@ -13,6 +13,7 @@ import useLocation from "../hooks/useLocation";
 import usersApi from "../api/users";
 import FormField from "../components/forms/FormField";
 import Form from "../components/forms/Form";
+import NavArrow from "../components/NavArrow";
 import SubmitButton from "../components/forms/SubmitButton";
 import colors from "../config/colors";
 import Slider from "../components/Slider";
@@ -116,6 +117,12 @@ function CheckInScreen({ navigation }) {
 
   return (
     <Screen style={styles.container}>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.arrow}
+      >
+        <NavArrow goBack={true}></NavArrow>
+      </TouchableOpacity>
       <Text>Check-In</Text>
 
       {/** SEARCH */}
