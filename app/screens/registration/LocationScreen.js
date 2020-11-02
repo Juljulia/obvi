@@ -6,7 +6,7 @@ import "firebase/firestore";
 
 import Button from "../../components/Button";
 import Pagination from "../../components/Pagination";
-import Text from "../../components/Text";
+import Text from "../../components/typography/Text";
 import useAuth from "../../auth/useAuth";
 import Screen from "../../components/Screen";
 import NavArrow from "../../components/NavArrow";

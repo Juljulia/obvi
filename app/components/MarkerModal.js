@@ -7,10 +7,11 @@ import {
   Image,
 } from "react-native";
 
-import Text from "../components/Text";
+import Text from "../components/typography/Text";
 import colors from "../config/colors";
 import usersApi from "../api/users";
 import ProfileImage from "./ProfileImage";
+import H1 from "./typography/H1";
 
 const value = new Animated.Value(0);
 

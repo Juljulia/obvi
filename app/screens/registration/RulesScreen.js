@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import useAuth from "../../auth/useAuth";
 import routes from "../../navigation/routes";
-import Text from "../../components/Text";
+import Text from "../../components/typography/Text";
 
 function RulesScreen({ navigation }) {
   const { logOut } = useAuth();

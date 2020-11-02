@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Image, View, StyleSheet } from "react-native";
 
-import Text from "../components/Text";
+import Text from "../components/typography/Text";
 import Screen from "../components/Screen";
 import usersApi from "../api/users";
 

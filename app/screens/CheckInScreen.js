@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import getEnvVars from "../../environment";
 import routes from "../navigation/routes";
 import Screen from "../components/Screen";
-import Text from "../components/Text";
+import Text from "../components/typography/Text";
 import useAuth from "../auth/useAuth";
 import useLocation from "../hooks/useLocation";
 import usersApi from "../api/users";
