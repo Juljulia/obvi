@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
-import Text from "./Text";
+import Text from "./typography/Text";
 
 function Pagination({ page, totalPages }) {
   return (

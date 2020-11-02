@@ -5,7 +5,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
 
-import Text from "../components/Text";
+import Text from "../components/typography/Text";
 import colors from "../config/colors";
 
 function Card({ children, image, title, subTitle, onPress, ...otherProps }) {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, TouchableHighlight } from "react-native";
 import colors from "../config/colors";
 
-import Text from "./Text";
+import Text from "./typography/Text";
 
 function PopUp({ text, style }) {
   const [isClosed, setIsClosed] = useState(false);

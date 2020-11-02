@@ -9,7 +9,7 @@ import PassionsScreen from "../screens/registration/PassionsScreen";
 import PhotoScreen from "../screens/registration/PhotoScreen";
 import LocationScreen from "../screens/registration/LocationScreen";
 import NavArrow from "../components/NavArrow";
-import Text from "../components/Text";
+import Text from "../components/typography/Text";
 
 const Stack = createStackNavigator();
 

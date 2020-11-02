@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 
 import CustomSliderMarker from "../components/CustomSliderMarker";
-import Text from "./Text";
+import Text from "./typography/Text";
 import colors from "../config/colors";
 
 function Slider({
