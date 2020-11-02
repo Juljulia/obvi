@@ -1,9 +1,10 @@
 import React from "react";
-import { Image, View, StyleSheet } from "react-native";
 import {
-  TouchableOpacity,
+  Image,
+  View,
+  StyleSheet,
   TouchableWithoutFeedback,
-} from "react-native-gesture-handler";
+} from "react-native";
 
 import Text from "../components/Text";
 import colors from "../config/colors";
