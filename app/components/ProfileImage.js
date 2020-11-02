@@ -37,7 +37,14 @@ function ProfileImage({
         ) : (
           <Image
             source={require("../assets/default.png")}
-            style={styles.image}
+            style={[
+              styles.image,
+              {
+                width: imgWidth,
+                height: imgHeight,
+                borderRadius: imgBorderRadius,
+              },
+            ]}
           />
         )}
       </ImageBackground>

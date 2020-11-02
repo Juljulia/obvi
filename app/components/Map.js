@@ -25,7 +25,6 @@ function Map({ region, pins }) {
     };
     setModalInfo({ ...user, ...pin });
     setModalVisible(true);
-    console.log(user);
   };
 
   return (
@@ -55,7 +54,7 @@ function Map({ region, pins }) {
                 />
               ) : (
                 <Image
-                  source={require("../assets/profile_image.png")}
+                  source={require("../assets/default.png")}
                   style={styles.defaultMarker}
                 />
               )}
@@ -70,6 +69,7 @@ function Map({ region, pins }) {
         adress={modalInfo.adress}
         pronoun={modalInfo.pronoun}
         imageData={modalInfo.imageData}
+        message={modalInfo.message}
       />
     </>
   );

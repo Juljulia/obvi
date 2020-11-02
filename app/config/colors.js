@@ -1,5 +1,7 @@
 export default {
-  primary: "#4070F4",
+  primary: "#5322E1",
+
+  //MOSH CURS
   medium: "#456078",
   light: "#F2F3F7",
   dark: "#0c0c0c", //text
@@ -8,7 +10,6 @@ export default {
 
   //FIGMA COLORS
   basicBlue: "#4070F4",
-  basicPurple: "#5322E1",
   basicGrey: "#F2F3F7",
   darkGrey: "#4B545A",
   darkBrown: "#6A515E",
