@@ -25,7 +25,6 @@ function Slider({
         }}
         trackStyle={{ height: 15, borderRadius: 36 }}
         selectedStyle={{
-          backgroundColor: colors.light,
           backgroundColor: "transparent",
           borderColor: "#F0F0F3",
           borderWidth: 1,

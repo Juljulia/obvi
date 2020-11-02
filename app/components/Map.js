@@ -25,6 +25,7 @@ function Map({ region, pins }) {
     };
     setModalInfo({ ...user, ...pin });
     setModalVisible(true);
+    console.log(user);
   };
 
   return (
@@ -67,7 +68,9 @@ function Map({ region, pins }) {
         username={modalInfo.username}
         orientation={modalInfo.orientation}
         adress={modalInfo.adress}
-      ></MarkerModal>
+        pronoun={modalInfo.pronoun}
+        imageData={modalInfo.imageData}
+      />
     </>
   );
 }
