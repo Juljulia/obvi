@@ -5,7 +5,7 @@ import colors from "../../config/colors";
 import Button from "../Button";
 import Pagination from "../Pagination";
 import Screen from "../Screen";
-import Text from "../Text";
+import Text from "../typography/Text";
 
 function FormScreen({
   color,

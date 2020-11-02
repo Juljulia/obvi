@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import React from "react";
+import { AppLoading } from "expo";
 import { NavigationContainer } from "@react-navigation/native";
 import * as firebase from "firebase";
 import "firebase/firestore";
+import {
+  useFonts,
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+} from "@expo-google-fonts/inter";
 
 import "./firebase";
 import NavigationTheme from "./app/navigation/NavigationTheme";
@@ -18,6 +26,12 @@ export default function App() {
   const [user, setUser] = useState();
   const [userData, setUserData] = useState();
   const db = firebase.firestore();
+  let [fontsLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+  });
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -46,7 +60,9 @@ export default function App() {
     getUserData();
   }, [user]);
 
-  if (user && userData === null) {
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else if (user && userData === null) {
     return (
       <Screen>
         <ActivityIndicator size="large" />
