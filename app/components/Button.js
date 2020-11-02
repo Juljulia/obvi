@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 
 import colors from "../config/colors";
+import Text from "../components/typography/Text";
 
 function AppButton({
   title,
@@ -37,18 +38,24 @@ function AppButton({
 const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.primary,
-    borderRadius: 25,
+    borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
     padding: 15,
-    width: "100%",
+    width: 280,
+    height: 60,
     marginVertical: 10,
+    shadowColor: "#8F93EA",
+    shadowOffset: {
+      width: 6,
+      height: 6,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 10,
   },
   text: {
-    color: colors.white,
-    fontSize: 18,
-    textTransform: "uppercase",
-    fontWeight: "bold",
+    fontFamily: "Inter_600SemiBold",
+    fontSize: 16,
   },
   disabledButton: (disabledStyle) =>
     disabledStyle && {
