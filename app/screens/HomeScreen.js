@@ -13,7 +13,7 @@ import Card from "../components/Card";
 import mapStyle from "./../config/mapStyle";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import routes from "../navigation/routes";
-import Text from "../components/Text";
+import Text from "../components/typography/Text";
 import Screen from "../components/Screen";
 import useAuth from "../auth/useAuth";
 import usersApi from "../api/users";
