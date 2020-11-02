@@ -1,62 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet } from "react-native";
-import * as firebase from "firebase";
 import "firebase/firestore";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
 import usersApi from "../api/users";
 import mapStyle from "./../config/mapStyle";
 import MarkerModal from "../components/MarkerModal";
-import useLocation from "../hooks/useLocation";
 
 const deltas = {
   latitudeDelta: 0.015,
   longitudeDelta: 0.0121,
 };
 
-function Map(props) {
-  const [checkIns, setCheckIns] = useState([]);
-  const db = firebase.firestore();
-  const location = useLocation();
+function Map({ region, pins }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalInfo, setModalInfo] = useState({});
-  const [region, setRegion] = useState();
 
-  const getCheckIns = async () => {
-    let places = [];
-    await db
-      .collection("checkIns")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          // console.log(doc.id, ' => ', doc.data());
-          places.push(doc.data());
-        });
-      });
-    setCheckIns(places);
-  };
-
-  const getMarkerInfo = async (checkIn) => {
-    const location = checkIn.location;
-    const user = await usersApi.getUser(checkIn.userId);
-    setRegion({
+  const getMarkerInfo = async (pin) => {
+    const location = pin.location;
+    const user = await usersApi.getUser(pin.userId);
+    region = {
       ...location,
       ...deltas,
-    });
-    setModalInfo({ ...user, ...checkIn });
+    };
+    setModalInfo({ ...user, ...pin });
     setModalVisible(true);
-    console.log(modalInfo);
+    console.log(user);
   };
-
-  useEffect(() => {
-    if (location) {
-      setRegion({
-        ...location,
-        ...deltas,
-      });
-    }
-    getCheckIns();
-  }, [location]);
 
   return (
     <>
@@ -69,17 +39,17 @@ function Map(props) {
         showsUserLocation
         onPanDrag={() => setModalVisible(false)}
       >
-        {checkIns &&
-          checkIns.map((checkIn, i) => (
+        {pins &&
+          pins.map((pin, i) => (
             <Marker
               key={i}
-              coordinate={checkIn.location}
-              onPress={() => getMarkerInfo(checkIn)}
+              coordinate={pin.location}
+              onPress={() => getMarkerInfo(pin)}
             >
-              {checkIn.imageUrl ? (
+              {pin.imageUrl ? (
                 <Image
                   source={{
-                    uri: checkIn.imageUrl,
+                    uri: pin.imageUrl,
                   }}
                   style={styles.profileIcon}
                 />
@@ -92,15 +62,15 @@ function Map(props) {
             </Marker>
           ))}
       </MapView>
-      {modalVisible && (
-        <MarkerModal
-          modalVisible={modalVisible}
-          name={modalInfo.name}
-          username={modalInfo.username}
-          orientation={modalInfo.orientation}
-          adress={modalInfo.adress}
-        ></MarkerModal>
-      )}
+      <MarkerModal
+        visible={modalVisible}
+        name={modalInfo.name}
+        username={modalInfo.username}
+        orientation={modalInfo.orientation}
+        adress={modalInfo.adress}
+        pronoun={modalInfo.pronoun}
+        imageData={modalInfo.imageData}
+      />
     </>
   );
 }

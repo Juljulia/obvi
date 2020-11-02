@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
 import FormScreen from "../../components/multiScreenForm/FormScreen";
-import Text from "../../components/Text";
+import Text from "../../components/typography/Text";
 import {
   AppFormField as FormField,
   AppForm as Form,
