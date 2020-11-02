@@ -10,6 +10,7 @@ import {
 import Text from "../components/Text";
 import colors from "../config/colors";
 import usersApi from "../api/users";
+import ProfileImage from "./ProfileImage";
 
 const value = new Animated.Value(0);
 
@@ -18,15 +19,16 @@ const saveModalTranslationY = value.interpolate({
   outputRange: [600, 0],
 });
 
-function MarkerModal({ adress, visible, name, orientation, username }) {
+function MarkerModal({
+  adress,
+  visible,
+  name,
+  orientation,
+  username,
+  pronoun,
+  imageData,
+}) {
   const [showModal, setShowModal] = useState(false);
-  const [userData, setUserData] = useState({});
-  const { user } = useAuth();
-
-  const getUserData = async () => {
-    const userAuthData = await usersApi.getUser(user.uid);
-    setUserData(userAuthData);
-  };
 
   useEffect(() => {
     setShowModal(visible);
@@ -37,10 +39,6 @@ function MarkerModal({ adress, visible, name, orientation, username }) {
     }).start();
   }, [visible]);
 
-  useEffect(() => {
-    getUserData();
-  }, []);
-
   if (showModal) {
     return (
       <View style={styles.container}>
@@ -48,23 +46,27 @@ function MarkerModal({ adress, visible, name, orientation, username }) {
           <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
             <View style={styles.closeButton} />
           </TouchableWithoutFeedback>
-          <View style={styles.imageBg}>
-            {userData.imageData ? (
-              <Image
-                source={{ uri: userData.imageData }}
-                style={styles.image}
-              />
-            ) : (
-              <Image
-                source={require("../assets/default.png")}
-                style={styles.image}
-              />
-            )}
+          <ProfileImage
+            style={styles.profileImg}
+            imageUrl={imageData}
+            imgWidth={59}
+            imgHeight={59}
+            imgBorderRadius={29.5}
+            bgWidth={72}
+            bgHeight={72}
+          />
+          <View style={styles.info}>
+            <View style={styles.userInfo}>
+              <Text>{username}</Text>
+              <Text>{pronoun}</Text>
+              <Text>{orientation}</Text>
+            </View>
+            <View style={styles.checkinInfo}>
+              <Text>Now checked in</Text>
+              <Text>{name}</Text>
+              {/* {adress ? <Text>{adress}</Text> : <Text>No adress</Text>} */}
+            </View>
           </View>
-          <Text>{name}</Text>
-          <Text>{username}</Text>
-          {adress ? <Text>{adress}</Text> : <Text>No adress</Text>}
-          <Text>{orientation}</Text>
         </Animated.View>
       </View>
     );
@@ -83,12 +85,13 @@ const styles = StyleSheet.create({
     height: "70%",
   },
   closeButton: {
-    backgroundColor: colors.medium,
-    height: 8,
-    width: 50,
+    backgroundColor: colors.mediumGrey,
+    height: 5,
+    width: 35,
     borderRadius: 5,
     position: "absolute",
     top: 15,
+    left: "45%",
   },
   innerContainer: {
     transform: [
@@ -99,25 +102,22 @@ const styles = StyleSheet.create({
     position: "relative",
     width: "100%",
     height: "100%",
-    backgroundColor: colors.primary,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: colors.basicGrey,
+    paddingTop: 50,
   },
-  image: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-  },
-  imageBg: {
+  profileImg: {
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
     top: -60,
     left: 0,
-    width: 145,
-    height: 145,
-    borderRadius: 70,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.basicGrey,
+    width: 116,
+    height: 116,
+    borderRadius: 58,
+  },
+  info: {
+    flexDirection: "row",
   },
 });
 
