@@ -84,6 +84,7 @@ function Map({ region, pins }) {
         pronoun={modalInfo.pronoun}
         imageData={modalInfo.imageData}
         message={modalInfo.message}
+        activeTime={modalInfo.activeTo}
       />
     </>
   );

@@ -17,6 +17,7 @@ import MessageBubble from "./MessageBubble";
 import ProfileImage from "./ProfileImage";
 import H2 from "./typography/H2";
 import Subheading from "./typography/Subheading";
+import TimeBubble from "./TimeBubble";
 
 const value = new Animated.Value(0);
 
@@ -33,9 +34,18 @@ function MarkerModal({
   pronoun,
   imageData,
   message,
+  activeTime,
 }) {
   const [showModal, setShowModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState();
+
+  const getTimeRemaining = () => {
+    const activeToInSec = activeTime / 1000;
+    const nowInSec = Date.parse(new Date()) / 1000;
+    const timeRemaining = activeToInSec - nowInSec;
+    setTimeRemaining(timeRemaining);
+  };
 
   useEffect(() => {
     setShowModal(visible);
@@ -47,6 +57,10 @@ function MarkerModal({
 
     if (!visible) setShowMore(false);
   }, [visible]);
+
+  useEffect(() => {
+    getTimeRemaining();
+  }, [activeTime]);
 
   if (showModal) {
     return (
@@ -92,38 +106,42 @@ function MarkerModal({
               <>
                 {message && <MessageBubble text={message} />}
                 <H2 style={{ width: "100%", marginTop: 8 }}>Stay</H2>
-                <Image source={require("../assets/counter.png")} />
-                <CountdownCircleTimer
-                  isPlaying
-                  duration={3600}
-                  colors={[[colors.primary]]}
-                  trailColor="#e8e8e8"
-                  size={160}
-                >
-                  {({ remainingTime }) => {
-                    const hours = Math.floor(remainingTime / 3600);
-                    const minutes = Math.floor((remainingTime % 3600) / 60);
+                {activeTime && (
+                  <>
+                    <TimeBubble text={Math.floor(timeRemaining / 3600)} />
+                    <CountdownCircleTimer
+                      isPlaying
+                      duration={timeRemaining}
+                      colors={[[colors.primary]]}
+                      trailColor="#e8e8e8"
+                      size={160}
+                    >
+                      {({ remainingTime }) => {
+                        const hours = Math.floor(remainingTime / 3600);
+                        const minutes = Math.floor((remainingTime % 3600) / 60);
 
-                    remainingTime = `${hours}:${minutes}`;
+                        remainingTime = `${hours}:${minutes}`;
 
-                    return (
-                      <ImageBackground
-                        source={require("../assets/progress-bar-bg.png")}
-                        style={[styles.progressBarBg]}
-                      >
-                        <Animated.Text
-                          style={{
-                            color: colors.night,
-                            fontFamily: "Inter_500Medium",
-                            fontSize: 12,
-                          }}
-                        >
-                          {remainingTime}
-                        </Animated.Text>
-                      </ImageBackground>
-                    );
-                  }}
-                </CountdownCircleTimer>
+                        return (
+                          <ImageBackground
+                            source={require("../assets/progress-bar-bg.png")}
+                            style={[styles.progressBarBg]}
+                          >
+                            <Animated.Text
+                              style={{
+                                color: colors.night,
+                                fontFamily: "Inter_500Medium",
+                                fontSize: 12,
+                              }}
+                            >
+                              {remainingTime}
+                            </Animated.Text>
+                          </ImageBackground>
+                        );
+                      }}
+                    </CountdownCircleTimer>
+                  </>
+                )}
               </>
             )}
 

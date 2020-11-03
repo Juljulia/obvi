@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 
-import CustomSliderMarker from "../components/CustomSliderMarker";
+import CustomSliderMarker from "./CustomSliderMarker";
 import Text from "./typography/Text";
 import colors from "../config/colors";
 
