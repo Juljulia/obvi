@@ -4,8 +4,8 @@ import colors from "../../config/colors";
 
 import Text from "./Text";
 
-function H1({ children }) {
-  return <Text style={styles.container}>{children}</Text>;
+function H1({ children, style }) {
+  return <Text style={[styles.container, style]}>{children}</Text>;
 }
 
 const styles = StyleSheet.create({

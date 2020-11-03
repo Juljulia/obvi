@@ -17,6 +17,7 @@ import NavArrow from "../components/NavArrow";
 import SubmitButton from "../components/forms/SubmitButton";
 import Slider from "../components/Slider";
 import SearchInput from "../components/SearchInput";
+import UploadScreen from "../screens/UploadScreen";
 
 const validationSchema = Yup.object().shape({
   message: Yup.string().label("Message"),
@@ -30,6 +31,7 @@ function CheckInScreen({ navigation }) {
   const [showPlaces, setShowPlaces] = useState(false);
   const [choosenPlace, setChoosenPlace] = useState();
   const [closeList, setCloseList] = useState(false);
+  const [uploadVisible, setUploadVisible] = useState(false);
   const [checkinDuration, setCheckinDuration] = useState([1]);
   const db = firebase.firestore();
 
@@ -105,17 +107,23 @@ function CheckInScreen({ navigation }) {
         console.error("Error writing document: ", error);
       });
 
+    setUploadVisible(true);
+
     //Reset values
     setChoosenPlace(null);
     setCheckinDuration([1]);
     setCloseList(false);
     resetForm();
+  };
 
+  const navigate = () => {
     navigation.navigate(routes.MAP, { update: true });
+    setUploadVisible(false);
   };
 
   return (
     <Screen style={styles.container}>
+      <UploadScreen onDone={navigate} visible={uploadVisible} />
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={styles.arrow}

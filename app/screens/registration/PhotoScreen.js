@@ -4,7 +4,6 @@ import ProgressBar from "react-native-progress/Bar";
 import * as firebase from "firebase";
 import "firebase/storage";
 
-import Button from "../../components/Button";
 import colors from "../../config/colors";
 import ImagePicker from "../../components/ImagePicker";
 import FormScreen from "../../components/multiScreenForm/FormScreen";
@@ -101,7 +100,13 @@ function PhotoScreen({ navigation, route }) {
   };
 
   return (
-    <FormScreen title="Add photo" page="6" totalPages="7" onPress={uploadImage}>
+    <FormScreen
+      title="Add photo"
+      page="6"
+      totalPages="7"
+      isActive={image}
+      onPress={uploadImage}
+    >
       <ImagePicker imageUri={image} onChangeImage={handleImage} />
       {progress > 0 && (
         <ProgressBar color={colors.primary} progress={progress} width={200} />

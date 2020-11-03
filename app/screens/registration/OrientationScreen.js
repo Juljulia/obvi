@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
@@ -33,13 +33,14 @@ function OrientationScreen({ navigation, route }) {
         />
       ),
     });
-  }, [navigation]);
+  }, [navigation, orientation]);
 
   return (
     <FormScreen
       title="My orientation is"
       page="4"
       totalPages="7"
+      isActive={orientation}
       onPress={() =>
         navigation.navigate(routes.REGISTERPASSIONS, {
           username,

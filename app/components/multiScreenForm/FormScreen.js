@@ -9,6 +9,7 @@ import Text from "../typography/Text";
 
 function FormScreen({
   color,
+  isActive = false,
   title,
   onPress,
   page,
@@ -20,12 +21,17 @@ function FormScreen({
     <Screen style={styles.container}>
       <Text>{title}</Text>
       {children}
-      <Button
+      {isActive ? (
+        <Button title="Continue" onPress={onPress} />
+      ) : (
+        <Button disabled={true} disabledStyle title="Continue" />
+      )}
+      {/* <Button
         title="Continue"
         onPress={onPress}
         color={color}
         textColor={textColor}
-      />
+      /> */}
       <Pagination page={page} totalPages={totalPages} />
     </Screen>
   );
