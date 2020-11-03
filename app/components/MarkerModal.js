@@ -6,7 +6,9 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  ImageBackground,
 } from "react-native";
+import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
 import Button from "../components/Button";
 import Text from "../components/typography/Text";
@@ -91,6 +93,37 @@ function MarkerModal({
                 {message && <MessageBubble text={message} />}
                 <H2 style={{ width: "100%", marginTop: 8 }}>Stay</H2>
                 <Image source={require("../assets/counter.png")} />
+                <CountdownCircleTimer
+                  isPlaying
+                  duration={3600}
+                  colors={[[colors.primary]]}
+                  trailColor="#e8e8e8"
+                  size={160}
+                >
+                  {({ remainingTime }) => {
+                    const hours = Math.floor(remainingTime / 3600);
+                    const minutes = Math.floor((remainingTime % 3600) / 60);
+
+                    remainingTime = `${hours}:${minutes}`;
+
+                    return (
+                      <ImageBackground
+                        source={require("../assets/progress-bar-bg.png")}
+                        style={[styles.progressBarBg]}
+                      >
+                        <Animated.Text
+                          style={{
+                            color: colors.night,
+                            fontFamily: "Inter_500Medium",
+                            fontSize: 12,
+                          }}
+                        >
+                          {remainingTime}
+                        </Animated.Text>
+                      </ImageBackground>
+                    );
+                  }}
+                </CountdownCircleTimer>
               </>
             )}
 
@@ -175,6 +208,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 22,
     paddingBottom: 50,
+  },
+  progressBarBg: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 205,
+    height: 205,
   },
 });
 

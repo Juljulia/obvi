@@ -25,7 +25,12 @@ function MapScreen({ navigation, route }) {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          places.push(doc.data());
+          const now = Date.parse(new Date());
+          const stillActive = doc.data().activeTo - now;
+
+          if (stillActive > 0) {
+            places.push(doc.data());
+          }
         });
       });
     setCheckIns(places);
