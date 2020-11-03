@@ -10,7 +10,7 @@ function Subheading({ children, style }) {
 
 const styles = StyleSheet.create({
   container: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: "Inter_500Medium",
     color: colors.night,
     lineHeight: 20,
