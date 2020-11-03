@@ -1,11 +1,15 @@
-import React, { useState } from "react";
-import { Image, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
 import "firebase/firestore";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
 import usersApi from "../api/users";
 import mapStyle from "./../config/mapStyle";
-import MarkerModal from "../components/MarkerModal";
+import MarkerModal from "./MarkerModal";
+import ProfileImage from "./ProfileImage";
+import useLocation from "../hooks/useLocation";
+import useAuth from "../auth/useAuth";
+import MapMarker from "./MapMarker";
 
 const deltas = {
   latitudeDelta: 0.015,
@@ -15,6 +19,18 @@ const deltas = {
 function Map({ region, pins }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalInfo, setModalInfo] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState();
+  const location = useLocation();
+  const { user } = useAuth();
+
+  const getLoggedInUser = async () => {
+    const loggedInUser = await usersApi.getUser(user.uid);
+    setLoggedInUser(loggedInUser);
+  };
+
+  useEffect(() => {
+    getLoggedInUser();
+  }, []);
 
   const getMarkerInfo = async (pin) => {
     const location = pin.location;
@@ -34,10 +50,13 @@ function Map({ region, pins }) {
         provider={PROVIDER_GOOGLE}
         region={region}
         customMapStyle={mapStyle}
-        showsMyLocationButton
-        showsUserLocation
         onPanDrag={() => setModalVisible(false)}
       >
+        {loggedInUser && location && (
+          <Marker coordinate={location}>
+            <MapMarker imageUrl={loggedInUser.imageData} />
+          </Marker>
+        )}
         {pins &&
           pins.map((pin, i) => (
             <Marker
@@ -45,19 +64,14 @@ function Map({ region, pins }) {
               coordinate={pin.location}
               onPress={() => getMarkerInfo(pin)}
             >
-              {pin.imageUrl ? (
-                <Image
-                  source={{
-                    uri: pin.imageUrl,
-                  }}
-                  style={styles.profileIcon}
-                />
-              ) : (
-                <Image
-                  source={require("../assets/default.png")}
-                  style={styles.defaultMarker}
-                />
-              )}
+              <ProfileImage
+                imageUrl={pin.imageUrl}
+                imgWidth={40}
+                imgHeight={40}
+                imgBorderRadius={20}
+                bgWidth={50}
+                bgHeight={50}
+              />
             </Marker>
           ))}
       </MapView>
@@ -76,17 +90,8 @@ function Map({ region, pins }) {
 }
 
 const styles = StyleSheet.create({
-  defaultMarker: {
-    height: 35,
-    width: 35,
-  },
   map: {
     flex: 1,
-  },
-  profileIcon: {
-    height: 35,
-    width: 35,
-    borderRadius: 35,
   },
 });
 
