@@ -1,17 +1,20 @@
-import React, { useLayoutEffect } from "react";
-import { StyleSheet } from "react-native";
+import React, { useLayoutEffect, useState } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import * as Location from "expo-location";
 import * as firebase from "firebase";
 import "firebase/firestore";
 
 import Button from "../../components/Button";
+import InfoModal from "../../components/InfoModal";
 import NavArrow from "../../components/NavArrow";
 import Pagination from "../../components/Pagination";
+import Screen from "../../components/Screen";
 import Text from "../../components/typography/Text";
 import useAuth from "../../auth/useAuth";
 
 function LocationScreen({ navigation, route }) {
   const { orientation, passions, pronoun, username, imageData } = route.params;
+  const [infoVisible, setInfoVisible] = useState(false);
   const { user } = useAuth();
   const db = firebase.firestore();
 
@@ -44,7 +47,7 @@ function LocationScreen({ navigation, route }) {
 
   console.log(userInfo);
 
-  const addUserInfo = () => {
+  const addUserInfo = async () => {
     db.collection("users")
       .doc(user.uid)
       .set(userInfo)
@@ -60,7 +63,15 @@ function LocationScreen({ navigation, route }) {
     <Screen style={styles.container}>
       <Text>Enable Location</Text>
       <Button title="Allow location" onPress={getLocation} />
+      <TouchableOpacity onPress={() => setInfoVisible(true)}>
+        <Text>Tell me more</Text>
+      </TouchableOpacity>
       <Pagination page="7" totalPages="7" />
+      <InfoModal
+        onPress={() => setInfoVisible(false)}
+        onPressButton={getLocation}
+        visible={infoVisible}
+      ></InfoModal>
     </Screen>
   );
 }

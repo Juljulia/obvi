@@ -4,7 +4,6 @@ import { StyleSheet } from "react-native";
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
-import FormScreen from "../../components/multiScreenForm/FormScreen";
 import Text from "../../components/typography/Text";
 
 function NameScreen({ navigation }) {
