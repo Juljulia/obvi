@@ -26,7 +26,7 @@ function PassionsScreen({ navigation, route }) {
         />
       ),
     });
-  }, [navigation]);
+  }, [navigation, passions]);
 
   return (
     <FormScreen

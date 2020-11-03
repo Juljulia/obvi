@@ -33,7 +33,7 @@ function OrientationScreen({ navigation, route }) {
         />
       ),
     });
-  }, [navigation]);
+  }, [navigation, orientation]);
 
   return (
     <FormScreen
