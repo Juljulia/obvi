@@ -1,4 +1,5 @@
 import React from "react";
+import { Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -6,21 +7,31 @@ import AccountScreen from "../screens/AccountScreen";
 import CheckInScreen from "../screens/CheckInScreen";
 import HomeScreen from "../screens/HomeScreen";
 import MapScreen from "../screens/MapScreen";
+import colors from "../config/colors";
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-        }}
-      />
+    <Tab.Navigator
+      tabBarOptions={{
+        showLabel: false,
+        style: {
+          backgroundColor: colors.white,
+          marginHorizontal: 12,
+          marginBottom: 18,
+          borderRadius: 50,
+          height: 74,
+          shadowColor: "#BEC2E2",
+          shadowOffset: {
+            width: 6,
+            height: 6,
+          },
+          shadowOpacity: 0.8,
+          shadowRadius: 18,
+        },
+      }}
+    >
       <Tab.Screen
         name="Check-in"
         component={CheckInScreen}
@@ -48,7 +59,16 @@ const AppNavigator = () => {
         component={AccountScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <Image source={require("../assets/icons/profile.png")} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: () => (
+            <Image source={require("../assets/icons/home.png")} />
           ),
         }}
       />
