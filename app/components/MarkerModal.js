@@ -35,6 +35,7 @@ function MarkerModal({
   imageData,
   message,
   activeTime,
+  duration,
 }) {
   const [showModal, setShowModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
@@ -108,19 +109,21 @@ function MarkerModal({
                 <H2 style={{ width: "100%", marginTop: 8 }}>Stay</H2>
                 {activeTime && (
                   <>
-                    <TimeBubble text={Math.floor(timeRemaining / 3600)} />
+                    <TimeBubble text={duration} />
                     <CountdownCircleTimer
                       isPlaying
+                      initialRemainingTime={duration * 3600}
+                      rotation="counterclockwise"
                       duration={timeRemaining}
                       colors={[[colors.primary]]}
                       trailColor="#e8e8e8"
                       size={160}
                     >
-                      {({ remainingTime }) => {
-                        const hours = Math.floor(remainingTime / 3600);
-                        const minutes = Math.floor((remainingTime % 3600) / 60);
+                      {() => {
+                        const hours = Math.floor(timeRemaining / 3600);
+                        const minutes = Math.floor((timeRemaining % 3600) / 60);
 
-                        remainingTime = `${hours}:${minutes}`;
+                        const showTimeRemaining = `${hours}:${minutes}`;
 
                         return (
                           <ImageBackground
@@ -134,7 +137,7 @@ function MarkerModal({
                                 fontSize: 12,
                               }}
                             >
-                              {remainingTime}
+                              {showTimeRemaining}
                             </Animated.Text>
                           </ImageBackground>
                         );
