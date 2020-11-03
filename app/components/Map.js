@@ -55,7 +55,7 @@ function Map({ region, pins }) {
                 />
               ) : (
                 <Image
-                  source={require("../assets/profile_image.png")}
+                  source={require("../assets/default.png")}
                   style={styles.defaultMarker}
                 />
               )}
