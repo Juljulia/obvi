@@ -19,6 +19,7 @@ function SelectMultiple({ group, onSelectedValuesChange }) {
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 1, //drop shadow offset
         shadowRadius: 4, // blur radius
+        elevation: 2,
       }}
       highLightStyle={{
         //not selected
