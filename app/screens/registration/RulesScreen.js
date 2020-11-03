@@ -15,6 +15,7 @@ function RulesScreen({ navigation }) {
       page="1"
       totalPages="7"
       onPress={() => navigation.navigate(routes.REGISTERNAME)}
+      isActive={true}
     >
       <Text>Please follow these house rules</Text>
       <Button title="Log out" onPress={() => logOut()} />

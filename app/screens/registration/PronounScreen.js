@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
-import { StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet, Text } from "react-native";
 
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
@@ -31,13 +31,14 @@ function PronounScreen({ navigation, route }) {
         />
       ),
     });
-  }, [navigation]);
+  }, [navigation, pronoun]);
 
   return (
     <FormScreen
       title="My pronoun is"
       page="3"
       totalPages="7"
+      isActive={pronoun}
       onPress={() =>
         navigation.navigate(routes.REGISTERORIENTATION, {
           username,
@@ -55,13 +56,15 @@ function PronounScreen({ navigation, route }) {
         placeholder={"Start typing"}
       />
       <Text>Pronouns</Text>
-      <SelectMultiple
-        group={searchPronouns}
-        // singleTap={(valueTap) => console.log(pronoun)}
-        onSelectedValuesChange={(selectedValues) =>
-          setPronoun(selectedValues.join(", "))
-        }
-      ></SelectMultiple>
+      <ScrollView>
+        <SelectMultiple
+          group={searchPronouns}
+          // singleTap={(valueTap) => console.log(pronoun)}
+          onSelectedValuesChange={(selectedValues) =>
+            setPronoun(selectedValues.join(", "))
+          }
+        ></SelectMultiple>
+      </ScrollView>
     </FormScreen>
   );
 }
