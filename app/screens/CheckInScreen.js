@@ -15,7 +15,6 @@ import FormField from "../components/forms/FormField";
 import Form from "../components/forms/Form";
 import NavArrow from "../components/NavArrow";
 import SubmitButton from "../components/forms/SubmitButton";
-import colors from "../config/colors";
 import Slider from "../components/Slider";
 import SearchInput from "../components/SearchInput";
 import UploadScreen from "../screens/UploadScreen";
