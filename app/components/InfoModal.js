@@ -16,11 +16,11 @@ function InfoModal({ onPress, onPressButton, visible }) {
         <Button title="Allow location" onPressButton={onPressButton} />
         <View style={styles.description}>
           <H2 style={styles.title}>Spot the community</H2>
-          <Text style={styles.text}>
+          <Text style={[styles.text, { lineHeight: 25 }]}>
             Your nearby location will show you friends within the community and
             their nearby whereabouts.
           </Text>
-          <Text>
+          <Text style={{ lineHeight: 25 }}>
             To see exact location check in within the app an meet up with like
             minded people.
           </Text>
@@ -32,7 +32,7 @@ function InfoModal({ onPress, onPressButton, visible }) {
 
 const styles = StyleSheet.create({
   arrow: {
-    marginBottom: 24,
+    marginBottom: 14, //10 + 14 button has 10 marginVertical
   },
   container: {
     alignItems: "center",
