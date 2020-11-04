@@ -165,7 +165,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-    maxHeight: 430,
+    maxHeight: 460,
+    paddingBottom: 55,
+    backgroundColor: colors.basicGrey,
   },
   closeButton: {
     backgroundColor: colors.mediumGrey,
@@ -228,7 +230,7 @@ const styles = StyleSheet.create({
   scrollView: {
     alignItems: "center",
     paddingHorizontal: 22,
-    paddingBottom: 50,
+    paddingBottom: 55,
   },
   progressBarBg: {
     alignItems: "center",

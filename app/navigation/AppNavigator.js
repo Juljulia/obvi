@@ -18,8 +18,6 @@ const AppNavigator = () => {
         showLabel: false,
         style: {
           backgroundColor: colors.white,
-          marginHorizontal: 12,
-          marginBottom: 18,
           borderRadius: 50,
           height: 74,
           shadowColor: "#BEC2E2",
@@ -29,6 +27,10 @@ const AppNavigator = () => {
           },
           shadowOpacity: 0.8,
           shadowRadius: 18,
+          position: "absolute",
+          left: 11,
+          right: 11,
+          bottom: 17,
         },
       }}
     >
