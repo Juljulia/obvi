@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 import Button from "../../components/Button";
-import FormScreen from "../../components/multiScreenForm/FormScreen";
+import FormScreen from "../../components/registration/FormScreen";
 import useAuth from "../../auth/useAuth";
 import routes from "../../navigation/routes";
 import Text from "../../components/typography/Text";
