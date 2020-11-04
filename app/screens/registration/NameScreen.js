@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
-import FormScreen from "../../components/multiScreenForm/FormScreen";
+import FormScreen from "../../components/registration/FormScreen";
 import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
 import Text from "../../components/typography/Text";

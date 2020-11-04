@@ -5,14 +5,22 @@ import * as firebase from "firebase";
 import "firebase/storage";
 
 import colors from "../../config/colors";
-import ImagePicker from "../../components/ImagePicker";
-import FormScreen from "../../components/multiScreenForm/FormScreen";
+import ImagePicker from "../../components/registration/ImagePicker";
+import FormScreen from "../../components/registration/FormScreen";
+import H2 from "../../components/typography/H2";
 import routes from "../../navigation/routes";
 import useAuth from "../../auth/useAuth";
 import NavArrow from "../../components/NavArrow";
 
 function PhotoScreen({ navigation, route }) {
-  const { username, pronoun, orientation, passions } = route.params;
+  const {
+    username,
+    pronoun,
+    showPronoun,
+    orientation,
+    showOrientation,
+    passions,
+  } = route.params;
   const { user } = useAuth();
   const [image, setImage] = useState();
   const [progress, setProgress] = useState(0);
@@ -23,7 +31,9 @@ function PhotoScreen({ navigation, route }) {
     navigation.navigate(routes.REGISTERLOCATION, {
       username,
       pronoun,
+      showPronoun,
       orientation,
+      showOrientation,
       passions,
       imageData,
     });
@@ -100,16 +110,16 @@ function PhotoScreen({ navigation, route }) {
   };
 
   return (
-    <FormScreen
-      title="Add photo"
-      page="6"
-      totalPages="7"
-      isActive={image}
-      onPress={uploadImage}
-    >
+    <FormScreen page="6" totalPages="7" isActive={image} onPress={uploadImage}>
+      <H2 style={{ alignSelf: "center" }}>Add photo</H2>
       <ImagePicker imageUri={image} onChangeImage={handleImage} />
       {progress > 0 && (
-        <ProgressBar color={colors.primary} progress={progress} width={200} />
+        <ProgressBar
+          color={colors.primary}
+          progress={progress}
+          width={200}
+          style={{ alignSelf: "center", marginVertical: 24 }}
+        />
       )}
     </FormScreen>
   );

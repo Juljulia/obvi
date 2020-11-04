@@ -1,16 +1,24 @@
 import React, { useState, useLayoutEffect } from "react";
-import { ScrollView, StyleSheet, View, Image } from "react-native";
-import CheckBox from "react-native-check-box";
+import {
+  Dimensions,
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 
-import FormScreen from "../../components/multiScreenForm/FormScreen";
+import colors from "../../config/colors";
+import Checkbox from "../../components/registration/Checkbox";
+import FormScreen from "../../components/registration/FormScreen";
 import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
 import NavArrow from "../../components/NavArrow";
-import PopUp from "../../components/PopUp";
+import PopUp from "../../components/registration/PopUp";
 import pronouns from "../../assets/arrays/pronouns";
-import SelectMultiple from "../../components/SelectMultiple";
-import colors from "../../config/colors";
+import SelectMultiple from "../../components/registration/SelectMultiple";
 import Text from "../../components/typography/Text";
+
+const windowHeight = Dimensions.get("window").height;
 
 function PronounScreen({ navigation, route }) {
   const { username } = route.params;
@@ -18,6 +26,8 @@ function PronounScreen({ navigation, route }) {
   const [pronoun, setPronoun] = useState(null);
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [viewAll, setViewAll] = useState(false);
+
+  const showPronoun = toggleCheckBox;
 
   let searchPronouns = [];
 
@@ -29,9 +39,6 @@ function PronounScreen({ navigation, route }) {
     searchPronouns = pronouns.slice();
   }
 
-  console.log(input["input"]);
-  console.log(searchPronouns);
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -40,86 +47,105 @@ function PronounScreen({ navigation, route }) {
             navigation.navigate(routes.REGISTERORIENTATION, {
               username,
               pronoun,
+              showPronoun,
             })
           }
         />
       ),
     });
-  }, [navigation, pronoun]);
+  }, [navigation, pronoun, showPronoun]);
 
   return (
-    <FormScreen
-      title="My gender      identity is"
-      page="3"
-      totalPages="7"
-      isActive={pronoun}
-      onPress={() =>
-        navigation.navigate(routes.REGISTERORIENTATION, {
-          username,
-          pronoun,
-        })
-      }
-    >
-      <PopUp
-        text="Whatever you don't care to answer, you skip."
-        style={styles.popUp}
-      />
-      <TextInput
-        value={input["input"]}
-        onChangeText={(input) => setInput({ input })}
-        placeholder={"Start typing"}
-      />
-
-      <View style={styles.titlesContainer}>
-        <Text>Gender identity</Text>
-        {viewAll ? (
-          <Text
-            style={{ textDecorationLine: "underline" }}
-            onPress={() => setViewAll(false)}
-          >
-            Hide all
-          </Text>
-        ) : (
-          <Text
-            style={{ textDecorationLine: "underline" }}
-            onPress={() => setViewAll(true)}
-          >
-            View all
-          </Text>
-        )}
-      </View>
-      <ScrollView style={styles.container}>
-        <SelectMultiple
-          group={searchPronouns}
-          onSelectedValuesChange={(selectedValues) =>
-            setPronoun(selectedValues.join(", "))
+    <ScrollView>
+      <KeyboardAvoidingView
+        behavior="position"
+        enabled
+        keyboardVerticalOffset={-150}
+      >
+        <FormScreen
+          title="My gender      identity is"
+          page="3"
+          totalPages="7"
+          isActive={pronoun}
+          onPress={() =>
+            navigation.navigate(routes.REGISTERORIENTATION, {
+              username,
+              pronoun,
+              showPronoun,
+            })
           }
-        ></SelectMultiple>
-      </ScrollView>
-      <CheckBox
-        rightText="Show gender identity on my profile"
-        rightTextStyle={{ color: colors.text }}
-        isChecked={toggleCheckBox}
-        onClick={() => setToggleCheckBox(!toggleCheckBox)}
-        checkedImage={<Image source={require("../../assets/check.png")} />}
-        unCheckedImage={<Image source={require("../../assets/uncheck.png")} />}
-      />
-    </FormScreen>
+          style={{ height: windowHeight + 25 }}
+        >
+          <PopUp
+            text="Whatever you don't care to answer, you skip."
+            style={styles.popUp}
+          />
+
+          <TextInput
+            value={input["input"]}
+            onChangeText={(input) => setInput({ input })}
+            placeholder={"Start typing"}
+          />
+
+          <View style={styles.titlesContainer}>
+            <Text>Gender identity</Text>
+            {viewAll ? (
+              <Text
+                style={{ textDecorationLine: "underline" }}
+                onPress={() => setViewAll(false)}
+              >
+                Hide all
+              </Text>
+            ) : (
+              <Text
+                style={{ textDecorationLine: "underline" }}
+                onPress={() => setViewAll(true)}
+              >
+                View all
+              </Text>
+            )}
+          </View>
+
+          <ScrollView style={styles.innerScrollView}>
+            <SelectMultiple
+              group={searchPronouns}
+              onSelectedValuesChange={(selectedValues) =>
+                setPronoun(selectedValues.join(", "))
+              }
+            ></SelectMultiple>
+          </ScrollView>
+          <Checkbox
+            rightText="Show gender identity on my profile"
+            isChecked={toggleCheckBox}
+            onClick={() => setToggleCheckBox(!toggleCheckBox)}
+          />
+        </FormScreen>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  checkbox: {},
-  container: {
-    marginTop: 12,
-    marginBottom: 24,
-    borderWidth: 1,
-    borderColor: "red",
+  checked: {
+    shadowColor: colors.shadow,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    elevation: 3,
+  },
+  innerScrollView: {
+    borderWidth: 12,
+    borderColor: colors.basicGrey,
+    borderBottomWidth: 24,
+    maxHeight: 235,
   },
   popUp: {
     position: "absolute",
-    right: 60,
-    top: 90,
+    right: 50,
+    top: 0,
   },
   titlesContainer: {
     flexDirection: "row",
