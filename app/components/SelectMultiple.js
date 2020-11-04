@@ -8,13 +8,12 @@ function SelectMultiple({ group, onSelectedValuesChange }) {
   return (
     <SelectMultipleGroupButton
       buttonViewStyle={{
-        margin: 5,
         borderRadius: 20,
         alignItems: "flex-start",
         height: 44,
         paddingLeft: 40,
         width: "70%",
-        marginVertical: 10,
+        marginVertical: 8,
         shadowColor: "#bdcde1",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 1, //drop shadow offset

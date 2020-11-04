@@ -35,10 +35,12 @@ function NameScreen({ navigation }) {
       <TextInput
         placeholder={"Name"}
         onChangeText={(username) => setUsername({ username })}
-        icon="account-outline"
+        icon="account"
         value={username["username"]}
       />
-      <Text>The choosen name will appear in you profile</Text>
+      <Text style={{ lineHeight: 25, marginBottom: 16 }}>
+        The chosen name will appear in you profile
+      </Text>
     </FormScreen>
   );
 }
