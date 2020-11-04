@@ -9,7 +9,6 @@ function AppButton({
   onPress,
   color = "primary",
   disabledStyle = false,
-  textColor = "white",
   style,
   ...otherProps
 }) {
@@ -24,13 +23,7 @@ function AppButton({
       onPress={onPress}
       {...otherProps}
     >
-      <Text
-        style={[
-          styles.text,
-          styles.disabledText(disabledStyle),
-          { color: colors[textColor] },
-        ]}
-      >
+      <Text style={[styles.text, styles.disabledText(disabledStyle)]}>
         {title}
       </Text>
     </TouchableOpacity>
@@ -44,7 +37,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 15,
-    width: 280,
+    width: 180,
     height: 60,
     marginVertical: 10,
     shadowColor: "#8F93EA",
@@ -59,22 +52,23 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Inter_600SemiBold",
     fontSize: 16,
+    color: colors.white,
   },
   disabledButton: (disabledStyle) =>
     disabledStyle && {
       backgroundColor: colors.light,
       backgroundColor: "transparent",
-      borderWidth: 1,
+      borderWidth: 0.8,
       overflow: "hidden",
-      shadowColor: "#A0A5B9",
+      shadowColor: "#BECDE2",
       shadowRadius: 10,
-      shadowOpacity: 0.5,
-      borderColor: "#FFFFFF",
+      shadowOpacity: 0.8,
+      borderColor: "#d8e0ed",
       shadowOffset: { width: -20, height: 10 },
     },
   disabledText: (disabledStyle) =>
     disabledStyle && {
-      color: colors.medium,
+      color: colors.mediumGrey,
     },
 });
 
