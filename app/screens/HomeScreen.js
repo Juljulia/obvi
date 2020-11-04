@@ -19,6 +19,7 @@ import useAuth from "../auth/useAuth";
 import usersApi from "../api/users";
 import useLocation from "../hooks/useLocation";
 import colors from "../config/colors";
+import NavIcon from "../components/nav/NavIcon";
 
 function HomeScreen({ navigation }) {
   const { user, logOut } = useAuth();
@@ -65,6 +66,18 @@ function HomeScreen({ navigation }) {
             <Button title="Logout" onPress={() => logOut()} />
           </View>
         )}
+        <View style={styles.navContainer}>
+          <NavIcon
+            icon={require("../assets/icons/compas.png")}
+            onPress={() => navigation.navigate(routes.MAP)}
+          />
+          <NavIcon
+            icon={require("../assets/icons/location.png")}
+            onPress={() => navigation.navigate(routes.CHECKIN)}
+          />
+          <NavIcon icon={require("../assets/icons/calender.png")} />
+          <NavIcon icon={require("../assets/icons/chat.png")} />
+        </View>
         <Avatars />
         <View style={styles.cardContainer}>
           <Card
@@ -110,6 +123,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    paddingHorizontal: 30,
   },
   map: {
     flex: 1,
@@ -126,6 +140,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: -28,
     left: -24.5,
+  },
+  navContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
 
