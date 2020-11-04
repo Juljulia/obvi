@@ -17,4 +17,5 @@ export default {
   mediumGrey: "#8C94A0",
   text: "#818181",
   white: "#FFFFFF",
+  shadow: "#aebcd1",
 };
