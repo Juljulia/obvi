@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, Text } from "react-native";
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
-import NavArrow from "../../components/NavArrow";
+import NavArrow from "../../components/nav/NavArrow";
 import PopUp from "../../components/PopUp";
 import pronouns from "../../assets/arrays/pronouns";
 import SelectMultiple from "../../components/SelectMultiple";

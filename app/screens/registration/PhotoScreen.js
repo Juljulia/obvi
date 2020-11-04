@@ -9,7 +9,7 @@ import ImagePicker from "../../components/ImagePicker";
 import FormScreen from "../../components/multiScreenForm/FormScreen";
 import routes from "../../navigation/routes";
 import useAuth from "../../auth/useAuth";
-import NavArrow from "../../components/NavArrow";
+import NavArrow from "../../components/nav/NavArrow";
 
 function PhotoScreen({ navigation, route }) {
   const { username, pronoun, orientation, passions } = route.params;

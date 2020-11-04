@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Image, TouchableOpacity, View } from "react-native";
 
-import colors from "../config/colors";
+import colors from "../../config/colors";
 
 function NavArrow({ goBack = false, onPress }) {
   if (goBack) {
@@ -9,7 +9,7 @@ function NavArrow({ goBack = false, onPress }) {
       <View style={[styles.container]}>
         <Image
           style={styles.arrow(goBack)}
-          source={require("../assets/arrow.png")}
+          source={require("../../assets/arrow.png")}
         />
       </View>
     );
@@ -18,7 +18,7 @@ function NavArrow({ goBack = false, onPress }) {
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <Image
         style={styles.arrow(goBack)}
-        source={require("../assets/arrow.png")}
+        source={require("../../assets/arrow.png")}
       />
     </TouchableOpacity>
   );
