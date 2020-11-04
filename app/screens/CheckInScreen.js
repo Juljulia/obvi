@@ -13,7 +13,7 @@ import useLocation from "../hooks/useLocation";
 import usersApi from "../api/users";
 import FormField from "../components/forms/FormField";
 import Form from "../components/forms/Form";
-import NavArrow from "../components/NavArrow";
+import NavArrow from "../components/nav/NavArrow";
 import SubmitButton from "../components/forms/SubmitButton";
 import Slider from "../components/Slider";
 import SearchInput from "../components/SearchInput";
