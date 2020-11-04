@@ -14,9 +14,10 @@ function FormScreen({
   page,
   totalPages,
   children,
+  style,
 }) {
   return (
-    <Screen style={styles.container}>
+    <Screen style={[styles.container, style]}>
       <H1>{title}</H1>
       {children}
       {isActive ? (
@@ -32,10 +33,8 @@ function FormScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === "ios" ? 150 : 60,
+    paddingTop: Platform.OS === "ios" ? 100 : 50,
     paddingHorizontal: Platform.OS === "ios" ? 30 : 15,
-    // borderWidth: 1,
-    // borderColor: "red",
   },
 });
 

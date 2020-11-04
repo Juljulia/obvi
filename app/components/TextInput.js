@@ -27,6 +27,7 @@ function AppTextInput({ icon, width = "100%", ...otherProps }) {
 
 const styles = StyleSheet.create({
   container: {
+    height: 70,
     marginTop: 34,
     marginBottom: 24,
     backgroundColor: "transparent",

@@ -2,19 +2,22 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { SelectMultipleGroupButton } from "react-native-selectmultiple-button";
 
-import colors from "../config/colors";
+import colors from "../../config/colors";
 
 function SelectMultiplePassions({ group, onSelectedValuesChange }) {
   return (
     <SelectMultipleGroupButton
+      containerViewStyle={{
+        justifyContent: "space-around",
+      }}
       buttonViewStyle={{
-        margin: 8,
+        marginVertical: 8,
         borderRadius: 16,
         padding: 4,
         maxWidth: 150,
-        alignItems: "center",
-        shadowColor: "#bdcde1",
-        shadowOffset: { width: 0, height: 2 },
+        alignItems: "flex-start",
+        shadowColor: colors.shadow,
+        shadowOffset: { width: 4, height: 4 },
         shadowOpacity: 1, //drop shadow offset
         shadowRadius: 4, // blur radius
         elevation: 2,
@@ -34,7 +37,6 @@ function SelectMultiplePassions({ group, onSelectedValuesChange }) {
         fontSize: 12,
       }}
       group={group}
-      // singleTap={(valueTap) => console.log(pronoun)}
       onSelectedValuesChange={onSelectedValuesChange}
     ></SelectMultipleGroupButton>
   );
