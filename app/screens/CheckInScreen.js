@@ -18,6 +18,7 @@ import SubmitButton from "../components/forms/SubmitButton";
 import Slider from "../components/Slider";
 import SearchInput from "../components/SearchInput";
 import UploadScreen from "../screens/UploadScreen";
+import ScreenTitle from "../components/ScreenTitle";
 
 const validationSchema = Yup.object().shape({
   message: Yup.string().label("Message"),
@@ -131,7 +132,7 @@ function CheckInScreen({ navigation }) {
       >
         <NavArrow goBack={true}></NavArrow>
       </TouchableOpacity>
-      <Text>Check-In</Text>
+      <ScreenTitle>Check-In</ScreenTitle>
 
       {/** SEARCH */}
       <SearchInput
