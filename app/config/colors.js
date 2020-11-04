@@ -4,7 +4,7 @@ export default {
   //MOSH CURS
   medium: "#456078",
   light: "#F2F3F7",
-  dark: "#0c0c0c", //text
+  dark: "#0c0c0c",
   white: "#fff",
   secondary: "#4ECDC4",
 
