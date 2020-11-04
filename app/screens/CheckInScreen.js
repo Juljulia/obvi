@@ -95,6 +95,7 @@ function CheckInScreen({ navigation }) {
       userId: user.uid,
       message: message,
       activeTo: activeToDateInMs,
+      duration: checkinDuration[0],
     };
 
     db.collection("checkIns")
