@@ -10,6 +10,7 @@ import PhotoScreen from "../screens/registration/PhotoScreen";
 import LocationScreen from "../screens/registration/LocationScreen";
 import NavArrow from "../components/NavArrow";
 import H2 from "../components/typography/H2";
+import colors from "../config/colors";
 
 const Stack = createStackNavigator();
 
@@ -18,13 +19,13 @@ const RegisterNavigator = () => {
     headerTitle: () => <H2>Registration</H2>,
     headerBackTitleVisible: false,
     headerBackImage: () => <NavArrow goBack={true} />,
-    headerTransparent: true,
     headerStyle: {
       height: 120,
       shadowRadius: 0,
       shadowOffset: {
         height: 0,
       },
+      backgroundColor: colors.basicGrey,
     },
   };
 
