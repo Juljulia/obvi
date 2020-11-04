@@ -1,37 +1,30 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import colors from "../../config/colors";
 
 import Button from "../Button";
 import Pagination from "../Pagination";
 import Screen from "../Screen";
-import Text from "../typography/Text";
+import H1 from "../typography/H1";
 
 function FormScreen({
-  color,
   isActive = false,
   title,
   onPress,
   page,
   totalPages,
-  textColor,
   children,
+  style,
 }) {
   return (
-    <Screen style={styles.container}>
-      <Text>{title}</Text>
+    <Screen style={[styles.container, style]}>
+      <H1>{title}</H1>
       {children}
       {isActive ? (
         <Button title="Continue" onPress={onPress} />
       ) : (
         <Button disabled={true} disabledStyle title="Continue" />
       )}
-      {/* <Button
-        title="Continue"
-        onPress={onPress}
-        color={color}
-        textColor={textColor}
-      /> */}
       <Pagination page={page} totalPages={totalPages} />
     </Screen>
   );
@@ -39,7 +32,9 @@ function FormScreen({
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 160,
+    flex: 1,
+    paddingTop: Platform.OS === "ios" ? 100 : 50,
+    paddingHorizontal: Platform.OS === "ios" ? 30 : 15,
   },
 });
 
