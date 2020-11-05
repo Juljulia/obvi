@@ -23,6 +23,79 @@ import NavIcon from "../components/nav/NavIcon";
 import H2 from "../components/typography/H2";
 import TextInput from "../components/TextInput";
 
+const posts = [
+  {
+    name: "Sally",
+    text: "Hello, what's the best place to go for a cup of coffee in the city?",
+    image: require("../assets/images/coffee.png"),
+    comments: 25,
+    shared: 12,
+    likes: 5,
+    thread: false,
+    commented: false,
+    isShared: false,
+    liked: false,
+    postedTimeAgo: 4,
+    profileImage: require("../assets/images/sally.jpeg"),
+  },
+  {
+    name: "Elena",
+    text: "Can anyone tell me where all the single femme lesbians are?!",
+    comments: 60,
+    shared: 40,
+    likes: 150,
+    thread: true,
+    commented: false,
+    isShared: false,
+    liked: true,
+    postedTimeAgo: 6,
+    profileImage: require("../assets/images/elena.jpg"),
+  },
+  {
+    name: "Mike",
+    text:
+      "Tell me if i'm wrong, but isn't Frilagret closed on Mondays? If so, anyone know a great place to hang on a Monday..?",
+    comments: 30,
+    shared: 3,
+    likes: 34,
+    thread: true,
+    commented: true,
+    isShared: false,
+    liked: true,
+    postedTimeAgo: 8,
+    profileImage: require("../assets/images/mike.jpg"),
+  },
+  {
+    name: "Jasmine",
+    text:
+      "I would like to find a second hand store with no gender sections? Is there any? Anyone want to come along and look for one? I have a car.",
+    image: require("../assets/images/clothes.png"),
+    comments: 25,
+    shared: 12,
+    likes: 65,
+    thread: false,
+    commented: false,
+    isShared: true,
+    liked: false,
+    postedTimeAgo: 13,
+    profileImage: require("../assets/images/jasmine.jpg"),
+  },
+  {
+    name: "Leo",
+    text: "Who wants to hang?",
+    image: require("../assets/images/coffee.png"),
+    comments: 40,
+    shared: 6,
+    likes: 80,
+    thread: true,
+    commented: true,
+    isShared: false,
+    liked: true,
+    postedTimeAgo: 13,
+    profileImage: require("../assets/images/leo.jpg"),
+  },
+];
+
 function HomeScreen({ navigation }) {
   const { user, logOut } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
@@ -94,16 +167,21 @@ function HomeScreen({ navigation }) {
                   source={require("../assets/send.png")}
                 />
               </View>
-              <Card
-                title="Sally"
-                image={require("../assets/images/coffee.png")}
-                subTitle="Hello, what's the best place to go for a cup of coffee in the city?"
-              ></Card>
-              <Card
-                title="Calendar"
-                image={require("../assets/union.png")}
-                subTitle="See upcoming events"
-              ></Card>
+              {posts.map((post, key) => (
+                <Card
+                  title={post.name}
+                  image={post.image}
+                  text={post.text}
+                  hours={post.postedTimeAgo}
+                  comments={post.comments}
+                  shared={post.shared}
+                  likes={post.likes}
+                  isCommented={post.commented}
+                  isShared={post.isShared}
+                  isLiked={post.liked}
+                  isThread={post.thread}
+                />
+              ))}
             </View>
           </>
         )}
@@ -113,9 +191,7 @@ function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  cardContainer: {
-    alignItems: "center",
-  },
+  cardContainer: {},
   container: {
     flex: 1,
   },
