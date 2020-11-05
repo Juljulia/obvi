@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
-import FormScreen from "../../components/multiScreenForm/FormScreen";
+import FormScreen from "../../components/registration/FormScreen";
 import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
 import Text from "../../components/typography/Text";
@@ -35,10 +35,12 @@ function NameScreen({ navigation }) {
       <TextInput
         placeholder={"Name"}
         onChangeText={(username) => setUsername({ username })}
-        icon="account-outline"
+        icon="account"
         value={username["username"]}
       />
-      <Text>The choosen name will appear in you profile</Text>
+      <Text style={{ lineHeight: 25, marginBottom: 16 }}>
+        The chosen name will appear in you profile
+      </Text>
     </FormScreen>
   );
 }

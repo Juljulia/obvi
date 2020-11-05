@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableHighlight } from "react-native";
-import colors from "../config/colors";
+import colors from "../../config/colors";
 
-import Text from "./typography/Text";
+import Text from "../typography/Text";
 
 function PopUp({ text, style }) {
   const [isClosed, setIsClosed] = useState(false);
@@ -29,10 +29,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    shadowOffset: { width: 3, height: 3 },
-    shadowColor: "rgba(190, 205, 226, 0.5)",
-    shadowRadius: 16,
-    shadowOpacity: 1,
+    shadowOffset: { width: 7, height: 7 },
+    shadowColor: colors.shadow,
+    shadowRadius: 6,
+    shadowOpacity: 0.7,
     width: 175,
     height: 54,
     backgroundColor: colors.white,
