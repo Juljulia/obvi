@@ -1,11 +1,5 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
-import {
-  Dimensions,
-  Platform,
-  StyleSheet,
-  ScrollView,
-  View,
-} from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import * as firebase from "firebase";
 import "firebase/storage";
@@ -17,8 +11,6 @@ import NavArrow from "../../components/NavArrow";
 import PhotoCard from "../../components/registration/PhotoCard";
 import routes from "../../navigation/routes";
 import useAuth from "../../auth/useAuth";
-
-const windowHeight = Dimensions.get("window").height;
 
 function PhotoScreen({ navigation, route }) {
   const {

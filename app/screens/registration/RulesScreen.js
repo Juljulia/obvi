@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Image, StyleSheet, ScrollView, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 
 import Button from "../../components/Button";
 import FormScreen from "../../components/registration/FormScreen";
@@ -8,8 +8,6 @@ import useAuth from "../../auth/useAuth";
 import routes from "../../navigation/routes";
 import Rule from "../../components/registration/Rule";
 import Text from "../../components/typography/Text";
-
-const windowHeight = Dimensions.get("window").height;
 
 function RulesScreen({ navigation }) {
   const { logOut } = useAuth();
