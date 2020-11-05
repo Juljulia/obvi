@@ -8,17 +8,18 @@ import {
 
 import Text from "../components/typography/Text";
 import colors from "../config/colors";
+import H2 from "./typography/H2";
 
 function Card({ children, image, title, subTitle, onPress, ...otherProps }) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.container} {...otherProps}>
-        {children}
-        <Image source={image}></Image>
-        <View style={styles.description}>
-          <Text>{title}</Text>
+        <View style={styles.textContent}>
+          <H2>{title}</H2>
           <Text>{subTitle}</Text>
         </View>
+        <Image source={image}></Image>
+        {children}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -31,8 +32,7 @@ const styles = StyleSheet.create({
     // borderColor: colors.primary,
     // borderWidth: 1,
     marginBottom: 24,
-    height: 390,
-    width: 314,
+    width: 256,
     overflow: "hidden",
     shadowColor: "#879fb7",
     shadowOffset: {
@@ -43,10 +43,9 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
-  description: {
-    position: "absolute",
-    bottom: 24,
-    paddingLeft: 24,
+  textContent: {
+    marginHorizontal: 17,
+    marginVertical: 8,
   },
 });
 
