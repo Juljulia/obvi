@@ -1,14 +1,21 @@
 import React, { useState, useLayoutEffect } from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { Image, StyleSheet, ScrollView } from "react-native";
 
-import FormScreen from "../../components/multiScreenForm/FormScreen";
+import FormScreen from "../../components/registration/FormScreen";
 import routes from "../../navigation/routes";
 import NavArrow from "../../components/nav/NavArrow";
 import passionsArr from "../../assets/arrays/passionsArr";
-import SelectMultiplePassions from "../../components/SelectMultiplePassions";
+import SelectMultiplePassions from "../../components/registration/SelectMultiplePassions";
+import Text from "../../components/typography/Text";
 
 function PassionsScreen({ navigation, route }) {
-  const { username, orientation, pronoun } = route.params;
+  const {
+    username,
+    orientation,
+    showOrientation,
+    pronoun,
+    showPronoun,
+  } = route.params;
   const [passions, setPassions] = useState(null);
 
   useLayoutEffect(() => {
@@ -20,7 +27,9 @@ function PassionsScreen({ navigation, route }) {
               username,
               pronoun,
               orientation,
+              showOrientation,
               passions,
+              showPronoun,
             })
           }
         />
@@ -39,11 +48,21 @@ function PassionsScreen({ navigation, route }) {
           username,
           pronoun,
           orientation,
+          showOrientation,
           passions,
+          showPronoun,
         })
       }
+      style={{ paddingTop: 16 }}
     >
-      <ScrollView contentContainerStyle={styles.passionsContainer}>
+      <Text style={{ paddingTop: 16, paddingBottom: 32 }}>
+        Let everyone know what you're passionate about, by adding it to your
+        profile.
+      </Text>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingBottom: 50 }}
+      >
         <SelectMultiplePassions
           group={passionsArr}
           onSelectedValuesChange={(selectedValues) =>
@@ -51,16 +70,20 @@ function PassionsScreen({ navigation, route }) {
           }
         ></SelectMultiplePassions>
       </ScrollView>
+      <Image
+        source={require("../../assets/fade.png")}
+        style={{
+          position: "absolute",
+          bottom: -60,
+          left: 20,
+        }}
+      ></Image>
     </FormScreen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {},
-  passionsContainer: {
-    flex: 1,
-    display: "flex",
-  },
 });
 
 export default PassionsScreen;

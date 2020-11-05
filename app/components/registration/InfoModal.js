@@ -1,17 +1,17 @@
 import React from "react";
 import { Image, Modal, StyleSheet, TouchableOpacity, View } from "react-native";
 
-import Button from "../components/Button";
-import H2 from "../components/typography/H2";
-import colors from "../config/colors";
-import Text from "../components/typography/Text";
+import Button from "../Button";
+import H2 from "../typography/H2";
+import colors from "../../config/colors";
+import Text from "../typography/Text";
 
 function InfoModal({ onPress, onPressButton, visible }) {
   return (
     <Modal animationType="slide" visible={visible}>
       <View style={styles.container}>
         <TouchableOpacity onPress={onPress} style={styles.arrow}>
-          <Image source={require("../assets/arrow-up.png")} />
+          <Image source={require("../../assets/arrow-up.png")} />
         </TouchableOpacity>
         <Button title="Allow location" onPressButton={onPressButton} />
         <View style={styles.description}>
