@@ -1,27 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import AccountScreen from "../screens/AccountScreen";
-import HomeScreen from "../screens/HomeScreen";
 import MapScreen from "../screens/MapScreen";
 import colors from "../config/colors";
 import MenuNavigator from "./MenuNavigator";
+import HomeNavigator from "./HomeNavigator";
 
-let tabBarVisible;
 const Tab = createBottomTabNavigator();
-
-Tab.navigationOptions = ({ navigation }) => {
-  tabBarVisible = true;
-  if (navigation.state.index === 0) {
-    tabBarVisible = false;
-  }
-};
 
 const AppNavigator = () => {
   return (
     <Tab.Navigator
-      tabBarVisible={tabBarVisible}
       mode="modal"
       tabBarOptions={{
         showLabel: false,
@@ -45,8 +36,8 @@ const AppNavigator = () => {
       initialRouteName="Home"
     >
       <Tab.Screen
-        name="menu"
-        children={MenuNavigator}
+        name="Menu"
+        component={MenuNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Image
@@ -85,7 +76,7 @@ const AppNavigator = () => {
       />
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeNavigator}
         options={{
           tabBarIcon: () => (
             <Image

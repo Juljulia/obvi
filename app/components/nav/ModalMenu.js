@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
-  Modal,
   TouchableOpacity,
   Image,
   FlatList,
@@ -12,7 +11,6 @@ import colors from "../../config/colors";
 import Text from "../typography/Text";
 import useAuth from "../../auth/useAuth";
 import routes from "../../navigation/routes";
-import ListItem from "../lists/ListItem";
 
 const menuItems = [
   {
@@ -63,51 +61,50 @@ const menuItems = [
 
 function ModalMenu({ navigation }) {
   const { logOut } = useAuth();
-  const [showModal, setShowModal] = useState(true);
+
   const handlePress = () => {
-    setShowModal(false);
     navigation.goBack();
   };
 
   return (
-    <Modal animationType="slide" transparent={true} visible={showModal}>
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={{
-            position: "absolute",
-            top: 15,
-            height: 20,
-            width: "100%",
-            alignItems: "center",
-          }}
-          onPress={handlePress}
-        >
-          <View style={styles.closeButton} />
-        </TouchableOpacity>
-        <View style={styles.linksContainer}>
-          <FlatList
-            data={menuItems}
-            keyExtractor={(menuItem) => menuItem.title}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate(item.targetScreen)}
-                style={styles.link}
-              >
-                <Image
-                  style={{ width: item.icon.width }}
-                  resizeMode="contain"
-                  source={item.icon.name}
-                />
-                <Text style={{ marginLeft: 15 }}>{item.title}</Text>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-        <TouchableOpacity style={{ width: "100%" }} onPress={() => logOut()}>
-          <Text>Sign out</Text>
-        </TouchableOpacity>
+    <View onl style={styles.container}>
+      <TouchableOpacity
+        style={{
+          position: "absolute",
+          top: 15,
+          height: 20,
+          width: "100%",
+          alignItems: "center",
+        }}
+        onPress={handlePress}
+      >
+        <View style={styles.closeButton} />
+      </TouchableOpacity>
+      <View style={styles.linksContainer}>
+        <FlatList
+          data={menuItems}
+          keyExtractor={(menuItem) => menuItem.title}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() =>
+                item.targetScreen ? navigation.navigate(item.targetScreen) : ""
+              }
+              style={styles.link}
+            >
+              <Image
+                style={{ width: item.icon.width }}
+                resizeMode="contain"
+                source={item.icon.name}
+              />
+              <Text style={{ marginLeft: 15 }}>{item.title}</Text>
+            </TouchableOpacity>
+          )}
+        />
       </View>
-    </Modal>
+      <TouchableOpacity style={{ width: "100%" }} onPress={() => logOut()}>
+        <Text>Sign out</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
@@ -116,6 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.basicGrey,
     paddingHorizontal: 30,
     paddingTop: 30,
+    paddingBottom: 40,
     height: "90%",
     borderTopLeftRadius: 35,
     borderTopRightRadius: 35,
@@ -130,6 +128,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 10,
     alignItems: "center",
+    zIndex: 10000,
   },
   closeButton: {
     backgroundColor: colors.mediumGrey,
