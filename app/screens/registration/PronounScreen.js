@@ -64,8 +64,7 @@ function PronounScreen({ navigation, route }) {
       >
         <FormScreen
           title="My gender      identity is"
-          page="3"
-          totalPages="7"
+          pagination={require("../../assets/pagination/3.png")}
           isActive={pronoun}
           onPress={() =>
             navigation.navigate(routes.REGISTERORIENTATION, {
@@ -74,7 +73,10 @@ function PronounScreen({ navigation, route }) {
               showPronoun,
             })
           }
-          style={{ height: windowHeight + 25 }}
+          style={{
+            height: windowHeight - 120,
+            paddingTop: 60,
+          }}
         >
           <PopUp
             text="Whatever you don't care to answer, you skip."
@@ -144,8 +146,8 @@ const styles = StyleSheet.create({
   },
   popUp: {
     position: "absolute",
-    right: 50,
-    top: 0,
+    right: 40,
+    top: -60,
   },
   titlesContainer: {
     flexDirection: "row",

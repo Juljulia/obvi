@@ -1,16 +1,24 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import {
+  Dimensions,
+  Platform,
+  StyleSheet,
+  ScrollView,
+  View,
+} from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import * as firebase from "firebase";
 import "firebase/storage";
 
 import colors from "../../config/colors";
-import ImagePicker from "../../components/registration/ImagePicker";
 import FormScreen from "../../components/registration/FormScreen";
 import H2 from "../../components/typography/H2";
+import NavArrow from "../../components/NavArrow";
+import PhotoCard from "../../components/registration/PhotoCard";
 import routes from "../../navigation/routes";
 import useAuth from "../../auth/useAuth";
-import NavArrow from "../../components/NavArrow";
+
+const windowHeight = Dimensions.get("window").height;
 
 function PhotoScreen({ navigation, route }) {
   const {
@@ -110,16 +118,30 @@ function PhotoScreen({ navigation, route }) {
   };
 
   return (
-    <FormScreen page="6" totalPages="7" isActive={image} onPress={uploadImage}>
-      <H2 style={{ alignSelf: "center" }}>Add photo</H2>
-      <ImagePicker imageUri={image} onChangeImage={handleImage} />
-      {progress > 0 && (
+    <FormScreen
+      isActive={image}
+      onPress={uploadImage}
+      pagination={require("../../assets/pagination/6.png")}
+      style={{ paddingTop: Platform.OS === "ios" ? 80 : 0 }}
+    >
+      <H2 style={{ alignSelf: "center", paddingBottom: 40 }}>Add photo</H2>
+      <PhotoCard
+        imageUri={image}
+        onChangeImage={handleImage}
+        name={username}
+        pronoun={pronoun}
+        orientation={orientation}
+      ></PhotoCard>
+
+      {progress > 0 ? (
         <ProgressBar
           color={colors.primary}
           progress={progress}
           width={200}
-          style={{ alignSelf: "center", marginVertical: 24 }}
+          style={{ alignSelf: "center", marginBottom: 20 }}
         />
+      ) : (
+        <View style={{ height: 26 }}></View>
       )}
     </FormScreen>
   );
