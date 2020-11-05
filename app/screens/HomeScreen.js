@@ -20,6 +20,8 @@ import usersApi from "../api/users";
 import useLocation from "../hooks/useLocation";
 import colors from "../config/colors";
 import NavIcon from "../components/nav/NavIcon";
+import H2 from "../components/typography/H2";
+import TextInput from "../components/TextInput";
 
 function HomeScreen({ navigation }) {
   const { user, logOut } = useAuth();
@@ -56,62 +58,55 @@ function HomeScreen({ navigation }) {
         <Image
           source={require("../assets/logo-small.png")}
           style={styles.logo}
+          resizeMode="contain"
         ></Image>
         {isLoading && !userData ? (
           <ActivityIndicator />
         ) : (
-          <View style={styles.welcome}>
-            <Text>Hello </Text>
-            <Text>{userData["username"]}</Text>
-            <Button title="Logout" onPress={() => logOut()} />
-          </View>
-        )}
-        <View style={styles.navContainer}>
-          <NavIcon
-            icon={require("../assets/icons/compas.png")}
-            onPress={() => navigation.navigate(routes.MAP)}
-          />
-          <NavIcon
-            icon={require("../assets/icons/location.png")}
-            onPress={() => navigation.navigate(routes.CHECKIN)}
-          />
-          <NavIcon icon={require("../assets/icons/calender.png")} />
-          <NavIcon icon={require("../assets/icons/chat.png")} />
-        </View>
-        <Avatars />
-        <View style={styles.cardContainer}>
-          <Card
-            title="The Obvi map"
-            subTitle="Show friends within the community"
-          >
-            {region && (
-              <MapView
-                style={styles.map}
-                provider={PROVIDER_GOOGLE}
-                region={region}
-                customMapStyle={mapStyle}
-                showsUserLocation
-                region={region}
+          <>
+            <View style={{ paddingHorizontal: 30 }}>
+              <Text>Hello, </Text>
+              <H2>{userData["username"]}</H2>
+            </View>
+            <View style={styles.navContainer}>
+              <NavIcon
+                icon={require("../assets/icons/compas.png")}
                 onPress={() => navigation.navigate(routes.MAP)}
-              ></MapView>
-            )}
-            <Image
-              source={require("../assets/wave.png")}
-              style={styles.wave}
-            ></Image>
-          </Card>
-          <Card
-            title="Check in"
-            image={require("../assets/union.png")}
-            subTitle="Show friends your exact location"
-            onPress={() => navigation.navigate(routes.CHECKIN)}
-          ></Card>
-          <Card
-            title="Calendar"
-            image={require("../assets/union.png")}
-            subTitle="See upcoming events"
-          ></Card>
-        </View>
+              />
+              <NavIcon
+                icon={require("../assets/icons/location.png")}
+                onPress={() => navigation.navigate(routes.CHECKIN)}
+              />
+              <NavIcon icon={require("../assets/icons/calender.png")} />
+              <NavIcon icon={require("../assets/icons/chat.png")} />
+            </View>
+            <View style={styles.cardContainer}>
+              <H2 style={styles.heading}>Community forum</H2>
+              <View style={styles.inputContainer}>
+                <Image source={require("../assets/Camera.png")} />
+                <TextInput
+                  style={{ height: 48, marginTop: 0, marginBottom: 0 }}
+                  width={259}
+                  placeholder="Tell/ask the community"
+                />
+                <Image
+                  style={styles.sendButton}
+                  source={require("../assets/send.png")}
+                />
+              </View>
+              <Card
+                title="Sally"
+                image={require("../assets/images/coffee.png")}
+                subTitle="Hello, what's the best place to go for a cup of coffee in the city?"
+              ></Card>
+              <Card
+                title="Calendar"
+                image={require("../assets/union.png")}
+                subTitle="See upcoming events"
+              ></Card>
+            </View>
+          </>
+        )}
       </Screen>
     </ScrollView>
   );
@@ -123,27 +118,35 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingHorizontal: 30,
-  },
-  map: {
-    flex: 1,
   },
   logo: {
     alignSelf: "center",
     marginTop: 32,
     marginBottom: 24,
-  },
-  welcome: {
-    paddingHorizontal: 32,
-  },
-  wave: {
-    position: "absolute",
-    bottom: -28,
-    left: -24.5,
+    width: 69,
   },
   navContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: 39,
+    marginBottom: 48,
+    paddingHorizontal: 30,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingLeft: 20,
+    paddingRight: 30,
+    marginBottom: 59,
+  },
+  sendButton: {
+    position: "absolute",
+    right: 10,
+  },
+  heading: {
+    width: "100%",
+    marginBottom: 35,
+    paddingHorizontal: 30,
   },
 });
 
