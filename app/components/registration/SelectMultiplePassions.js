@@ -1,5 +1,4 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
 import { SelectMultipleGroupButton } from "react-native-selectmultiple-button";
 
 import colors from "../../config/colors";

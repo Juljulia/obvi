@@ -24,13 +24,12 @@ function NameScreen({ navigation }) {
 
   return (
     <FormScreen
+      title="My name is"
       isActive={disabled}
       onPress={() =>
         navigation.navigate(routes.REGISTERPRONOUN, { ...username })
       }
-      page="2"
-      title="My name is"
-      totalPages="7"
+      pagination={require("../../assets/pagination/2.png")}
     >
       <TextInput
         placeholder={"Name"}
@@ -38,7 +37,7 @@ function NameScreen({ navigation }) {
         icon="account"
         value={username["username"]}
       />
-      <Text style={{ lineHeight: 25, marginBottom: 16 }}>
+      <Text style={{ lineHeight: 25, marginBottom: 40 }}>
         The chosen name will appear in you profile
       </Text>
     </FormScreen>
