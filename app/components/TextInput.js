@@ -14,17 +14,31 @@ function AppTextInput({
 }) {
   return (
     <View style={[styles.container, { width, height }, style]}>
-      <Image
-        style={{
-          width,
-          height,
-          position: "absolute",
-          top: 0,
-          left: 0,
-        }}
-        source={require("../assets/input-bg.png")}
-        resizeMode="stretch"
-      />
+      {height < 100 ? (
+        <Image
+          style={{
+            width,
+            height,
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+          source={require("../assets/input-bg.png")}
+          resizeMode="stretch"
+        />
+      ) : (
+        <Image
+          style={{
+            width,
+            height,
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+          source={require("../assets/message-bg.png")}
+          resizeMode="stretch"
+        />
+      )}
       {icon && (
         <MaterialCommunityIcons
           name={icon}
