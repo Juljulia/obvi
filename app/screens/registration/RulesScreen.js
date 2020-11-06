@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
 
 import Button from "../../components/Button";
 import FormScreen from "../../components/registration/FormScreen";
@@ -15,39 +15,47 @@ function RulesScreen({ navigation }) {
     <FormScreen
       onPress={() => navigation.navigate(routes.REGISTERNAME)}
       isActive={true}
-      style={{ paddingTop: 0, flex: 1 }}
-      pagination={require("../../assets/pagination/1.png")}
+      style={{ paddingTop: 0, paddingHorizontal: 15, paddingBottom: 140 }}
+      // pagination={require("../../assets/pagination/1.png")}
     >
-      <View style={{ alignItems: "center" }}>
-        <Image source={require("../../assets/logo-small.png")}></Image>
-        <H2 style={{ paddingTop: 16 }}>Welcome to Obvi</H2>
-        <Text style={{ paddingTop: 16, paddingBottom: 40 }}>
-          Please follow these house rules
-        </Text>
-      </View>
-      <View style={{ paddingHorizontal: 8 }}>
-        <Rule
-          title="Be yourself."
-          text="This platform is created to house you as you are"
-        ></Rule>
-        <Rule
-          title="Be safe."
-          text="Report bad or inappropriate behavior."
-        ></Rule>
-        <Rule
-          title="Play nice."
-          text="Respect each other and embrace your differences. "
-        ></Rule>
-        <Rule
-          title="Be proactive."
-          text="Share your whereabouts and your knowledge within this beautiful comunity."
-        ></Rule>
-      </View>
-      {/* <Button title="Log out" onPress={() => logOut()} /> */}
+      <ScrollView style={styles.scrollView} contentContainerStyle={{}}>
+        <View style={{ alignItems: "center" }}>
+          <Image source={require("../../assets/logo-small.png")}></Image>
+          <H2 style={{ paddingTop: 20 }}>Welcome to Obvi</H2>
+          <Text style={{ paddingTop: 16 }}>
+            Please follow these house rules
+          </Text>
+        </View>
+        <View style={{}}>
+          <Rule
+            title="Be yourself."
+            text="This platform is created to house you as you are"
+          />
+          <Rule title="Be safe." text="Report bad or inappropriate behavior." />
+          <Rule
+            title="Play nice."
+            text="Respect each other and embrace your differences. "
+          />
+          <Rule
+            title="Be proactive."
+            text="Share your whereabouts and your knowledge within this beautiful comunity."
+          />
+        </View>
+
+        {/* <Button title="Log out" onPress={() => logOut()} /> */}
+      </ScrollView>
+      <Image
+        source={require("../../assets/pagination/1.png")}
+        style={{ alignSelf: "center", position: "absolute", bottom: -45 }}
+      ></Image>
     </FormScreen>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  scrollView: {
+    // flex: 1,
+  },
+});
 
 export default RulesScreen;

@@ -1,6 +1,5 @@
 import React from "react";
 import { Image, Platform, StyleSheet, View } from "react-native";
-import colors from "../../config/colors";
 
 import Button from "../Button";
 import Screen from "../Screen";
@@ -27,7 +26,7 @@ function FormScreen({
       </View>
       <Image
         source={pagination}
-        style={{ alignSelf: "center", position: "absolute", bottom: -32 }}
+        style={{ alignSelf: "center", position: "absolute", bottom: 0 }}
       ></Image>
     </Screen>
   );
@@ -36,8 +35,8 @@ function FormScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === "ios" ? 100 : 50,
-    paddingHorizontal: Platform.OS === "ios" ? 30 : 15,
+    paddingTop: Platform.OS === "ios" ? 80 : 50,
+    paddingHorizontal: Platform.OS === "ios" ? 15 : 15,
   },
 });
 
