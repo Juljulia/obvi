@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Alert,
   Platform,
+  ImageBackground,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
@@ -55,13 +56,16 @@ function AppImagePicker({ imageUri, onChangeImage }) {
     <TouchableWithoutFeedback onPress={handlePress}>
       <View style={styles.container}>
         {!imageUri && (
-          <MaterialCommunityIcons
-            name="camera"
-            size={40}
-            color={colors.medium}
-          />
+          <Image source={require("../../assets/imagepicker.png")}></Image>
         )}
-        {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
+        {imageUri && (
+          <ImageBackground
+            style={styles.container}
+            source={require("../../assets/profile-img-bg.png")}
+          >
+            <Image source={{ uri: imageUri }} style={styles.image} />
+          </ImageBackground>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -70,16 +74,17 @@ function AppImagePicker({ imageUri, onChangeImage }) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: colors.light,
-    borderRadius: 15,
-    height: 100,
+    backgroundColor: colors.basicGrey,
     justifyContent: "center",
     overflow: "hidden",
-    width: 100,
+    width: 150,
+    height: 150,
   },
   image: {
-    width: "100%",
-    height: "100%",
+    position: "relative",
+    borderRadius: 75,
+    width: "85%",
+    height: "85%",
   },
 });
 

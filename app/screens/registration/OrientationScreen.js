@@ -61,12 +61,10 @@ function OrientationScreen({ navigation, route }) {
       <KeyboardAvoidingView
         behavior="position"
         enabled
-        keyboardVerticalOffset={-200}
+        keyboardVerticalOffset={-150}
       >
         <FormScreen
           title="My orientation is"
-          page="4"
-          totalPages="7"
           isActive={orientation}
           onPress={() =>
             navigation.navigate(routes.REGISTERPASSIONS, {
@@ -77,7 +75,8 @@ function OrientationScreen({ navigation, route }) {
               showOrientation,
             })
           }
-          style={{ height: windowHeight + 25 }}
+          style={{ height: windowHeight - 120, paddingTop: 50 }}
+          pagination={require("../../assets/pagination/4.png")}
         >
           <TextInput
             value={input["input"]}

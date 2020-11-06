@@ -1,9 +1,8 @@
 import React from "react";
-import { Platform, StyleSheet } from "react-native";
+import { Image, Platform, StyleSheet, View } from "react-native";
 import colors from "../../config/colors";
 
 import Button from "../Button";
-import Pagination from "../Pagination";
 import Screen from "../Screen";
 import H1 from "../typography/H1";
 
@@ -11,21 +10,25 @@ function FormScreen({
   isActive = false,
   title,
   onPress,
-  page,
-  totalPages,
   children,
   style,
+  pagination,
 }) {
   return (
     <Screen style={[styles.container, style]}>
-      <H1>{title}</H1>
-      {children}
-      {isActive ? (
-        <Button title="Continue" onPress={onPress} />
-      ) : (
-        <Button disabled={true} disabledStyle title="Continue" />
-      )}
-      <Pagination page={page} totalPages={totalPages} />
+      <View>
+        <H1>{title}</H1>
+        {children}
+        {isActive ? (
+          <Button title="Continue" onPress={onPress} />
+        ) : (
+          <Button disabled={true} disabledStyle title="Continue" />
+        )}
+      </View>
+      <Image
+        source={pagination}
+        style={{ alignSelf: "center", position: "absolute", bottom: -32 }}
+      ></Image>
     </Screen>
   );
 }

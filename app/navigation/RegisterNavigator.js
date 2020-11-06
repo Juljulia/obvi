@@ -29,6 +29,11 @@ const RegisterNavigator = () => {
     },
   };
 
+  const locationHeaderOptions = {
+    ...headerOptions,
+    headerTransparent: true,
+  };
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -64,7 +69,7 @@ const RegisterNavigator = () => {
       <Stack.Screen
         name="Register Location"
         component={LocationScreen}
-        options={headerOptions}
+        options={locationHeaderOptions}
       />
     </Stack.Navigator>
   );

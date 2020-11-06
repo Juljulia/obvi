@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect } from "react";
 import { Image, StyleSheet, ScrollView } from "react-native";
 
 import FormScreen from "../../components/registration/FormScreen";
@@ -16,7 +16,19 @@ function PassionsScreen({ navigation, route }) {
     pronoun,
     showPronoun,
   } = route.params;
-  const [passions, setPassions] = useState(null);
+  const [passions, setPassions] = useState([]);
+  const [active, setActive] = useState(false);
+
+  const changePassions = (selectedValues) => {
+    setPassions(selectedValues);
+
+    //sets button to active och inactive
+    if (passions.length) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -40,9 +52,7 @@ function PassionsScreen({ navigation, route }) {
   return (
     <FormScreen
       title="Passions"
-      page="5"
-      totalPages="7"
-      isActive={passions}
+      isActive={active}
       onPress={() =>
         navigation.navigate(routes.REGISTERPHOTO, {
           username,
@@ -54,19 +64,20 @@ function PassionsScreen({ navigation, route }) {
         })
       }
       style={{ paddingTop: 16 }}
+      pagination={require("../../assets/pagination/5.png")}
     >
-      <Text style={{ paddingTop: 16, paddingBottom: 32 }}>
+      <Text style={{ paddingTop: 16, paddingBottom: 32, lineHeight: 25 }}>
         Let everyone know what you're passionate about, by adding it to your
         profile.
       </Text>
       <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{ paddingBottom: 50 }}
+        style={{ height: "50%" }}
+        contentContainerStyle={{ paddingBottom: 60 }}
       >
         <SelectMultiplePassions
           group={passionsArr}
           onSelectedValuesChange={(selectedValues) =>
-            setPassions(selectedValues)
+            changePassions(selectedValues)
           }
         ></SelectMultiplePassions>
       </ScrollView>
