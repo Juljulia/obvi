@@ -24,7 +24,7 @@ function PronounScreen({ navigation, route }) {
   const { username } = route.params;
   const [input, setInput] = useState("");
   const [pronoun, setPronoun] = useState(null);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [toggleCheckBox, setToggleCheckBox] = useState(true);
   const [viewAll, setViewAll] = useState(false);
 
   const showPronoun = toggleCheckBox;
@@ -56,14 +56,14 @@ function PronounScreen({ navigation, route }) {
   }, [navigation, pronoun, showPronoun]);
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.scrollView}>
       <KeyboardAvoidingView
         behavior="position"
         enabled
-        keyboardVerticalOffset={-150}
+        keyboardVerticalOffset={-100}
       >
         <FormScreen
-          title="My gender      identity is"
+          title="My gender identity is"
           pagination={require("../../assets/pagination/3.png")}
           isActive={pronoun}
           onPress={() =>
@@ -74,15 +74,10 @@ function PronounScreen({ navigation, route }) {
             })
           }
           style={{
-            height: windowHeight - 120,
-            paddingTop: 60,
+            minHeight: windowHeight - 120,
+            paddingBottom: 44,
           }}
         >
-          <PopUp
-            text="Whatever you don't care to answer, you skip."
-            style={styles.popUp}
-          />
-
           <TextInput
             value={input["input"]}
             onChangeText={(input) => setInput({ input })}
@@ -123,6 +118,10 @@ function PronounScreen({ navigation, route }) {
           />
         </FormScreen>
       </KeyboardAvoidingView>
+      <PopUp
+        text="Whatever you don't care to answer, you skip."
+        style={styles.popUp}
+      />
     </ScrollView>
   );
 }
@@ -142,12 +141,15 @@ const styles = StyleSheet.create({
     borderWidth: 12,
     borderColor: colors.basicGrey,
     borderBottomWidth: 24,
-    maxHeight: 235,
+    height: 215,
   },
   popUp: {
     position: "absolute",
-    right: 40,
-    top: -60,
+    right: 60,
+    top: 10,
+  },
+  scrollView: {
+    backgroundColor: colors.basicGrey,
   },
   titlesContainer: {
     flexDirection: "row",

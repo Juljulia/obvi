@@ -6,7 +6,7 @@ import Text from "../../components/typography/Text";
 
 function Rule({ title, text }) {
   return (
-    <View style={{ paddingBottom: 32 }}>
+    <View style={{ marginTop: 40 }}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Image source={require("../../assets/rules-check.png")}></Image>
         <H2 style={{ paddingLeft: 24 }}>{title}</H2>

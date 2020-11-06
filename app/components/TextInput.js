@@ -66,17 +66,8 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 30,
     elevation: 1,
-
-    // borderColor: "black",
-    // borderWidth: 1,
-    // overflow: "hidden",
-    // shadowColor: colors.shadow,
-    // shadowRadius: 3,
-    // shadowOpacity: 1,
-    // shadowOffset: {
-    //   width: 2,
-    //   height: 2,
-    // },
+    borderRadius: Platform.OS === "ios" ? 30 : 0,
+    elevation: 3,
   },
   text: {
     fontSize: 14,
