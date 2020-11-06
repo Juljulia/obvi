@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
+  Image,
 } from "react-native";
 import * as firebase from "firebase";
 import "firebase/firestore";
@@ -28,6 +29,7 @@ import UploadScreen from "../screens/UploadScreen";
 import ScreenTitle from "../components/ScreenTitle";
 import H2 from "../components/typography/H2";
 import H1 from "../components/typography/H1";
+import colors from "../config/colors";
 
 const validationSchema = Yup.object().shape({
   message: Yup.string().label("Message"),
@@ -138,9 +140,6 @@ function CheckInScreen({ navigation }) {
   const onPressSearchInput = () => {
     setCloseList(false);
     setShowText(false);
-
-    console.log(closeList);
-    console.log(showText);
   };
 
   return (
@@ -186,7 +185,20 @@ function CheckInScreen({ navigation }) {
                 style={styles.places}
                 onPress={() => handleChoosePlace(item)}
               >
-                <Text>{item.name}</Text>
+                <Image
+                  style={{
+                    marginRight: 29,
+                    width: 13,
+                    height: 17,
+                  }}
+                  source={require("../assets/pin-purple.png")}
+                />
+                <View>
+                  <Text>{item.name}</Text>
+                  <Text style={{ fontSize: 13, color: colors.mediumGrey }}>
+                    {item.vicinity ? item.vicinity : item.formatted_address}
+                  </Text>
+                </View>
               </TouchableOpacity>
             )}
           />
@@ -245,7 +257,9 @@ const styles = StyleSheet.create({
     marginBottom: 200,
   },
   places: {
-    padding: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    flexDirection: "row",
   },
   textWrapper: (showText) => ({
     marginHorizontal: 30,

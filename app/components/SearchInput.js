@@ -56,11 +56,11 @@ function SearchInput({
 const styles = StyleSheet.create({
   resultsList: {
     maxHeight: 300,
-    backgroundColor: colors.white,
+    backgroundColor: colors.basicGrey,
     borderRadius: 30,
     shadowOffset: { width: 6, height: 6 },
-    shadowColor: "rgba(0, 0, 0, 0.1)",
-    shadowRadius: 16,
+    shadowColor: colors.shadow,
+    shadowRadius: 9,
     shadowOpacity: 1,
     padding: 21,
     zIndex: 2,

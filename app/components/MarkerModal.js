@@ -107,8 +107,10 @@ function MarkerModal({
             </View>
             {showMore && (
               <>
-                {message && <MessageBubble text={message} />}
-                <H2 style={{ width: "100%", marginTop: 8 }}>Stay</H2>
+                {message && (
+                  <MessageBubble style={{ marginTop: 20 }} text={message} />
+                )}
+                <H2 style={{ width: "100%", marginTop: 18 }}>Stay</H2>
                 {activeTime && (
                   <View style={{ marginBottom: 15, alignItems: "center" }}>
                     <TimeBubble text={duration} />
