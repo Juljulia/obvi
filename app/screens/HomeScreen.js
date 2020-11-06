@@ -6,19 +6,14 @@ import {
   ScrollView,
   View,
 } from "react-native";
+import { Dimensions } from "react-native";
 
-import Avatars from "../components/Avatars";
-import Button from "../components/Button";
 import Card from "../components/Card";
-import mapStyle from "./../config/mapStyle";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import routes from "../navigation/routes";
 import Text from "../components/typography/Text";
 import Screen from "../components/Screen";
 import useAuth from "../auth/useAuth";
 import usersApi from "../api/users";
-import useLocation from "../hooks/useLocation";
-import colors from "../config/colors";
 import NavIcon from "../components/nav/NavIcon";
 import H2 from "../components/typography/H2";
 import TextInput from "../components/TextInput";
@@ -95,18 +90,12 @@ const posts = [
     profileImage: require("../assets/images/leo.jpg"),
   },
 ];
+const screenWidth = Dimensions.get("window").width;
 
 function HomeScreen({ navigation }) {
-  const { user, logOut } = useAuth();
+  const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState();
-  const location = useLocation();
-  const [region, setRegion] = useState();
-
-  const deltas = {
-    latitudeDelta: 0.015,
-    longitudeDelta: 0.0121,
-  };
 
   const getUserData = async () => {
     const data = await usersApi.getUser(user.uid);
@@ -115,15 +104,8 @@ function HomeScreen({ navigation }) {
   };
 
   useEffect(() => {
-    if (location) {
-      setRegion({
-        ...location,
-        ...deltas,
-      });
-    }
-
     getUserData();
-  }, [location]);
+  }, []);
 
   return (
     <ScrollView>
@@ -158,8 +140,9 @@ function HomeScreen({ navigation }) {
               <View style={styles.inputContainer}>
                 <Image source={require("../assets/Camera.png")} />
                 <TextInput
-                  style={{ height: 48, marginTop: 0, marginBottom: 0 }}
-                  width={259}
+                  height={48}
+                  style={{ marginTop: 0, marginBottom: 0 }}
+                  width={screenWidth * 0.7}
                   placeholder="Tell/ask the community"
                 />
                 <Image
