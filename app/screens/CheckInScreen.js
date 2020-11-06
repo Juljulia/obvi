@@ -218,7 +218,7 @@ function CheckInScreen({ navigation }) {
                 style={{ padding: 20, marginTop: 15 }}
                 inputStyle={{ height: "100%" }}
                 multiline
-                maxLength={255}
+                maxLength={200}
                 name="message"
                 placeholder="Write your message"
               />
