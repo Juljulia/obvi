@@ -13,7 +13,7 @@ import "firebase/firestore";
 import Button from "../../components/Button";
 import NavArrow from "../../components/nav/NavArrow";
 import InfoModal from "../../components/registration/InfoModal";
-import Pagination from "../../components/Pagination";
+import Pagination from "../../components/registration/Pagination";
 import Screen from "../../components/Screen";
 import Text from "../../components/typography/Text";
 import H2 from "../../components/typography/H2";

@@ -15,10 +15,12 @@ function SearchInput({
   closeList,
   showResults,
   renderItem,
+  style,
 }) {
   return (
     <View>
       <TextInput
+        style={style}
         placeholder={placeholder}
         icon={icon}
         onChangeText={onChangeText}
