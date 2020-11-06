@@ -8,7 +8,7 @@ import OrientationScreen from "../screens/registration/OrientationScreen";
 import PassionsScreen from "../screens/registration/PassionsScreen";
 import PhotoScreen from "../screens/registration/PhotoScreen";
 import LocationScreen from "../screens/registration/LocationScreen";
-import NavArrow from "../components/NavArrow";
+import NavArrow from "../components/nav/NavArrow";
 import H2 from "../components/typography/H2";
 import colors from "../config/colors";
 

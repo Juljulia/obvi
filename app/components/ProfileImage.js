@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Image, ImageBackground } from "react-native";
 
 function ProfileImage({
+  localImageUrl,
   imageUrl,
   imgWidth = 120,
   imgHeight = 120,
@@ -22,7 +23,20 @@ function ProfileImage({
         ]}
         source={require("../assets/profile-img-bg.png")}
       >
-        {imageUrl ? (
+        {localImageUrl && (
+          <Image
+            source={localImageUrl}
+            style={[
+              styles.image,
+              {
+                width: imgWidth,
+                height: imgHeight,
+                borderRadius: imgBorderRadius,
+              },
+            ]}
+          />
+        )}
+        {imageUrl && (
           <Image
             source={{ uri: imageUrl }}
             style={[
@@ -34,7 +48,8 @@ function ProfileImage({
               },
             ]}
           />
-        ) : (
+        )}
+        {!imageUrl && !localImageUrl && (
           <Image
             source={require("../assets/default.png")}
             style={[
