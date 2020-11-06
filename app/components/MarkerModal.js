@@ -9,6 +9,7 @@ import {
   ImageBackground,
 } from "react-native";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
+import { Dimensions } from "react-native";
 
 import Button from "../components/Button";
 import Text from "../components/typography/Text";
@@ -20,6 +21,7 @@ import Subheading from "./typography/Subheading";
 import TimeBubble from "./TimeBubble";
 
 const value = new Animated.Value(0);
+const screenHeight = Dimensions.get("window").height;
 
 const saveModalTranslationY = value.interpolate({
   inputRange: [0, 1],
@@ -108,7 +110,7 @@ function MarkerModal({
                 {message && <MessageBubble text={message} />}
                 <H2 style={{ width: "100%", marginTop: 8 }}>Stay</H2>
                 {activeTime && (
-                  <>
+                  <View style={{ marginBottom: 15, alignItems: "center" }}>
                     <TimeBubble text={duration} />
                     <CountdownCircleTimer
                       isPlaying
@@ -143,12 +145,15 @@ function MarkerModal({
                         );
                       }}
                     </CountdownCircleTimer>
-                  </>
+                  </View>
                 )}
               </>
             )}
 
-            <Button style={{ marginTop: 30 }} title="Visit Profile" />
+            <Button
+              style={{ width: 280, marginTop: 30 }}
+              title="Visit Profile"
+            />
           </ScrollView>
         </Animated.View>
       </View>
@@ -165,8 +170,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-    maxHeight: 460,
-    paddingBottom: 65,
+    maxHeight: screenHeight * 0.75,
     backgroundColor: colors.basicGrey,
   },
   closeButton: {
@@ -195,6 +199,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 10,
     alignItems: "center",
+    paddingBottom: 65,
   },
   profileImg: {
     alignItems: "center",
