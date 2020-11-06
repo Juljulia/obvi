@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowOpacity: 0.5,
     shadowOffset: { width: -5, height: 10 },
-    borderRadius: 30,
-    elevation: 1,
+    borderRadius: Platform.OS === "ios" ? 30 : 0,
+    elevation: 3,
   },
   text: {
     fontSize: 14,
