@@ -169,6 +169,7 @@ function HomeScreen({ navigation }) {
               </View>
               {posts.map((post, key) => (
                 <Card
+                  key={key}
                   title={post.name}
                   image={post.image}
                   text={post.text}
@@ -180,6 +181,7 @@ function HomeScreen({ navigation }) {
                   isShared={post.isShared}
                   isLiked={post.liked}
                   isThread={post.thread}
+                  profileImage={post.profileImage}
                 />
               ))}
             </View>
