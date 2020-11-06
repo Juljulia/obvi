@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     backgroundColor: colors.basicGrey,
     marginBottom: 24,
-    width: 256,
+    width: "72%",
     shadowColor: colors.shadow,
     shadowOffset: {
       width: 6,

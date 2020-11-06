@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, TouchableOpacity, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Image,
+} from "react-native";
 import * as firebase from "firebase";
 import "firebase/firestore";
 import * as Yup from "yup";
+import { Dimensions } from "react-native";
 
 import getEnvVars from "../../environment";
 import routes from "../navigation/routes";
@@ -19,10 +27,14 @@ import Slider from "../components/Slider";
 import SearchInput from "../components/SearchInput";
 import UploadScreen from "../screens/UploadScreen";
 import ScreenTitle from "../components/ScreenTitle";
+import H2 from "../components/typography/H2";
+import H1 from "../components/typography/H1";
+import colors from "../config/colors";
 
 const validationSchema = Yup.object().shape({
   message: Yup.string().label("Message"),
 });
+const screenWidth = Dimensions.get("window").width;
 
 function CheckInScreen({ navigation }) {
   const { user } = useAuth();
@@ -31,9 +43,10 @@ function CheckInScreen({ navigation }) {
   const { googlePlacesApiKey } = getEnvVars();
   const [showPlaces, setShowPlaces] = useState(false);
   const [choosenPlace, setChoosenPlace] = useState();
-  const [closeList, setCloseList] = useState(false);
+  const [closeList, setCloseList] = useState(true);
   const [uploadVisible, setUploadVisible] = useState(false);
   const [checkinDuration, setCheckinDuration] = useState([1]);
+  const [showText, setShowText] = useState(true);
   const db = firebase.firestore();
 
   useEffect(() => {
@@ -70,6 +83,7 @@ function CheckInScreen({ navigation }) {
   const handleChoosePlace = (item) => {
     setChoosenPlace(item);
     setCloseList(true);
+    setShowText(true);
   };
 
   const handleSubmit = async ({ message }, { resetForm }) => {
@@ -123,6 +137,11 @@ function CheckInScreen({ navigation }) {
     setUploadVisible(false);
   };
 
+  const onPressSearchInput = () => {
+    setCloseList(false);
+    setShowText(false);
+  };
+
   return (
     <Screen style={styles.container}>
       <UploadScreen onDone={navigate} visible={uploadVisible} />
@@ -134,60 +153,99 @@ function CheckInScreen({ navigation }) {
       </TouchableOpacity>
       <ScreenTitle>Check-In</ScreenTitle>
 
-      {/** SEARCH */}
-      <SearchInput
-        results={places}
-        keyExtractor={(place) => place.place_id.toString()}
-        onChangeText={(value) => searchPlaces(value)}
-        value={choosenPlace ? choosenPlace.name : ""}
-        placeholder="Where are you?"
-        icon="map-search-outline"
-        closeList={closeList}
-        showResults={showPlaces}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.places}
-            onPress={() => handleChoosePlace(item)}
-          >
-            <Text>{item.name}</Text>
-          </TouchableOpacity>
-        )}
-      />
+      <ScrollView scrollEnabled={closeList}>
+        <KeyboardAvoidingView behavior="position" enabled>
+          <View style={styles.textWrapper(showText)}>
+            <H2 style={{ marginBottom: 16 }}>
+              Find and connect with nearby places, friends and more.
+            </H2>
+            <Text>
+              Obvi needs your location to make some features work. You can
+              always change this later in your phone’s settings.
+            </Text>
 
-      <ScrollView>
-        {/** SLIDER */}
-        <Text>Stay</Text>
-        <Text>
-          For how long are you planning to stay? Let the community know.
-        </Text>
-        <Slider
-          onValuesChange={(value) => setCheckinDuration(value)}
-          values={checkinDuration}
-        />
+            <H1 style={{ marginTop: 19 }}>Check In</H1>
+          </View>
 
-        {/** MESSAGE */}
-        <View style={styles.messageContainer}>
-          <Form
-            initialValues={{ message: "" }}
-            onSubmit={handleSubmit}
-            validationSchema={validationSchema}
-          >
-            <Text>Message</Text>
-            <Text>Give a shout out, tell us what's up! </Text>
-            <FormField
-              maxLength={255}
-              multiline
-              textAlignVertical="top"
-              name="message"
-              numberOfLines={3}
-              placeholder="Message..."
-            />
-            {closeList ? (
-              <SubmitButton title="Check in" />
-            ) : (
-              <SubmitButton disabled={true} disabledStyle title="Check in" />
+          {/** SEARCH */}
+          <SearchInput
+            inputWidth={screenWidth * 0.85}
+            style={{ marginTop: 28, marginHorizontal: 30 }}
+            results={places}
+            keyExtractor={(place) => place.place_id.toString()}
+            onChangeText={(value) => searchPlaces(value)}
+            value={choosenPlace ? choosenPlace.name : ""}
+            placeholder="Where are you?"
+            icon="map-search-outline"
+            closeList={closeList}
+            showResults={showPlaces}
+            onPress={onPressSearchInput}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.places}
+                onPress={() => handleChoosePlace(item)}
+              >
+                <Image
+                  style={{
+                    marginRight: 29,
+                    width: 13,
+                    height: 17,
+                  }}
+                  source={require("../assets/pin-purple.png")}
+                />
+                <View>
+                  <Text>{item.name}</Text>
+                  <Text style={{ fontSize: 13, color: colors.mediumGrey }}>
+                    {item.vicinity ? item.vicinity : item.formatted_address}
+                  </Text>
+                </View>
+              </TouchableOpacity>
             )}
-          </Form>
+          />
+        </KeyboardAvoidingView>
+
+        <View style={{ paddingHorizontal: 30 }}>
+          {/** SLIDER */}
+          <H2 style={{ marginBottom: 13 }}>Stay</H2>
+          <Text>For how long are you planning to stay?</Text>
+          <Text>Let the community know.</Text>
+          <Slider
+            onValuesChange={(value) => setCheckinDuration(value)}
+            values={checkinDuration}
+            length={screenWidth * 0.85}
+          />
+
+          {/** MESSAGE */}
+          <View style={styles.messageContainer}>
+            <Form
+              initialValues={{ message: "" }}
+              onSubmit={handleSubmit}
+              validationSchema={validationSchema}
+            >
+              <H2 style={{ marginBottom: 14, marginTop: 18 }}>Message</H2>
+              <Text>Give a shout out, tell us what's up! </Text>
+              <FormField
+                height={176}
+                width={screenWidth * 0.85}
+                style={{ padding: 20, marginTop: 15 }}
+                inputStyle={{ height: "100%" }}
+                multiline
+                maxLength={200}
+                name="message"
+                placeholder="Write your message"
+              />
+              {closeList ? (
+                <SubmitButton style={{ width: 280 }} title="Check in" />
+              ) : (
+                <SubmitButton
+                  style={{ width: 280 }}
+                  disabled={true}
+                  disabledStyle
+                  title="Check in"
+                />
+              )}
+            </Form>
+          </View>
         </View>
       </ScrollView>
     </Screen>
@@ -199,8 +257,15 @@ const styles = StyleSheet.create({
     marginBottom: 200,
   },
   places: {
-    padding: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    flexDirection: "row",
   },
+  textWrapper: (showText) => ({
+    marginHorizontal: 30,
+    marginTop: 50,
+    display: showText ? "flex" : "none",
+  }),
 });
 
 export default CheckInScreen;
