@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import * as firebase from "firebase";
@@ -7,10 +7,11 @@ import "firebase/storage";
 import colors from "../../config/colors";
 import FormScreen from "../../components/registration/FormScreen";
 import H2 from "../../components/typography/H2";
-import PhotoCard from "../../components/registration/PhotoCard";
 import routes from "../../navigation/routes";
 import useAuth from "../../auth/useAuth";
 import NavArrow from "../../components/nav/NavArrow";
+import PhotoCard from "../../components/registration/PhotoCard";
+import { ScrollView } from "react-native-gesture-handler";
 
 function PhotoScreen({ navigation, route }) {
   const {
@@ -22,10 +23,11 @@ function PhotoScreen({ navigation, route }) {
     passions,
   } = route.params;
   const { user } = useAuth();
-  const [image, setImage] = useState();
+  const [imageUri, setImageUri] = useState(imageUri);
   const [progress, setProgress] = useState(0);
   //Pass null if the user doesn't choose an image
   const [imageData, setImageData] = useState(null);
+  const scrollRef = useRef();
 
   const navigate = () => {
     navigation.navigate(routes.REGISTERLOCATION, {
@@ -36,6 +38,7 @@ function PhotoScreen({ navigation, route }) {
       showOrientation,
       passions,
       imageData,
+      imageUri,
     });
   };
 
@@ -52,11 +55,11 @@ function PhotoScreen({ navigation, route }) {
   }, [imageData]);
 
   const handleImage = (uri) => {
-    setImage(uri);
+    setImageUri(uri);
   };
 
   const uploadImage = async () => {
-    if (image) {
+    if (imageUri) {
       const blob = await new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.onload = function () {
@@ -67,11 +70,11 @@ function PhotoScreen({ navigation, route }) {
           reject(new TypeError("Network request failed"));
         };
         xhr.responseType = "blob";
-        xhr.open("GET", image, true);
+        xhr.open("GET", imageUri, true);
         xhr.send(null);
       });
 
-      const fileExtension = image.substring(image.lastIndexOf("/") + 1);
+      const fileExtension = imageUri.substring(imageUri.lastIndexOf("/") + 1);
       const fileName = `${user.uid}.${fileExtension}`;
 
       const storageRef = firebase
@@ -110,32 +113,34 @@ function PhotoScreen({ navigation, route }) {
   };
 
   return (
-    <FormScreen
-      isActive={image}
-      onPress={uploadImage}
-      pagination={require("../../assets/pagination/6.png")}
-      style={{ paddingTop: Platform.OS === "ios" ? 80 : 0 }}
-    >
-      <H2 style={{ alignSelf: "center", paddingBottom: 40 }}>Add photo</H2>
-      <PhotoCard
-        imageUri={image}
-        onChangeImage={handleImage}
-        name={username}
-        pronoun={pronoun}
-        orientation={orientation}
-      ></PhotoCard>
-
-      {progress > 0 ? (
-        <ProgressBar
-          color={colors.primary}
-          progress={progress}
-          width={200}
-          style={{ alignSelf: "center", marginBottom: 20 }}
+    <ScrollView ref={scrollRef}>
+      <FormScreen
+        isActive={imageUri}
+        onPress={uploadImage}
+        pagination={require("../../assets/pagination/6.png")}
+        style={{ paddingTop: 0, paddingBottom: 44 }}
+      >
+        <H2 style={{ alignSelf: "center", paddingBottom: 40 }}>Add photo</H2>
+        <PhotoCard
+          imageUri={imageUri}
+          onChangeImage={handleImage}
+          name={username}
+          pronoun={pronoun}
+          orientation={orientation}
         />
-      ) : (
-        <View style={{ height: 26 }}></View>
-      )}
-    </FormScreen>
+
+        {progress > 0 ? (
+          <ProgressBar
+            color={colors.primary}
+            progress={progress}
+            width={200}
+            style={{ alignSelf: "center", marginBottom: 20 }}
+          />
+        ) : (
+          <View style={{ height: 26 }}></View>
+        )}
+      </FormScreen>
+    </ScrollView>
   );
 }
 

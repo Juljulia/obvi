@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { SelectMultipleGroupButton } from "react-native-selectmultiple-button";
 
 import colors from "../../config/colors";
@@ -35,7 +35,6 @@ function SelectMultiple({ group, onSelectedValuesChange }) {
         fontSize: 12,
       }}
       group={group}
-      // singleTap={(valueTap) => console.log(pronoun)}
       onSelectedValuesChange={onSelectedValuesChange}
     ></SelectMultipleGroupButton>
   );

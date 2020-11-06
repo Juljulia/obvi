@@ -36,8 +36,9 @@ function NameScreen({ navigation }) {
         onChangeText={(username) => setUsername({ username })}
         icon="account"
         value={username["username"]}
+        style={{ marginBottom: 12 }}
       />
-      <Text style={{ lineHeight: 25, marginBottom: 40 }}>
+      <Text style={{ lineHeight: 25, marginBottom: 120 }}>
         The chosen name will appear in you profile
       </Text>
     </FormScreen>

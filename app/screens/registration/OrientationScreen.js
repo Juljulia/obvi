@@ -24,7 +24,7 @@ function OrientationScreen({ navigation, route }) {
   const [input, setInput] = useState("");
   const [orientation, setOrientation] = useState(null);
   const [viewAll, setViewAll] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [toggleCheckBox, setToggleCheckBox] = useState(true);
 
   const showOrientation = toggleCheckBox;
 
@@ -57,11 +57,11 @@ function OrientationScreen({ navigation, route }) {
   }, [navigation, orientation, showOrientation]);
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.scrollView}>
       <KeyboardAvoidingView
         behavior="position"
         enabled
-        keyboardVerticalOffset={-150}
+        keyboardVerticalOffset={-100}
       >
         <FormScreen
           title="My orientation is"
@@ -75,7 +75,10 @@ function OrientationScreen({ navigation, route }) {
               showOrientation,
             })
           }
-          style={{ height: windowHeight - 120, paddingTop: 50 }}
+          style={{
+            minHeight: windowHeight - 120,
+            paddingBottom: 44,
+          }}
           pagination={require("../../assets/pagination/4.png")}
         >
           <TextInput
@@ -125,8 +128,10 @@ const styles = StyleSheet.create({
     borderWidth: 12,
     borderColor: colors.basicGrey,
     borderBottomWidth: 24,
-    minHeight: 100,
-    maxHeight: 235,
+    height: 215,
+  },
+  scrollView: {
+    backgroundColor: colors.basicGrey,
   },
   titlesContainer: {
     flexDirection: "row",
