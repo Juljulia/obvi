@@ -1,13 +1,44 @@
 import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-// import defaultStyles from "../config/styles";
 import colors from "../config/colors";
 
-function AppTextInput({ icon, width = "100%", style, ...otherProps }) {
+function AppTextInput({
+  icon,
+  width = 315,
+  height = 70,
+  style,
+  inputStyle,
+  ...otherProps
+}) {
   return (
-    <View style={[styles.container, { width }, style]}>
+    <View style={[styles.container, { width, height }, style]}>
+      {height < 100 ? (
+        <Image
+          style={{
+            width,
+            height,
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+          source={require("../assets/input-bg.png")}
+          resizeMode="stretch"
+        />
+      ) : (
+        <Image
+          style={{
+            width,
+            height,
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+          source={require("../assets/message-bg.png")}
+          resizeMode="stretch"
+        />
+      )}
       {icon && (
         <MaterialCommunityIcons
           name={icon}
@@ -18,7 +49,7 @@ function AppTextInput({ icon, width = "100%", style, ...otherProps }) {
       )}
       <TextInput
         placeholderTextColor={colors.mediumGrey}
-        style={styles.text}
+        style={[styles.text, inputStyle]}
         {...otherProps}
       />
     </View>
@@ -27,20 +58,14 @@ function AppTextInput({ icon, width = "100%", style, ...otherProps }) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 70,
     marginTop: 34,
     marginBottom: 24,
     backgroundColor: "transparent",
-    borderColor: colors.white,
-    borderWidth: 0.5,
-    overflow: "hidden",
     flexDirection: "row",
     alignItems: "center",
     padding: 15,
-    shadowColor: colors.mediumGrey,
-    shadowRadius: 10,
-    shadowOpacity: 0.5,
-    shadowOffset: { width: -5, height: 10 },
+    borderRadius: 30,
+    elevation: 1,
     borderRadius: Platform.OS === "ios" ? 30 : 0,
     elevation: 3,
   },

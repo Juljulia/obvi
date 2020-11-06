@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, ActivityIndicator, FlatList } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 import TextInput from "../components/TextInput";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
@@ -15,15 +16,25 @@ function SearchInput({
   closeList,
   showResults,
   renderItem,
+  style,
+  onPress,
+  inputWidth = 315,
+  inputHeight = 70,
+  ...otherProps
 }) {
   return (
-    <View>
-      <TextInput
-        placeholder={placeholder}
-        icon={icon}
-        onChangeText={onChangeText}
-        value={value}
-      />
+    <View {...otherProps}>
+      <TouchableWithoutFeedback onPress={onPress}>
+        <TextInput
+          style={style}
+          placeholder={placeholder}
+          icon={icon}
+          onChangeText={onChangeText}
+          value={value}
+          width={inputWidth}
+          height={inputHeight}
+        />
+      </TouchableWithoutFeedback>
       {!closeList && (
         <View style={styles.resultsList}>
           {!showResults ? (
@@ -44,14 +55,15 @@ function SearchInput({
 
 const styles = StyleSheet.create({
   resultsList: {
-    maxHeight: 400,
-    backgroundColor: colors.white,
+    maxHeight: 300,
+    backgroundColor: colors.basicGrey,
     borderRadius: 30,
     shadowOffset: { width: 6, height: 6 },
-    shadowColor: "rgba(0, 0, 0, 0.1)",
-    shadowRadius: 16,
+    shadowColor: colors.shadow,
+    shadowRadius: 9,
     shadowOpacity: 1,
     padding: 21,
+    zIndex: 2,
   },
 });
 

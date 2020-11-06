@@ -12,6 +12,7 @@ function SubmitButton({ title, style, disabledStyle, ...otherProps }) {
       onPress={handleSubmit}
       {...otherProps}
       disabledStyle={disabledStyle}
+      style={style}
     />
   );
 }

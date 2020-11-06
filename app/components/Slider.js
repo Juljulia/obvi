@@ -21,17 +21,31 @@ function Slider({
         containerStyle={{
           height: 96,
           justifyContent: "flex-end",
-          marginLeft: 30,
+          shadowColor: colors.shadow,
+          shadowOffset: {
+            width: 3.74,
+            height: 3.74,
+          },
+          shadowOpacity: 1,
+          shadowRadius: 6,
         }}
-        trackStyle={{ height: 15, borderRadius: 36 }}
+        trackStyle={{
+          height: 15,
+          borderRadius: 36,
+          backgroundColor: colors.primary,
+        }}
         selectedStyle={{
           backgroundColor: "transparent",
           borderColor: "#F0F0F3",
           borderWidth: 1,
           overflow: "hidden",
-          shadowColor: "#A0A5B9",
-          shadowRadius: 9,
+          shadowColor: colors.shadow,
+          shadowRadius: 2,
           shadowOpacity: 1,
+          shadowOffset: {
+            width: 2,
+            height: 2,
+          },
         }}
         onValuesChange={onValuesChange}
         min={min}
@@ -41,11 +55,12 @@ function Slider({
           return <CustomSliderMarker text={e.currentValue} />;
         }}
         markerOffsetY={-20}
+        markerOffsetX={5}
         values={values}
       />
       <View style={styles.timeRange}>
-        <Text>{minLabel}</Text>
-        <Text>{maxLabel}</Text>
+        <Text style={styles.timeRangeText}>{minLabel}</Text>
+        <Text style={styles.timeRangeText}>{maxLabel}</Text>
       </View>
     </View>
   );
@@ -53,11 +68,14 @@ function Slider({
 
 const styles = StyleSheet.create({
   timeRange: {
-    marginLeft: 30,
-    width: 315,
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 10,
+  },
+  timeRangeText: {
+    color: colors.text,
+    fontSize: 12,
+    fontFamily: "Inter_500Medium",
   },
 });
 

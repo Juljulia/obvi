@@ -1,7 +1,5 @@
 import React from "react";
 import { Image, Platform, StyleSheet, View } from "react-native";
-import colors from "../../config/colors";
-import { wp, hp } from "../../config/dimensions";
 
 import Button from "../Button";
 import Screen from "../Screen";
