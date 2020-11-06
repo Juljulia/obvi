@@ -7,18 +7,13 @@ import {
   View,
 } from "react-native";
 
-import Avatars from "../components/Avatars";
-import Button from "../components/Button";
 import Card from "../components/Card";
-import mapStyle from "./../config/mapStyle";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import routes from "../navigation/routes";
 import Text from "../components/typography/Text";
 import Screen from "../components/Screen";
 import useAuth from "../auth/useAuth";
 import usersApi from "../api/users";
 import useLocation from "../hooks/useLocation";
-import colors from "../config/colors";
 import NavIcon from "../components/nav/NavIcon";
 import H2 from "../components/typography/H2";
 import TextInput from "../components/TextInput";
