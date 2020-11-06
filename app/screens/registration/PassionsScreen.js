@@ -16,19 +16,7 @@ function PassionsScreen({ navigation, route }) {
     pronoun,
     showPronoun,
   } = route.params;
-  const [passions, setPassions] = useState([]);
-  const [active, setActive] = useState(false);
-
-  const changePassions = (selectedValues) => {
-    setPassions(selectedValues);
-
-    //sets button to active och inactive
-    if (passions.length) {
-      setActive(true);
-    } else {
-      setActive(false);
-    }
-  };
+  const [passions, setPassions] = useState(null);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -52,7 +40,7 @@ function PassionsScreen({ navigation, route }) {
   return (
     <FormScreen
       title="Passions"
-      isActive={active}
+      isActive={passions}
       onPress={() =>
         navigation.navigate(routes.REGISTERPHOTO, {
           username,
@@ -66,18 +54,18 @@ function PassionsScreen({ navigation, route }) {
       style={{ paddingTop: 16 }}
       pagination={require("../../assets/pagination/5.png")}
     >
-      <Text style={{ paddingTop: 16, paddingBottom: 32, lineHeight: 25 }}>
+      <Text style={{ paddingTop: 12, paddingBottom: 16, lineHeight: 25 }}>
         Let everyone know what you're passionate about, by adding it to your
         profile.
       </Text>
       <ScrollView
         style={{ height: "50%" }}
-        contentContainerStyle={{ paddingBottom: 60 }}
+        contentContainerStyle={{ paddingBottom: 70 }}
       >
         <SelectMultiplePassions
           group={passionsArr}
           onSelectedValuesChange={(selectedValues) =>
-            changePassions(selectedValues)
+            setPassions(selectedValues.join(", "))
           }
         ></SelectMultiplePassions>
       </ScrollView>

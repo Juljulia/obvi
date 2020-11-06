@@ -10,16 +10,14 @@ function SelectMultiplePassions({ group, onSelectedValuesChange }) {
         justifyContent: "space-around",
       }}
       buttonViewStyle={{
-        marginVertical: 8,
         borderRadius: 16,
+        elevation: 2,
+        marginVertical: 4,
         padding: 4,
-        maxWidth: 150,
-        alignItems: "flex-start",
         shadowColor: colors.shadow,
         shadowOffset: { width: 4, height: 4 },
         shadowOpacity: 1, //drop shadow offset
         shadowRadius: 4, // blur radius
-        elevation: 2,
       }}
       highLightStyle={{
         //not selected

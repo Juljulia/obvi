@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 10,
     alignSelf: "center",
+    elevation: 4,
   },
   text: {
     fontFamily: "Inter_600SemiBold",
