@@ -170,6 +170,7 @@ function CheckInScreen({ navigation }) {
 
           {/** SEARCH */}
           <SearchInput
+            inputWidth={screenWidth * 0.85}
             style={{ marginTop: 28, marginHorizontal: 30 }}
             results={places}
             keyExtractor={(place) => place.place_id.toString()}
@@ -212,7 +213,9 @@ function CheckInScreen({ navigation }) {
               <H2 style={{ marginBottom: 14, marginTop: 18 }}>Message</H2>
               <Text>Give a shout out, tell us what's up! </Text>
               <FormField
-                style={{ height: 176, padding: 20, marginTop: 15 }}
+                height={176}
+                width={screenWidth * 0.85}
+                style={{ padding: 20, marginTop: 15 }}
                 inputStyle={{ height: "100%" }}
                 multiline
                 maxLength={255}
