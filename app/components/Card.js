@@ -36,7 +36,7 @@ function Card({
         imgBorderRadius={17.5}
         bgWidth={40}
         bgHeight={40}
-        imageUrl={profileImage}
+        localImageUrl={profileImage}
         style={styles.profileImage}
       />
       <TouchableWithoutFeedback onPress={onPress}>
