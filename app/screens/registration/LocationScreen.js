@@ -13,7 +13,6 @@ import "firebase/firestore";
 import Button from "../../components/Button";
 import NavArrow from "../../components/nav/NavArrow";
 import InfoModal from "../../components/registration/InfoModal";
-import Pagination from "../../components/Pagination";
 import Screen from "../../components/Screen";
 import Text from "../../components/typography/Text";
 import H2 from "../../components/typography/H2";
@@ -28,10 +27,13 @@ function LocationScreen({ navigation, route }) {
     showPronoun,
     username,
     imageData,
+    imageUri,
   } = route.params;
   const [infoVisible, setInfoVisible] = useState(false);
   const { user } = useAuth();
   const db = firebase.firestore();
+
+  console.log(imageUri);
 
   const userInfo = {
     orientation,
@@ -44,8 +46,6 @@ function LocationScreen({ navigation, route }) {
     email: user.email,
     uid: user.uid,
   };
-
-  console.log(imageData);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -63,8 +63,6 @@ function LocationScreen({ navigation, route }) {
 
     addUserInfo();
   };
-
-  console.log(userInfo);
 
   const addUserInfo = async () => {
     db.collection("users")
@@ -91,7 +89,10 @@ function LocationScreen({ navigation, route }) {
           style={styles.mapMarker}
         >
           {imageData ? (
-            <Image source={{ uri: imageData }} style={{ width: 70 }} />
+            <Image
+              source={{ uri: imageUri }}
+              style={{ width: 65, height: 65, borderRadius: 75 }}
+            />
           ) : (
             <Image
               source={require("../../assets/default.png")}
