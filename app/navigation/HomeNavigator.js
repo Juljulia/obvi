@@ -8,7 +8,7 @@ import CheckInScreen from "../screens/CheckInScreen";
 const Stack = createStackNavigator();
 
 const HomeNavigator = () => (
-  <Stack.Navigator>
+  <Stack.Navigator mode="modal">
     <Stack.Screen
       name="Home"
       component={HomeScreen}

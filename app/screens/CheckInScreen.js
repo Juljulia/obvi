@@ -19,6 +19,8 @@ import Slider from "../components/Slider";
 import SearchInput from "../components/SearchInput";
 import UploadScreen from "../screens/UploadScreen";
 import ScreenTitle from "../components/ScreenTitle";
+import H2 from "../components/typography/H2";
+import H1 from "../components/typography/H1";
 
 const validationSchema = Yup.object().shape({
   message: Yup.string().label("Message"),
@@ -134,8 +136,26 @@ function CheckInScreen({ navigation }) {
       </TouchableOpacity>
       <ScreenTitle>Check-In</ScreenTitle>
 
+      <View
+        style={{
+          marginHorizontal: 30,
+          marginTop: 50,
+        }}
+      >
+        <H2 style={{ marginBottom: 16 }}>
+          Find and connect with nearby places, friends and more.
+        </H2>
+        <Text>
+          Obvi needs your location to make some features work. You can always
+          change this later in your phone’s settings.
+        </Text>
+
+        <H1 style={{ marginTop: 19 }}>Check In</H1>
+      </View>
+
       {/** SEARCH */}
       <SearchInput
+        style={{ marginTop: 28, marginHorizontal: 30, width: "85%" }}
         results={places}
         keyExtractor={(place) => place.place_id.toString()}
         onChangeText={(value) => searchPlaces(value)}

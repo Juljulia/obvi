@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "react-native";
+import { Image, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import AccountScreen from "../screens/AccountScreen";
@@ -40,11 +40,18 @@ const AppNavigator = () => {
         component={MenuNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Image
-              style={{ width: 50 }}
-              resizeMode="contain"
-              source={require("../assets/icons/menu.png")}
-            />
+            <View
+              style={{
+                height: "100%",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                style={{ width: 50 }}
+                resizeMode="contain"
+                source={require("../assets/icons/menu.png")}
+              />
+            </View>
           ),
         }}
       />
@@ -53,11 +60,18 @@ const AppNavigator = () => {
         component={MapScreen}
         options={{
           tabBarIcon: () => (
-            <Image
-              style={{ width: 25 }}
-              resizeMode="contain"
-              source={require("../assets/icons/search.png")}
-            />
+            <View
+              style={{
+                height: "100%",
+                paddingTop: "20%",
+              }}
+            >
+              <Image
+                style={{ width: 25 }}
+                resizeMode="contain"
+                source={require("../assets/icons/search.png")}
+              />
+            </View>
           ),
         }}
       />
@@ -66,11 +80,18 @@ const AppNavigator = () => {
         component={AccountScreen}
         options={{
           tabBarIcon: () => (
-            <Image
-              style={{ width: 25 }}
-              resizeMode="contain"
-              source={require("../assets/icons/profile.png")}
-            />
+            <View
+              style={{
+                height: "100%",
+                paddingTop: "20%",
+              }}
+            >
+              <Image
+                style={{ width: 25 }}
+                resizeMode="contain"
+                source={require("../assets/icons/profile.png")}
+              />
+            </View>
           ),
         }}
       />
@@ -79,11 +100,18 @@ const AppNavigator = () => {
         component={HomeNavigator}
         options={{
           tabBarIcon: () => (
-            <Image
-              style={{ width: 24 }}
-              resizeMode="contain"
-              source={require("../assets/icons/home.png")}
-            />
+            <View
+              style={{
+                height: "100%",
+                paddingTop: "17%",
+              }}
+            >
+              <Image
+                style={{ width: 24 }}
+                resizeMode="contain"
+                source={require("../assets/icons/home.png")}
+              />
+            </View>
           ),
         }}
       />
