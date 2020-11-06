@@ -7,10 +7,10 @@ import "firebase/storage";
 import colors from "../../config/colors";
 import FormScreen from "../../components/registration/FormScreen";
 import H2 from "../../components/typography/H2";
-import NavArrow from "../../components/NavArrow";
 import PhotoCard from "../../components/registration/PhotoCard";
 import routes from "../../navigation/routes";
 import useAuth from "../../auth/useAuth";
+import NavArrow from "../../components/nav/NavArrow";
 
 function PhotoScreen({ navigation, route }) {
   const {

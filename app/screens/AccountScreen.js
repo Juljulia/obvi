@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Image, View, StyleSheet, TouchableOpacity } from "react-native";
 
 import Text from "../components/typography/Text";
-import NavArrow from "../components/NavArrow";
+import NavArrow from "../components/nav/NavArrow";
 import Screen from "../components/Screen";
 import usersApi from "../api/users";
+import ScreenTitle from "../components/ScreenTitle";
 
 function AccountScreen({ navigation }) {
   const { user } = useAuth();
@@ -24,6 +25,7 @@ function AccountScreen({ navigation }) {
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <NavArrow goBack={true}></NavArrow>
       </TouchableOpacity>
+      <ScreenTitle>My Profile</ScreenTitle>
       <View style={styles.container}>
         {userData.imageData ? (
           <Image

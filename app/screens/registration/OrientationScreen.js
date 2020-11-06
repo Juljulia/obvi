@@ -11,7 +11,7 @@ import Checkbox from "../../components/registration/Checkbox";
 import FormScreen from "../../components/registration/FormScreen";
 import routes from "../../navigation/routes";
 import TextInput from "../../components/TextInput";
-import NavArrow from "../../components/NavArrow";
+import NavArrow from "../../components/nav/NavArrow";
 import orientations from "../../assets/arrays/orientations";
 import SelectMultiple from "../../components/registration/SelectMultiple";
 import Text from "../../components/typography/Text";

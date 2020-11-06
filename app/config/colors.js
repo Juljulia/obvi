@@ -11,11 +11,12 @@ export default {
   //FIGMA COLORS
   basicBlue: "#4070F4",
   basicGrey: "#F2F3F7",
+  basicPurple: "#5322E1",
   darkGrey: "#4B545A",
   darkBrown: "#6A515E",
   night: "#3E4958",
   mediumGrey: "#8C94A0",
-  text: "#818181",
+  text: "#4C535A",
   white: "#FFFFFF",
   shadow: "#aebcd1",
 };

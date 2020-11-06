@@ -5,7 +5,8 @@ import * as firebase from "firebase";
 import Map from "../components/Map";
 import Screen from "../components/Screen";
 import useLocation from "../hooks/useLocation";
-import NavArrow from "../components/NavArrow";
+import NavArrow from "../components/nav/NavArrow";
+import ScreenTitle from "../components/ScreenTitle";
 
 const deltas = {
   latitudeDelta: 0.015,
@@ -63,6 +64,7 @@ function MapScreen({ navigation, route }) {
         >
           <NavArrow goBack={true}></NavArrow>
         </TouchableOpacity>
+        <ScreenTitle>Map</ScreenTitle>
       </View>
     </Screen>
   );

@@ -3,7 +3,7 @@ import { Image, StyleSheet, ScrollView } from "react-native";
 
 import FormScreen from "../../components/registration/FormScreen";
 import routes from "../../navigation/routes";
-import NavArrow from "../../components/NavArrow";
+import NavArrow from "../../components/nav/NavArrow";
 import passionsArr from "../../assets/arrays/passionsArr";
 import SelectMultiplePassions from "../../components/registration/SelectMultiplePassions";
 import Text from "../../components/typography/Text";
