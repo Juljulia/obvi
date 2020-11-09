@@ -30,6 +30,7 @@ import ScreenTitle from "../components/ScreenTitle";
 import H2 from "../components/typography/H2";
 import H1 from "../components/typography/H1";
 import colors from "../config/colors";
+import PopUp from "../components/registration/PopUp";
 
 const validationSchema = Yup.object().shape({
   message: Yup.string().label("Message"),
@@ -128,7 +129,8 @@ function CheckInScreen({ navigation }) {
     //Reset values
     setChoosenPlace(null);
     setCheckinDuration([1]);
-    setCloseList(false);
+    setCloseList(true);
+    setShowText(true);
     resetForm();
   };
 
@@ -145,11 +147,24 @@ function CheckInScreen({ navigation }) {
   return (
     <Screen style={styles.container}>
       <UploadScreen onDone={navigate} visible={uploadVisible} />
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={styles.arrow}
-      >
-        <NavArrow goBack={true}></NavArrow>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <NavArrow goBack={true} />
+      </TouchableOpacity>
+      <TouchableOpacity>
+        {location ? (
+          <Image
+            style={styles.enableLocation}
+            source={require("../assets/location-enabled.png")}
+          />
+        ) : (
+          <>
+            <Image
+              style={styles.enableLocation}
+              source={require("../assets/location-disabled.png")}
+            />
+            <PopUp style={styles.popUp} text="Enable location" />
+          </>
+        )}
       </TouchableOpacity>
       <ScreenTitle>Check-In</ScreenTitle>
 
@@ -253,6 +268,14 @@ function CheckInScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  enableLocation: {
+    position: "absolute",
+    right: 15,
+    top: -55,
+    zIndex: 2,
+    width: 68,
+    height: 68,
+  },
   messageContainer: {
     marginBottom: 200,
   },
@@ -261,9 +284,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: "row",
   },
+  popUp: {
+    width: 125,
+    height: 44,
+    justifyContent: "center",
+    position: "absolute",
+    right: 60,
+    top: 2,
+  },
   textWrapper: (showText) => ({
     marginHorizontal: 30,
-    marginTop: 50,
+    marginTop: 60,
     display: showText ? "flex" : "none",
   }),
 });
