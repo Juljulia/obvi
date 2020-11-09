@@ -3,10 +3,10 @@ import { StyleSheet, Image, TouchableOpacity, View } from "react-native";
 
 import colors from "../../config/colors";
 
-function NavArrow({ goBack = false, onPress }) {
+function NavArrow({ goBack = false, onPress, style }) {
   if (goBack) {
     return (
-      <View style={[styles.container]}>
+      <View style={[styles.container, style]}>
         <Image
           style={styles.arrow(goBack)}
           source={require("../../assets/arrow.png")}
@@ -15,7 +15,7 @@ function NavArrow({ goBack = false, onPress }) {
     );
   }
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
       <Image
         style={styles.arrow(goBack)}
         source={require("../../assets/arrow.png")}
@@ -29,11 +29,11 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    shadowOffset: { width: 7, height: 7 },
+    shadowOffset: { width: 3.74, height: 3.74 },
     shadowColor: colors.shadow,
-    shadowRadius: 10,
+    shadowRadius: 4.5,
     shadowOpacity: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.basicGrey,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 25,
@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
   },
   arrow: (goBack) => ({
     transform: goBack ? [{ rotate: "180deg" }] : [],
+    width: 8,
+    height: 12,
   }),
 });
 
