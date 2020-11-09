@@ -11,17 +11,16 @@ import useLocation from "../hooks/useLocation";
 import useAuth from "../auth/useAuth";
 import MapMarker from "./MapMarker";
 
-const deltas = {
-  latitudeDelta: 0.015,
-  longitudeDelta: 0.0121,
-};
-
-function Map({ region, pins }) {
+function Map({ initialRegion, parentCallback, pins, region }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalInfo, setModalInfo] = useState({});
   const [loggedInUser, setLoggedInUser] = useState();
   const location = useLocation();
   const { user } = useAuth();
+
+  const passMarkerLocation = (pin) => {
+    parentCallback(pin.location);
+  };
 
   const getLoggedInUser = async () => {
     const loggedInUser = await usersApi.getUser(user.uid);
@@ -33,12 +32,7 @@ function Map({ region, pins }) {
   }, []);
 
   const getMarkerInfo = async (pin) => {
-    const location = pin.location;
     const user = await usersApi.getUser(pin.userId);
-    region = {
-      ...location,
-      ...deltas,
-    };
     setModalInfo({ ...user, ...pin });
     setModalVisible(true);
   };
@@ -48,6 +42,7 @@ function Map({ region, pins }) {
       <MapView
         style={styles.map}
         provider={PROVIDER_GOOGLE}
+        initialRegion={initialRegion}
         region={region}
         customMapStyle={mapStyle}
         onPanDrag={() => setModalVisible(false)}
@@ -62,7 +57,7 @@ function Map({ region, pins }) {
             <Marker
               key={i}
               coordinate={pin.location}
-              onPress={() => getMarkerInfo(pin)}
+              onPress={() => getMarkerInfo(pin) + passMarkerLocation(pin)}
             >
               <ProfileImage
                 imageUrl={pin.imageUrl}
