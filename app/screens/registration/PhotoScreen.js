@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View, ScrollView } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import * as firebase from "firebase";
 import "firebase/storage";
@@ -11,7 +11,10 @@ import routes from "../../navigation/routes";
 import useAuth from "../../auth/useAuth";
 import NavArrow from "../../components/nav/NavArrow";
 import PhotoCard from "../../components/registration/PhotoCard";
-import { ScrollView } from "react-native-gesture-handler";
+import Screen from "../../components/Screen";
+
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("screen").height;
 
 function PhotoScreen({ navigation, route }) {
   const {
@@ -44,7 +47,9 @@ function PhotoScreen({ navigation, route }) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <NavArrow onPress={navigate} />,
+      headerRight: () => (
+        <NavArrow style={{ marginTop: 50 }} onPress={navigate} />
+      ),
     });
   }, [navigation]);
 
@@ -113,39 +118,50 @@ function PhotoScreen({ navigation, route }) {
   };
 
   return (
-    <ScrollView ref={scrollRef}>
-      <FormScreen
-        isActive={imageUri}
-        onPress={uploadImage}
-        pagination={require("../../assets/pagination/6.png")}
-        style={{ paddingTop: 0, paddingBottom: 44 }}
+    <Screen>
+      <ScrollView
+        contentContainerStyle={{ flex: screenHeight > 800 ? 1 : "" }}
+        ref={scrollRef}
       >
-        <H2 style={{ alignSelf: "center", paddingBottom: 40 }}>Add photo</H2>
-        <PhotoCard
-          imageUri={imageUri}
-          onChangeImage={handleImage}
-          name={username}
-          pronoun={pronoun}
-          orientation={orientation}
-        />
-
-        {progress > 0 ? (
-          <ProgressBar
-            color={colors.primary}
-            progress={progress}
-            width={200}
-            style={{ alignSelf: "center", marginBottom: 20 }}
+        <FormScreen
+          isActive={imageUri}
+          onPress={uploadImage}
+          pagination={require("../../assets/pagination/6.png")}
+          style={{
+            paddingTop: 45,
+            paddingBottom: screenHeight > 800 ? 0 : 70,
+            paddingHorizontal: screenWidth > 400 ? 20 : 17,
+          }}
+        >
+          <H2 style={{ alignSelf: "center", paddingBottom: 40 }}>Add photo</H2>
+          <PhotoCard
+            imageUri={imageUri}
+            onChangeImage={handleImage}
+            name={username}
+            pronoun={pronoun}
+            orientation={orientation}
           />
-        ) : (
-          <View style={{ height: 26 }}></View>
-        )}
-      </FormScreen>
-    </ScrollView>
+
+          {progress > 0 ? (
+            <ProgressBar
+              color={colors.primary}
+              progress={progress}
+              width={200}
+              style={{ alignSelf: "center", marginBottom: 20 }}
+            />
+          ) : (
+            <View style={{ height: 26 }}></View>
+          )}
+        </FormScreen>
+      </ScrollView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  scrollView: {
+    backgroundColor: "blue",
+  },
 });
 
 export default PhotoScreen;

@@ -81,6 +81,7 @@ function Map({ initialRegion, parentCallback, pins, region }) {
         message={modalInfo.message}
         activeTime={modalInfo.activeTo}
         duration={modalInfo.duration}
+        geoLocation={modalInfo.location}
       />
     </>
   );

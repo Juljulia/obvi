@@ -8,6 +8,7 @@ function SelectMultiplePassions({ group, onSelectedValuesChange }) {
     <SelectMultipleGroupButton
       containerViewStyle={{
         justifyContent: "space-around",
+        paddingRight: 5,
       }}
       buttonViewStyle={{
         borderRadius: 16,

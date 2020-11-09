@@ -33,8 +33,6 @@ function LocationScreen({ navigation, route }) {
   const { user } = useAuth();
   const db = firebase.firestore();
 
-  console.log(imageUri);
-
   const userInfo = {
     orientation,
     showOrientation,
@@ -49,7 +47,9 @@ function LocationScreen({ navigation, route }) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <NavArrow onPress={addUserInfo} />,
+      headerRight: () => (
+        <NavArrow style={{ marginTop: 50 }} onPress={addUserInfo} />
+      ),
     });
   }, [navigation]);
 

@@ -13,7 +13,11 @@ function InfoModal({ onPress, onPressButton, visible }) {
         <TouchableOpacity onPress={onPress} style={styles.arrow}>
           <Image source={require("../../assets/arrow-up.png")} />
         </TouchableOpacity>
-        <Button title="Allow location" onPressButton={onPressButton} />
+        <Button
+          style={{ width: 280 }}
+          title="Allow location"
+          onPressButton={onPressButton}
+        />
         <View style={styles.description}>
           <H2 style={styles.title}>Spot the community</H2>
           <Text style={[styles.text, { lineHeight: 25 }]}>
