@@ -86,6 +86,7 @@ function Map({ region, pins }) {
         message={modalInfo.message}
         activeTime={modalInfo.activeTo}
         duration={modalInfo.duration}
+        geoLocation={modalInfo.location}
       />
     </>
   );
