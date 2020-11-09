@@ -27,8 +27,8 @@ const validationSchema = Yup.object().shape({
 function RegisterScreen({ navigation }) {
   const [error, setError] = useState();
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showVerifiedPassword, setShowVerifiedPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
+  const [showVerifiedPassword, setShowVerifiedPassword] = useState(true);
   const [eye, setEye] = useState("eye");
   const [eyeVerify, setEyeVerify] = useState("eye");
 
@@ -110,7 +110,7 @@ function RegisterScreen({ navigation }) {
             rightIcon={eyeVerify}
             name="passwordConfirmation"
             placeholder="Verify password"
-            secureTextEntry={showPassword}
+            secureTextEntry={showVerifiedPassword}
             textContentType="password"
             onPress={() => setShowVerifiedPassword(!showVerifiedPassword)}
           />
