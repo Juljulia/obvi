@@ -1,5 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Dimensions } from "react-native";
 
 import RulesScreen from "../screens/registration/RulesScreen";
 import NameScreen from "../screens/registration/NameScreen";
@@ -13,14 +14,15 @@ import H2 from "../components/typography/H2";
 import colors from "../config/colors";
 
 const Stack = createStackNavigator();
+const height = Dimensions.get("window").height;
 
 const RegisterNavigator = () => {
   const headerOptions = {
     headerTitle: () => <H2>Registration</H2>,
     headerBackTitleVisible: false,
-    headerBackImage: () => <NavArrow goBack={true} />,
+    headerBackImage: () => <NavArrow style={{ marginTop: 50 }} goBack={true} />,
     headerStyle: {
-      height: 120,
+      height: height * 0.09,
       shadowRadius: 0,
       shadowOffset: {
         height: 0,

@@ -3,10 +3,10 @@ import { StyleSheet, Image, TouchableOpacity, View } from "react-native";
 
 import colors from "../../config/colors";
 
-function NavArrow({ goBack = false, onPress }) {
+function NavArrow({ goBack = false, onPress, style }) {
   if (goBack) {
     return (
-      <View style={[styles.container]}>
+      <View style={[styles.container, style]}>
         <Image
           style={styles.arrow(goBack)}
           source={require("../../assets/arrow.png")}
