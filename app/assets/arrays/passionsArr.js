@@ -1,10 +1,10 @@
 export default [
   { value: "Politics" },
   { value: "Board Games" },
-  { value: "Conversation" },
   { value: "Food" },
   { value: "Animals" },
   { value: "Language" },
+  { value: "Conversation" },
   { value: "Cats" },
   { value: "Me" },
   { value: "Culture" },

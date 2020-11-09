@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Dimensions, Image, ScrollView, StyleSheet, View } from "react-native";
+import React from "react";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
 
 import FormScreen from "../../components/registration/FormScreen";
 import H2 from "../../components/typography/H2";
@@ -8,15 +8,12 @@ import Rule from "../../components/registration/Rule";
 import Text from "../../components/typography/Text";
 
 function RulesScreen({ navigation }) {
-  const width = Dimensions.get("window").width;
-
   return (
     <FormScreen
       onPress={() => navigation.navigate(routes.REGISTERNAME)}
       isActive={true}
       style={{
         paddingTop: 0,
-        paddingHorizontal: width > 400 ? 38 : 17,
         paddingBottom: 140,
       }}
       pagination={require("../../assets/pagination/1.png")}

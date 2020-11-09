@@ -34,6 +34,7 @@ const RegisterNavigator = () => {
   const locationHeaderOptions = {
     ...headerOptions,
     headerTransparent: true,
+    headerLeft: null,
   };
 
   return (

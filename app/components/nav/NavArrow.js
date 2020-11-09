@@ -15,7 +15,7 @@ function NavArrow({ goBack = false, onPress, style }) {
     );
   }
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
       <Image
         style={styles.arrow(goBack)}
         source={require("../../assets/arrow.png")}
