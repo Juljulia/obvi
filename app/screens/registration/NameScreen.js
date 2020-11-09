@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 import FormScreen from "../../components/registration/FormScreen";
 import routes from "../../navigation/routes";
@@ -9,6 +9,7 @@ import Text from "../../components/typography/Text";
 function NameScreen({ navigation }) {
   const [username, setUsername] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const screenWidth = Dimensions.get("window").width;
 
   const handleActive = (username) => {
     if (username.username) {
@@ -37,8 +38,9 @@ function NameScreen({ navigation }) {
         icon="account"
         value={username["username"]}
         style={{ marginBottom: 12 }}
+        width={screenWidth * 0.83}
       />
-      <Text style={{ lineHeight: 25, marginBottom: 120 }}>
+      <Text style={{ lineHeight: 25, marginBottom: 120, alignSelf: "center" }}>
         The chosen name will appear in you profile
       </Text>
     </FormScreen>

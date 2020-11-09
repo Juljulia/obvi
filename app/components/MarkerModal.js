@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import { Dimensions } from "react-native";
+import { getDistance } from "geolib";
 
 import Button from "../components/Button";
 import Text from "../components/typography/Text";
@@ -19,6 +20,7 @@ import ProfileImage from "./ProfileImage";
 import H2 from "./typography/H2";
 import Subheading from "./typography/Subheading";
 import TimeBubble from "./TimeBubble";
+import useLocation from "../hooks/useLocation";
 
 const value = new Animated.Value(0);
 const screenHeight = Dimensions.get("window").height;
@@ -38,10 +40,13 @@ function MarkerModal({
   message,
   activeTime,
   duration,
+  geoLocation,
 }) {
   const [showModal, setShowModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState();
+  const [distance, setDistance] = useState();
+  const userLocation = useLocation();
 
   const getTimeRemaining = () => {
     const activeToInSec = activeTime / 1000;
@@ -64,6 +69,15 @@ function MarkerModal({
   useEffect(() => {
     getTimeRemaining();
   }, [activeTime]);
+
+  useEffect(() => {
+    if (userLocation && geoLocation) {
+      const distanceToUser = Math.floor(
+        getDistance(geoLocation, userLocation) / 1000
+      );
+      setDistance(distanceToUser);
+    }
+  }, [geoLocation]);
 
   if (showModal) {
     return (
@@ -93,7 +107,9 @@ function MarkerModal({
                 <H2 style={styles.h2}>{username}</H2>
                 <Text style={{ lineHeight: 20 }}>{pronoun}</Text>
                 <Text style={{ lineHeight: 20 }}>{orientation}</Text>
-                <Text style={{ lineHeight: 20 }}>3 kilometers away</Text>
+                <Text style={{ lineHeight: 20 }}>
+                  {distance} kilometers away
+                </Text>
               </View>
               <View style={styles.checkinInfo}>
                 <View style={styles.checkedIn}>
