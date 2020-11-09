@@ -145,7 +145,7 @@ function CheckInScreen({ navigation }) {
   };
 
   return (
-    <Screen style={styles.container}>
+    <Screen>
       <UploadScreen onDone={navigate} visible={uploadVisible} />
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <NavArrow goBack={true} />
