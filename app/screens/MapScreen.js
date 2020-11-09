@@ -8,16 +8,22 @@ import useLocation from "../hooks/useLocation";
 import NavArrow from "../components/nav/NavArrow";
 import ScreenTitle from "../components/ScreenTitle";
 
-const deltas = {
-  latitudeDelta: 0.015,
-  longitudeDelta: 0.0121,
-};
-
 function MapScreen({ navigation, route }) {
   const [checkIns, setCheckIns] = useState([]);
-  const [region, setRegion] = useState();
+  const [initialRegion, setInitialRegion] = useState(null);
+  const [region, setRegion] = useState(null);
+
   const db = firebase.firestore();
-  const location = useLocation();
+  let location = useLocation();
+
+  const deltas = {
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.0121,
+  };
+
+  const handleCallback = (markerLocation) => {
+    setRegion({ ...markerLocation, ...deltas });
+  };
 
   const getCheckIns = async () => {
     let places = [];
@@ -39,7 +45,7 @@ function MapScreen({ navigation, route }) {
 
   useEffect(() => {
     if (location) {
-      setRegion({
+      setInitialRegion({
         ...location,
         ...deltas,
       });
@@ -57,7 +63,13 @@ function MapScreen({ navigation, route }) {
   return (
     <Screen style={styles.container}>
       <View style={styles.container}>
-        <Map style={styles.map} region={region} pins={checkIns}></Map>
+        <Map
+          style={styles.map}
+          initialRegion={initialRegion}
+          region={region}
+          pins={checkIns}
+          parentCallback={handleCallback}
+        ></Map>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={styles.arrow}

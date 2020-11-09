@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import Text from "../components/typography/Text";
 import H2 from "../components/typography/H2";
 import NavArrow from "../components/nav/NavArrow";
 import ProfileCard from "../components/ProfileCard";
 import Screen from "../components/Screen";
 import ScreenTitle from "../components/ScreenTitle";
+import Text from "../components/typography/Text";
 import usersApi from "../api/users";
 
 function AccountScreen({ navigation }) {
@@ -37,7 +37,6 @@ function AccountScreen({ navigation }) {
     getUserData();
   }, []);
 
-  console.log(userData);
   return (
     <ScrollView>
       <Screen>
@@ -54,13 +53,11 @@ function AccountScreen({ navigation }) {
             orientation={orientation}
             imageData={imageData}
           ></ProfileCard>
-          <View>
-            <H2>Passions</H2>
-            <Text style={{ paddingTop: 12, lineHeight: 25, paddingBottom: 24 }}>
-              {passions}
-            </Text>
+          <View style={styles.innerContainer}>
+            <H2 style={styles.innerTitle}>Passions</H2>
+            <Text style={{ lineHeight: 25 }}>{passions}</Text>
           </View>
-          <View>
+          <View style={styles.innerContainer}>
             <H2>Friends</H2>
             <ScrollView
               horizontal
@@ -97,11 +94,17 @@ function AccountScreen({ navigation }) {
               View all
             </Text>
           </View>
-          <View>
-            <H2>Frequent check-ins</H2>
-            <Text style={{ paddingBottom: 12, lineHeight: 25 }}>
+          <View style={styles.innerContainer}>
+            <H2 style={styles.innerTitle}>Frequent check-ins</H2>
+            <Text style={{ lineHeight: 25 }}>
               Ocianen, Folk, Frilagret, Stadsbiblioteket, Super Sushi,
               Dansforum, Condeco, Streetlife
+            </Text>
+          </View>
+          <View>
+            <H2 style={styles.innerTitle}>Calendar</H2>
+            <Text style={{ paddingBottom: 12, lineHeight: 25 }}>
+              Queer takeover, Lesbisk frukost, Julmarknad
             </Text>
           </View>
         </View>
@@ -113,6 +116,8 @@ function AccountScreen({ navigation }) {
 const styles = StyleSheet.create({
   avatar: {
     marginHorizontal: 4,
+    width: 78,
+    height: 78,
   },
   container: {
     paddingHorizontal: 30,
@@ -121,10 +126,16 @@ const styles = StyleSheet.create({
     top: -20,
     zIndex: -1,
   },
+  innerContainer: {
+    paddingBottom: 24,
+  },
   image: {
     width: 145,
     height: 145,
     borderRadius: 70,
+  },
+  innerTitle: {
+    paddingBottom: 12,
   },
   text: {
     marginTop: 15,
