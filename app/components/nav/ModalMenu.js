@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   View,
   StyleSheet,
   TouchableOpacity,
   Image,
   FlatList,
+  Dimensions,
 } from "react-native";
 
 import colors from "../../config/colors";
@@ -12,6 +13,7 @@ import Text from "../typography/Text";
 import useAuth from "../../auth/useAuth";
 import routes from "../../navigation/routes";
 
+const screenHeight = Dimensions.get("window").height;
 const menuItems = [
   {
     title: "Home",
@@ -67,7 +69,7 @@ function ModalMenu({ navigation }) {
   };
 
   return (
-    <View onl style={styles.container}>
+    <View style={styles.container}>
       <TouchableOpacity
         style={{
           position: "absolute",
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingTop: 30,
     paddingBottom: 40,
-    height: "90%",
+    height: screenHeight > 800 ? screenHeight * 0.85 : screenHeight * 0.95,
     borderTopLeftRadius: 35,
     borderTopRightRadius: 35,
     width: "100%",
