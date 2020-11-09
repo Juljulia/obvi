@@ -1,24 +1,36 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 
 import Button from "../components/Button";
+import Text from "../components/typography/Text";
+import colors from "../config/colors";
 import routes from "../navigation/routes";
 
 function WelcomeScreen({ navigation }) {
   return (
     <View style={styles.background}>
       <View style={styles.logoContainer}>
-        <Text style={styles.tagline}>Firebase Auth!</Text>
+        <Image
+          source={require("../assets/logo.png")}
+          style={styles.logo}
+        ></Image>
+        <Text style={styles.tagline}>Obvi</Text>
+        <Text style={styles.text}>
+          Obvi is a place where information and people gather within the
+          LGBTQIA+ community in Gothenburg.
+        </Text>
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          title="Login"
+          title="Sign in"
           onPress={() => navigation.navigate(routes.LOGIN)}
+          style={{ width: 280 }}
         />
         <Button
-          title="Register"
-          color="secondary"
+          title="Sign up"
+          color="primary"
           onPress={() => navigation.navigate(routes.REGISTER)}
+          style={{ width: 280 }}
         />
       </View>
     </View>
@@ -28,26 +40,33 @@ function WelcomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.basicGrey,
   },
   buttonContainer: {
-    padding: 20,
     width: "100%",
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 212,
+    height: 212,
   },
   logoContainer: {
-    position: "absolute",
-    top: 70,
     alignItems: "center",
+    paddingHorizontal: 70,
+    paddingBottom: 80,
   },
   tagline: {
-    fontSize: 25,
-    fontWeight: "600",
-    paddingVertical: 20,
+    fontSize: 24,
+    fontFamily: "Gill Sans",
+    paddingBottom: 32,
+    color: "#4B545A",
+  },
+  text: {
+    textAlign: "center",
+    fontSize: 15,
+    lineHeight: 25,
+    paddingHorizontal: 5,
   },
 });
 

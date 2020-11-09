@@ -185,7 +185,7 @@ function CheckInScreen({ navigation }) {
           {/** SEARCH */}
           <SearchInput
             inputWidth={screenWidth * 0.85}
-            style={{ marginTop: 28, marginHorizontal: 30 }}
+            style={{ marginTop: 28, marginHorizontal: 30, marginBottom: 24 }}
             results={places}
             keyExtractor={(place) => place.place_id.toString()}
             onChangeText={(value) => searchPlaces(value)}
