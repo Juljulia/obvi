@@ -9,6 +9,7 @@ import {
   ImageBackground,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import * as ImageManipulator from "expo-image-manipulator";
 
 import colors from "../../config/colors";
 
@@ -44,8 +45,14 @@ function AppImagePicker({ imageUri, onChangeImage }) {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         quality: 0.5,
       });
+
+      //Resize the image
+      const manipResult = await ImageManipulator.manipulateAsync(result.uri, [
+        { resize: { width: 500 } },
+      ]);
+
       //When the user selects an image we call onChangeImage and notify the consumer of this component that the image is changed.
-      if (!result.cancelled) onChangeImage(result.uri);
+      if (!result.cancelled) onChangeImage(manipResult.uri);
     } catch (error) {
       console.log("Error reading an image", error);
     }

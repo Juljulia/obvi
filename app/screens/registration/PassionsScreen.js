@@ -1,5 +1,5 @@
-import React, { useState, useLayoutEffect, useEffect } from "react";
-import { Image, StyleSheet, ScrollView } from "react-native";
+import React, { useState, useLayoutEffect } from "react";
+import { Image, StyleSheet, ScrollView, Dimensions } from "react-native";
 
 import FormScreen from "../../components/registration/FormScreen";
 import routes from "../../navigation/routes";
@@ -17,6 +17,8 @@ function PassionsScreen({ navigation, route }) {
     showPronoun,
   } = route.params;
   const [passions, setPassions] = useState(null);
+  const screenWidth = Dimensions.get("window").width;
+  const screenHeight = Dimensions.get("window").height;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -32,6 +34,7 @@ function PassionsScreen({ navigation, route }) {
               showPronoun,
             })
           }
+          style={{ marginTop: 50 }}
         />
       ),
     });
@@ -51,15 +54,17 @@ function PassionsScreen({ navigation, route }) {
           showPronoun,
         })
       }
-      style={{ paddingTop: 16 }}
+      style={{ paddingTop: 50, paddingHorizontal: screenWidth > 400 ? 30 : 15 }}
       pagination={require("../../assets/pagination/5.png")}
     >
-      <Text style={{ paddingTop: 12, paddingBottom: 16, lineHeight: 25 }}>
+      <Text style={{ paddingTop: 12, paddingBottom: 26, lineHeight: 25 }}>
         Let everyone know what you're passionate about, by adding it to your
         profile.
       </Text>
       <ScrollView
-        style={{ height: "50%" }}
+        style={{
+          height: screenHeight > 800 ? screenHeight * 0.5 : screenHeight * 0.45,
+        }}
         contentContainerStyle={{ paddingBottom: 70 }}
       >
         <SelectMultiplePassions
