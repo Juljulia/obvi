@@ -25,7 +25,7 @@ function OrientationScreen({ navigation, route }) {
   const [orientation, setOrientation] = useState(null);
   const [viewAll, setViewAll] = useState(false);
   const [toggleCheckBox, setToggleCheckBox] = useState(true);
-
+  const screenWidth = Dimensions.get("window").width;
   const showOrientation = toggleCheckBox;
 
   let searchOrientations = [];
@@ -51,6 +51,7 @@ function OrientationScreen({ navigation, route }) {
               showOrientation,
             })
           }
+          style={{ marginTop: 50 }}
         />
       ),
     });
@@ -77,6 +78,7 @@ function OrientationScreen({ navigation, route }) {
           }
           style={{
             minHeight: windowHeight - 120,
+            paddingHorizontal: screenWidth > 400 ? 18 : 17,
             paddingBottom: 44,
           }}
           pagination={require("../../assets/pagination/4.png")}
@@ -85,6 +87,7 @@ function OrientationScreen({ navigation, route }) {
             value={input["input"]}
             onChangeText={(input) => setInput({ input })}
             placeholder={"Start typing"}
+            width={screenWidth * 0.83}
           />
           <View style={styles.titlesContainer}>
             <Text>Orientations</Text>
