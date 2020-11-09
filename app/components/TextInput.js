@@ -1,5 +1,11 @@
 import React from "react";
-import { View, TextInput, StyleSheet, Image } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from "../config/colors";
@@ -10,6 +16,8 @@ function AppTextInput({
   height = 70,
   style,
   inputStyle,
+  onPress,
+  rightIcon,
   ...otherProps
 }) {
   return (
@@ -47,6 +55,16 @@ function AppTextInput({
           style={styles.icon}
         />
       )}
+      {rightIcon && (
+        <TouchableWithoutFeedback onPress={onPress}>
+          <MaterialCommunityIcons
+            name={rightIcon}
+            size={20}
+            color={colors.mediumGrey}
+            style={styles.rightIcon}
+          />
+        </TouchableWithoutFeedback>
+      )}
       <TextInput
         placeholderTextColor={colors.mediumGrey}
         style={[styles.text, inputStyle]}
@@ -58,8 +76,8 @@ function AppTextInput({
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 34,
-    marginBottom: 24,
+    marginTop: 30,
+    marginBottom: 16,
     backgroundColor: "transparent",
     flexDirection: "row",
     alignItems: "center",
@@ -76,6 +94,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 10,
+  },
+  rightIcon: {
+    position: "absolute",
+    right: 32,
   },
 });
 
