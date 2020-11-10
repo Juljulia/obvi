@@ -107,7 +107,7 @@ function OrientationScreen({ navigation, route }) {
               </Text>
             )}
           </View>
-          <ScrollView style={styles.innerScrollView}>
+          <ScrollView style={styles.innerScrollView} nestedScrollEnabled>
             <SelectMultiple
               group={searchOrientations}
               onSelectedValuesChange={(selectedValues) =>

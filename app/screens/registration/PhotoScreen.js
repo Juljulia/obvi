@@ -120,7 +120,7 @@ function PhotoScreen({ navigation, route }) {
   return (
     <Screen>
       <ScrollView
-        contentContainerStyle={{ flex: screenHeight > 800 ? 1 : "" }}
+        contentContainerStyle={{ flex: screenHeight > 800 ? 1 : 0 }}
         ref={scrollRef}
       >
         <FormScreen
@@ -128,7 +128,7 @@ function PhotoScreen({ navigation, route }) {
           onPress={uploadImage}
           pagination={require("../../assets/pagination/6.png")}
           style={{
-            paddingTop: 45,
+            paddingTop: Platform.OS === "ios" ? 45 : 0,
             paddingBottom: screenHeight > 800 ? 0 : 70,
             paddingHorizontal: screenWidth > 400 ? 20 : 17,
           }}

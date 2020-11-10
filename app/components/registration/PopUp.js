@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.basicGrey,
     paddingVertical: 7,
     paddingHorizontal: 19,
+    elevation: 5,
   },
   text: {
     fontSize: 12,
