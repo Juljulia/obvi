@@ -14,10 +14,12 @@ function AppTextInput({
   icon,
   width = 315,
   height = 70,
+  iconSize = 20,
   style,
   inputStyle,
   onPress,
   rightIcon,
+  imageIcon,
   ...otherProps
 }) {
   return (
@@ -50,16 +52,17 @@ function AppTextInput({
       {icon && (
         <MaterialCommunityIcons
           name={icon}
-          size={20}
+          size={iconSize}
           color={colors.mediumGrey}
           style={styles.icon}
         />
       )}
+      {imageIcon && <Image style={styles.imageIcon} source={imageIcon} />}
       {rightIcon && (
         <TouchableWithoutFeedback onPress={onPress}>
           <MaterialCommunityIcons
             name={rightIcon}
-            size={20}
+            size={iconSize}
             color={colors.mediumGrey}
             style={styles.rightIcon}
           />
@@ -88,6 +91,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   icon: {
+    marginRight: 10,
+  },
+  imageIcon: {
+    width: 20,
+    height: 20,
     marginRight: 10,
   },
   rightIcon: {
