@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     width: 180,
     height: 60,
     marginVertical: 10,
-    shadowColor: "#8F93EA",
+    shadowColor: colors.shadow,
     shadowOffset: {
       width: 6,
       height: 6,
