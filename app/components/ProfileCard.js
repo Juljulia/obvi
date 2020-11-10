@@ -12,6 +12,7 @@ function ProfileCard({
   imageData,
   showPronoun,
   showOrientation,
+  distance,
 }) {
   return (
     <View style={styles.container}>
@@ -42,7 +43,9 @@ function ProfileCard({
             source={require("../assets/pin.png")}
             style={styles.pin}
           ></Image>
-          <Text style={{ lineHeight: 25 }}>0 kilometers away</Text>
+          <Text style={{ lineHeight: 25 }}>
+            {distance ? distance : 0} kilometers away
+          </Text>
         </View>
         <View style={styles.info}>
           <Image

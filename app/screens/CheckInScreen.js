@@ -184,7 +184,7 @@ function CheckInScreen({ navigation }) {
           onChangeText={(value) => searchPlaces(value)}
           value={choosenPlace ? choosenPlace.name : ""}
           placeholder="Where are you?"
-          icon="map-search-outline"
+          icon="magnify"
           closeList={closeList}
           showResults={showPlaces}
           onPress={onPressSearchInput}

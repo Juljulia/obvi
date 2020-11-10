@@ -20,6 +20,8 @@ import H2 from "./typography/H2";
 import Subheading from "./typography/Subheading";
 import TimeBubble from "./TimeBubble";
 import useLocation from "../hooks/useLocation";
+import navigation from "../navigation/rootNavigation";
+import routes from "../navigation/routes";
 import { screen } from "../config/dimensions";
 
 const value = new Animated.Value(0);
@@ -31,11 +33,8 @@ const saveModalTranslationY = value.interpolate({
 
 function MarkerModal({
   visible,
+  user,
   name,
-  orientation,
-  username,
-  pronoun,
-  imageData,
   message,
   activeTime,
   duration,
@@ -50,8 +49,8 @@ function MarkerModal({
   const getTimeRemaining = () => {
     const activeToInSec = activeTime / 1000;
     const nowInSec = Date.parse(new Date()) / 1000;
-    const timeRemaining = activeToInSec - nowInSec;
-    setTimeRemaining(timeRemaining);
+    const timeRemainingInSec = activeToInSec - nowInSec;
+    setTimeRemaining(timeRemainingInSec);
   };
 
   useEffect(() => {
@@ -90,7 +89,7 @@ function MarkerModal({
           </TouchableOpacity>
           <ProfileImage
             style={styles.profileImg}
-            imageUrl={imageData}
+            imageUrl={user.imageData}
             imgWidth={59}
             imgHeight={59}
             imgBorderRadius={29.5}
@@ -103,9 +102,9 @@ function MarkerModal({
           >
             <View style={styles.info}>
               <View style={styles.userInfo}>
-                <H2 style={styles.h2}>{username}</H2>
-                <Text style={{ lineHeight: 20 }}>{pronoun}</Text>
-                <Text style={{ lineHeight: 20 }}>{orientation}</Text>
+                <H2 style={styles.h2}>{user.username}</H2>
+                <Text style={{ lineHeight: 20 }}>{user.pronoun}</Text>
+                <Text style={{ lineHeight: 20 }}>{user.orientation}</Text>
                 <Text style={{ lineHeight: 20 }}>
                   {distance} kilometers away
                 </Text>
@@ -113,7 +112,9 @@ function MarkerModal({
               <View style={styles.checkinInfo}>
                 <View style={styles.checkedIn}>
                   <TouchableOpacity onPress={() => setShowMore(true)}>
-                    <Subheading>Now checked in</Subheading>
+                    <Subheading style={styles.checkedInLink(showMore)}>
+                      Now checked in
+                    </Subheading>
                   </TouchableOpacity>
                   <Image source={require("../assets/checked-in.png")} />
                 </View>
@@ -131,9 +132,8 @@ function MarkerModal({
                     <TimeBubble text={duration} />
                     <CountdownCircleTimer
                       isPlaying
-                      initialRemainingTime={duration * 3600}
-                      rotation="counterclockwise"
-                      duration={timeRemaining}
+                      initialRemainingTime={timeRemaining}
+                      duration={duration * 3600}
                       colors={[[colors.primary]]}
                       trailColor="#e8e8e8"
                       size={160}
@@ -142,7 +142,9 @@ function MarkerModal({
                         const hours = Math.floor(timeRemaining / 3600);
                         const minutes = Math.floor((timeRemaining % 3600) / 60);
 
-                        const showTimeRemaining = `${hours}:${minutes}`;
+                        const showTimeRemaining = `${hours}:${
+                          minutes < 10 ? "0" + minutes : minutes
+                        }`;
 
                         return (
                           <ImageBackground
@@ -170,6 +172,9 @@ function MarkerModal({
             <Button
               style={{ width: 280, marginTop: 30 }}
               title="Visit Profile"
+              onPress={() =>
+                navigation.navigate(routes.VISITPROFILE, { user, distance })
+              }
             />
           </ScrollView>
         </Animated.View>
@@ -260,6 +265,9 @@ const styles = StyleSheet.create({
     width: 205,
     height: 205,
   },
+  checkedInLink: (showMore) => ({
+    textDecorationLine: !showMore && "underline",
+  }),
 });
 
 export default MarkerModal;
