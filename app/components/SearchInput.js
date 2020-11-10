@@ -28,7 +28,7 @@ function SearchInput({
         <TextInput
           style={style}
           placeholder={placeholder}
-          icon={icon}
+          imageIcon={require("../assets/icons/search-grey.png")}
           onChangeText={onChangeText}
           value={value}
           width={inputWidth}
