@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 25,
     marginHorizontal: 30,
+    elevation: 5,
   },
   arrow: (goBack) => ({
     transform: goBack ? [{ rotate: "180deg" }] : [],
