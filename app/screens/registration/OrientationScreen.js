@@ -1,6 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
 import {
-  Dimensions,
   KeyboardAvoidingView,
   StyleSheet,
   ScrollView,
@@ -16,8 +15,7 @@ import orientations from "../../assets/arrays/orientations";
 import SelectMultiple from "../../components/registration/SelectMultiple";
 import Text from "../../components/typography/Text";
 import colors from "../../config/colors";
-
-const windowHeight = Dimensions.get("window").height;
+import { screen } from "../../config/dimensions";
 
 function OrientationScreen({ navigation, route }) {
   const { username, pronoun, showPronoun } = route.params;
@@ -25,7 +23,6 @@ function OrientationScreen({ navigation, route }) {
   const [orientation, setOrientation] = useState(null);
   const [viewAll, setViewAll] = useState(false);
   const [toggleCheckBox, setToggleCheckBox] = useState(true);
-  const screenWidth = Dimensions.get("window").width;
   const showOrientation = toggleCheckBox;
 
   let searchOrientations = [];
@@ -77,8 +74,8 @@ function OrientationScreen({ navigation, route }) {
             })
           }
           style={{
-            minHeight: windowHeight - 120,
-            paddingHorizontal: screenWidth > 400 ? 18 : 17,
+            minHeight: screen.height - 120,
+            paddingHorizontal: screen.width > 400 ? 18 : 17,
             paddingBottom: 44,
           }}
           pagination={require("../../assets/pagination/4.png")}
@@ -87,7 +84,7 @@ function OrientationScreen({ navigation, route }) {
             value={input["input"]}
             onChangeText={(input) => setInput({ input })}
             placeholder={"Start typing"}
-            width={screenWidth * 0.83}
+            width={screen.width * 0.83}
           />
           <View style={styles.titlesContainer}>
             <Text>Orientations</Text>
@@ -107,7 +104,7 @@ function OrientationScreen({ navigation, route }) {
               </Text>
             )}
           </View>
-          <ScrollView style={styles.innerScrollView}>
+          <ScrollView style={styles.innerScrollView} nestedScrollEnabled>
             <SelectMultiple
               group={searchOrientations}
               onSelectedValuesChange={(selectedValues) =>

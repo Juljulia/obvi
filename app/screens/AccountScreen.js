@@ -104,14 +104,20 @@ function AccountScreen({ navigation }) {
           </View>
           <View style={styles.innerContainer}>
             <H2 style={styles.innerTitle}>Frequent check-ins</H2>
-            <Text style={{ lineHeight: 25 }}>
-              Ocianen, Folk, Frilagret, Stadsbiblioteket, Super Sushi,
-              Dansforum, Condeco, Streetlife
+            <Text style={{ lineHeight: 25, textDecorationLine: "underline" }}>
+              Ocianen Folk, Frilagret, Stadsbiblioteket, Super Sushi, Dansforum,
+              Condeco, Streetlife
             </Text>
           </View>
           <View>
             <H2 style={styles.innerTitle}>Calendar</H2>
-            <Text style={{ paddingBottom: 12, lineHeight: 25 }}>
+            <Text
+              style={{
+                paddingBottom: 12,
+                lineHeight: 25,
+                textDecorationLine: "underline",
+              }}
+            >
               Queer takeover, Lesbisk frukost, Julmarknad
             </Text>
           </View>

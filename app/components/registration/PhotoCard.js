@@ -1,12 +1,11 @@
 import React from "react";
-import { Image, View, StyleSheet, Dimensions } from "react-native";
+import { Image, View, StyleSheet } from "react-native";
 
 import colors from "../../config/colors";
 import H2 from "../typography/H2";
 import Text from "../typography/Text";
 import ImagePicker from "./ImagePicker";
-
-const screenWidth = Dimensions.get("window").width;
+import { screen } from "../../config/dimensions";
 
 function PhotoCard({ name, pronoun, orientation, imageUri, onChangeImage }) {
   return (
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.basicGrey,
     borderRadius: 30,
     height: 400,
-    width: screenWidth * 0.82,
+    width: screen.width * 0.82,
     marginBottom: 32,
     paddingTop: 50,
     shadowColor: "#88A0B7",

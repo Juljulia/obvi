@@ -27,6 +27,7 @@ const RegisterNavigator = () => {
       shadowOffset: {
         height: 0,
       },
+      elevation: 0,
       backgroundColor: colors.basicGrey,
     },
   };
@@ -38,7 +39,7 @@ const RegisterNavigator = () => {
   };
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
       <Stack.Screen
         name="Register Rules"
         component={RulesScreen}

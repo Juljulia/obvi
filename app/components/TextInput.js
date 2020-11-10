@@ -78,14 +78,9 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 30,
     marginBottom: 16,
-    backgroundColor: "transparent",
     flexDirection: "row",
     alignItems: "center",
     padding: 15,
-    borderRadius: 30,
-    elevation: 1,
-    borderRadius: Platform.OS === "ios" ? 30 : 0,
-    elevation: 3,
   },
   text: {
     fontSize: 14,
