@@ -1,11 +1,10 @@
 import React from "react";
-import { Dimensions, Image, Platform, StyleSheet, View } from "react-native";
+import { Image, Platform, StyleSheet, View } from "react-native";
 
 import Button from "../Button";
 import Screen from "../Screen";
 import H1 from "../typography/H1";
-
-const screenWidth = Dimensions.get("window").width;
+import { screen } from "../../config/dimensions";
 
 function FormScreen({
   buttonStyle,
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: Platform.OS === "ios" ? 100 : 50,
-    paddingHorizontal: screenWidth > 400 ? 38 : 17,
+    paddingHorizontal: screen.width > 400 ? 38 : 17,
   },
 });
 

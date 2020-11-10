@@ -6,7 +6,6 @@ import {
   ScrollView,
   View,
 } from "react-native";
-import { Dimensions } from "react-native";
 
 import Card from "../components/Card";
 import routes from "../navigation/routes";
@@ -17,6 +16,7 @@ import usersApi from "../api/users";
 import NavIcon from "../components/nav/NavIcon";
 import H2 from "../components/typography/H2";
 import TextInput from "../components/TextInput";
+import { screen } from "../config/dimensions";
 
 const posts = [
   {
@@ -90,7 +90,6 @@ const posts = [
     profileImage: require("../assets/images/leo.jpg"),
   },
 ];
-const screenWidth = Dimensions.get("window").width;
 
 function HomeScreen({ navigation }) {
   const { user } = useAuth();
@@ -142,7 +141,7 @@ function HomeScreen({ navigation }) {
                 <TextInput
                   height={48}
                   style={{ marginTop: 0, marginBottom: 0 }}
-                  width={screenWidth * 0.7}
+                  width={screen.width * 0.7}
                   placeholder="Tell/ask the community"
                 />
                 <Image

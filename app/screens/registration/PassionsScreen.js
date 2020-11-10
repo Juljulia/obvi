@@ -1,11 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
-import {
-  Image,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-  Platform,
-} from "react-native";
+import { Image, StyleSheet, ScrollView, Platform } from "react-native";
 
 import FormScreen from "../../components/registration/FormScreen";
 import routes from "../../navigation/routes";
@@ -13,9 +7,7 @@ import NavArrow from "../../components/nav/NavArrow";
 import passionsArr from "../../assets/arrays/passionsArr";
 import SelectMultiplePassions from "../../components/registration/SelectMultiplePassions";
 import Text from "../../components/typography/Text";
-
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
+import { screen } from "../../config/dimensions";
 
 function PassionsScreen({ navigation, route }) {
   const {
@@ -70,7 +62,8 @@ function PassionsScreen({ navigation, route }) {
       </Text>
       <ScrollView
         style={{
-          height: screenHeight > 800 ? screenHeight * 0.5 : screenHeight * 0.45,
+          height:
+            screen.height > 800 ? screen.height * 0.5 : screen.height * 0.45,
         }}
         contentContainerStyle={{ paddingBottom: 70 }}
       >
@@ -97,7 +90,7 @@ const styles = StyleSheet.create({
   container: {},
   formScreen: {
     paddingTop: Platform.OS === "android" ? 25 : 50,
-    paddingHorizontal: screenWidth > 400 ? 30 : 15,
+    paddingHorizontal: screen.width > 400 ? 30 : 15,
   },
 });
 

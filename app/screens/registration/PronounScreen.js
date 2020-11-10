@@ -1,6 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
 import {
-  Dimensions,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -18,9 +17,7 @@ import PopUp from "../../components/registration/PopUp";
 import pronouns from "../../assets/arrays/pronouns";
 import SelectMultiple from "../../components/registration/SelectMultiple";
 import Text from "../../components/typography/Text";
-
-const screenHeight = Dimensions.get("window").height;
-const screenWidth = Dimensions.get("window").width;
+import { screen } from "../../config/dimensions";
 
 function PronounScreen({ navigation, route }) {
   const { username } = route.params;
@@ -77,13 +74,13 @@ function PronounScreen({ navigation, route }) {
             })
           }
           style={styles.formScreen}
-          headingStyle={{ width: screenWidth * 0.7 }}
+          headingStyle={{ width: screen.width * 0.7 }}
         >
           <TextInput
             value={input["input"]}
             onChangeText={(input) => setInput({ input })}
             placeholder={"Start typing"}
-            width={screenWidth * 0.83}
+            width={screen.width * 0.83}
           />
 
           <View style={styles.titlesContainer}>
@@ -140,8 +137,8 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   formScreen: {
-    minHeight: screenHeight - 120,
-    paddingHorizontal: screenWidth > 400 ? 18 : 17,
+    minHeight: screen.height - 120,
+    paddingHorizontal: screen.width > 400 ? 18 : 17,
     paddingBottom: 44,
     paddingTop: Platform.OS === "android" ? 50 : 100,
   },
