@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, ScrollView, StyleSheet, View } from "react-native";
+import { Image, ScrollView, StyleSheet, View, Platform } from "react-native";
 
 import FormScreen from "../../components/registration/FormScreen";
 import H2 from "../../components/typography/H2";
@@ -10,15 +10,16 @@ import Text from "../../components/typography/Text";
 function RulesScreen({ navigation }) {
   return (
     <FormScreen
+      buttonStyle={styles.buttonStyleAndroid}
       onPress={() => navigation.navigate(routes.REGISTERNAME)}
       isActive={true}
       style={{
         paddingTop: 0,
-        paddingBottom: 140,
+        paddingBottom: Platform.OS === "ios" ? 140 : 0,
       }}
       pagination={require("../../assets/pagination/1.png")}
     >
-      <ScrollView style={styles.scrollView} contentContainerStyle={{}}>
+      <ScrollView style={styles.scrollView}>
         <View style={{ alignItems: "center" }}>
           <Image
             style={{ width: 52, height: 52, marginTop: 10 }}
@@ -29,7 +30,7 @@ function RulesScreen({ navigation }) {
             Please follow these house rules
           </Text>
         </View>
-        <View style={{}}>
+        <View>
           <Rule
             title="Be yourself."
             text="This platform is created to house you as you are."
@@ -52,6 +53,11 @@ function RulesScreen({ navigation }) {
 const styles = StyleSheet.create({
   scrollView: {
     paddingBottom: 40,
+    marginBottom: Platform.OS === "ios" ? 0 : 200,
+  },
+  buttonStyleAndroid: {
+    position: Platform.OS === "ios" ? "relative" : "absolute",
+    bottom: Platform.OS === "ios" ? 0 : 100,
   },
 });
 

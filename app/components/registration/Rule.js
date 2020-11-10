@@ -1,12 +1,11 @@
 import React from "react";
-import { Image, View, StyleSheet, Dimensions } from "react-native";
+import { Image, View, StyleSheet } from "react-native";
 
 import H2 from "../../components/typography/H2";
 import Text from "../../components/typography/Text";
+import { screen } from "../../config/dimensions";
 
 function Rule({ title, text }) {
-  const width = Dimensions.get("window").width;
-
   return (
     <View style={{ marginTop: 37 }}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -18,7 +17,7 @@ function Rule({ title, text }) {
           lineHeight: 25,
           paddingTop: 8,
           paddingLeft: 4,
-          paddingRight: width > 400 ? 40 : 0,
+          paddingRight: screen.width > 400 ? 40 : 0,
         }}
       >
         {text}
