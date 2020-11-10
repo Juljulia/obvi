@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
-  KeyboardAvoidingView,
   Image,
 } from "react-native";
 import * as firebase from "firebase";
@@ -47,7 +46,6 @@ function CheckInScreen({ navigation }) {
   const [closeList, setCloseList] = useState(true);
   const [uploadVisible, setUploadVisible] = useState(false);
   const [checkinDuration, setCheckinDuration] = useState([1]);
-  const [showText, setShowText] = useState(true);
   const db = firebase.firestore();
 
   useEffect(() => {
@@ -84,7 +82,6 @@ function CheckInScreen({ navigation }) {
   const handleChoosePlace = (item) => {
     setChoosenPlace(item);
     setCloseList(true);
-    setShowText(true);
   };
 
   const handleSubmit = async ({ message }, { resetForm }) => {
@@ -130,7 +127,6 @@ function CheckInScreen({ navigation }) {
     setChoosenPlace(null);
     setCheckinDuration([1]);
     setCloseList(true);
-    setShowText(true);
     resetForm();
   };
 
@@ -141,7 +137,6 @@ function CheckInScreen({ navigation }) {
 
   const onPressSearchInput = () => {
     setCloseList(false);
-    setShowText(false);
   };
 
   return (
@@ -168,56 +163,54 @@ function CheckInScreen({ navigation }) {
       </TouchableOpacity>
       <ScreenTitle>Check-In</ScreenTitle>
 
-      <ScrollView scrollEnabled={closeList}>
-        <KeyboardAvoidingView behavior="position" enabled>
-          <View style={styles.textWrapper(showText)}>
-            <H2 style={{ marginBottom: 16 }}>
-              Find and connect with nearby places, friends and more.
-            </H2>
-            <Text>
-              Obvi needs your location to make some features work. You can
-              always change this later in your phone’s settings.
-            </Text>
+      <ScrollView>
+        <View style={styles.textWrapper}>
+          <H2 style={{ marginBottom: 16 }}>
+            Find and connect with nearby places, friends and more.
+          </H2>
+          <Text>
+            Obvi needs your location to make some features work. You can always
+            change this later in your phone’s settings.
+          </Text>
 
-            <H1 style={{ marginTop: 19 }}>Check In</H1>
-          </View>
+          <H1 style={{ marginTop: 19 }}>Check In</H1>
+        </View>
 
-          {/** SEARCH */}
-          <SearchInput
-            inputWidth={screenWidth * 0.85}
-            style={{ marginTop: 28, marginHorizontal: 30, marginBottom: 24 }}
-            results={places}
-            keyExtractor={(place) => place.place_id.toString()}
-            onChangeText={(value) => searchPlaces(value)}
-            value={choosenPlace ? choosenPlace.name : ""}
-            placeholder="Where are you?"
-            icon="map-search-outline"
-            closeList={closeList}
-            showResults={showPlaces}
-            onPress={onPressSearchInput}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.places}
-                onPress={() => handleChoosePlace(item)}
-              >
-                <Image
-                  style={{
-                    marginRight: 29,
-                    width: 13,
-                    height: 17,
-                  }}
-                  source={require("../assets/pin-purple.png")}
-                />
-                <View>
-                  <Text>{item.name}</Text>
-                  <Text style={{ fontSize: 13, color: colors.mediumGrey }}>
-                    {item.vicinity ? item.vicinity : item.formatted_address}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            )}
-          />
-        </KeyboardAvoidingView>
+        {/** SEARCH */}
+        <SearchInput
+          inputWidth={screenWidth * 0.85}
+          style={{ marginTop: 28, marginHorizontal: 30, marginBottom: 24 }}
+          results={places}
+          keyExtractor={(place) => place.place_id.toString()}
+          onChangeText={(value) => searchPlaces(value)}
+          value={choosenPlace ? choosenPlace.name : ""}
+          placeholder="Where are you?"
+          icon="map-search-outline"
+          closeList={closeList}
+          showResults={showPlaces}
+          onPress={onPressSearchInput}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.places}
+              onPress={() => handleChoosePlace(item)}
+            >
+              <Image
+                style={{
+                  marginRight: 29,
+                  width: 13,
+                  height: 17,
+                }}
+                source={require("../assets/pin-purple.png")}
+              />
+              <View>
+                <Text>{item.name}</Text>
+                <Text style={{ fontSize: 13, color: colors.mediumGrey }}>
+                  {item.vicinity ? item.vicinity : item.formatted_address}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
 
         <View style={{ paddingHorizontal: 30 }}>
           {/** SLIDER */}
@@ -249,19 +242,13 @@ function CheckInScreen({ navigation }) {
                 name="message"
                 placeholder="Write your message"
               />
-              {closeList ? (
+              {choosenPlace ? (
                 <SubmitButton style={{ width: 280 }} title="Check in" />
               ) : (
                 <Image
                   source={require("../assets/disabled-checkIn.png")}
                   style={{ alignSelf: "center", marginVertical: 10 }}
                 />
-                // <SubmitButton
-                //   style={{ width: 280 }}
-                //   disabled={true}
-                //   disabledStyle
-                //   title="Check in"
-                // />
               )}
             </Form>
           </View>
@@ -296,11 +283,10 @@ const styles = StyleSheet.create({
     right: 60,
     top: 2,
   },
-  textWrapper: (showText) => ({
+  textWrapper: {
     marginHorizontal: 30,
     marginTop: 60,
-    display: showText ? "flex" : "none",
-  }),
+  },
 });
 
 export default CheckInScreen;
