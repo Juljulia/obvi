@@ -9,7 +9,6 @@ import {
 import * as firebase from "firebase";
 import "firebase/firestore";
 import * as Yup from "yup";
-import { Dimensions } from "react-native";
 
 import getEnvVars from "../../environment";
 import routes from "../navigation/routes";
@@ -30,11 +29,11 @@ import H2 from "../components/typography/H2";
 import H1 from "../components/typography/H1";
 import colors from "../config/colors";
 import PopUp from "../components/registration/PopUp";
+import { screen } from "../config/dimensions";
 
 const validationSchema = Yup.object().shape({
   message: Yup.string().label("Message"),
 });
-const screenWidth = Dimensions.get("window").width;
 
 function CheckInScreen({ navigation }) {
   const { user } = useAuth();
@@ -178,7 +177,7 @@ function CheckInScreen({ navigation }) {
 
         {/** SEARCH */}
         <SearchInput
-          inputWidth={screenWidth * 0.85}
+          inputWidth={screen.width * 0.85}
           style={{ marginTop: 28, marginHorizontal: 30, marginBottom: 24 }}
           results={places}
           keyExtractor={(place) => place.place_id.toString()}
@@ -220,7 +219,7 @@ function CheckInScreen({ navigation }) {
           <Slider
             onValuesChange={(value) => setCheckinDuration(value)}
             values={checkinDuration}
-            length={screenWidth * 0.85}
+            length={screen.width * 0.85}
           />
 
           {/** MESSAGE */}
@@ -234,7 +233,7 @@ function CheckInScreen({ navigation }) {
               <Text>Give a shout out, tell us what's up! </Text>
               <FormField
                 height={176}
-                width={screenWidth * 0.85}
+                width={screen.width * 0.85}
                 style={{ padding: 20, marginTop: 15 }}
                 inputStyle={{ height: "100%" }}
                 multiline

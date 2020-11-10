@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
-import { Dimensions, StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import ProgressBar from "react-native-progress/Bar";
 import * as firebase from "firebase";
 import "firebase/storage";
@@ -12,9 +12,7 @@ import useAuth from "../../auth/useAuth";
 import NavArrow from "../../components/nav/NavArrow";
 import PhotoCard from "../../components/registration/PhotoCard";
 import Screen from "../../components/Screen";
-
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("screen").height;
+import { screen } from "../../config/dimensions";
 
 function PhotoScreen({ navigation, route }) {
   const {
@@ -120,7 +118,7 @@ function PhotoScreen({ navigation, route }) {
   return (
     <Screen>
       <ScrollView
-        contentContainerStyle={{ flex: screenHeight > 800 ? 1 : "" }}
+        contentContainerStyle={{ flex: screen.height > 800 ? 1 : 0 }}
         ref={scrollRef}
       >
         <FormScreen
@@ -128,9 +126,9 @@ function PhotoScreen({ navigation, route }) {
           onPress={uploadImage}
           pagination={require("../../assets/pagination/6.png")}
           style={{
-            paddingTop: 45,
-            paddingBottom: screenHeight > 800 ? 0 : 70,
-            paddingHorizontal: screenWidth > 400 ? 20 : 17,
+            paddingTop: Platform.OS === "ios" ? 45 : 0,
+            paddingBottom: screen.height > 800 ? 0 : 70,
+            paddingHorizontal: screen.width > 400 ? 20 : 17,
           }}
         >
           <H2 style={{ alignSelf: "center", paddingBottom: 40 }}>Add photo</H2>
@@ -158,10 +156,6 @@ function PhotoScreen({ navigation, route }) {
   );
 }
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: "blue",
-  },
-});
+const styles = StyleSheet.create({});
 
 export default PhotoScreen;

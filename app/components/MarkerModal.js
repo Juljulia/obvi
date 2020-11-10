@@ -9,7 +9,6 @@ import {
   ImageBackground,
 } from "react-native";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
-import { Dimensions } from "react-native";
 import { getDistance } from "geolib";
 
 import Button from "../components/Button";
@@ -23,9 +22,9 @@ import TimeBubble from "./TimeBubble";
 import useLocation from "../hooks/useLocation";
 import navigation from "../navigation/rootNavigation";
 import routes from "../navigation/routes";
+import { screen } from "../config/dimensions";
 
 const value = new Animated.Value(0);
-const screenHeight = Dimensions.get("window").height;
 
 const saveModalTranslationY = value.interpolate({
   inputRange: [0, 1],
@@ -193,7 +192,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-    maxHeight: screenHeight * 0.75,
+    maxHeight: screen.height * 0.75,
     backgroundColor: colors.basicGrey,
   },
   closeButton: {

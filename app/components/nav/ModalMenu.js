@@ -5,15 +5,14 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
-  Dimensions,
 } from "react-native";
 
 import colors from "../../config/colors";
 import Text from "../typography/Text";
 import useAuth from "../../auth/useAuth";
 import routes from "../../navigation/routes";
+import { screen } from "../../config/dimensions";
 
-const screenHeight = Dimensions.get("window").height;
 const menuItems = [
   {
     title: "Home",
@@ -116,7 +115,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingTop: 30,
     paddingBottom: 40,
-    height: screenHeight > 800 ? screenHeight * 0.85 : screenHeight * 0.95,
+    height: screen.height > 800 ? screen.height * 0.85 : screen.height * 0.95,
     borderTopLeftRadius: 35,
     borderTopRightRadius: 35,
     width: "100%",

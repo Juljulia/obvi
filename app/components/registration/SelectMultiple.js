@@ -12,7 +12,7 @@ function SelectMultiple({ group, onSelectedValuesChange }) {
         alignItems: "flex-start",
         height: 44,
         paddingLeft: 40,
-        width: "70%",
+        width: "95%",
         marginVertical: 8,
         shadowColor: colors.shadow,
         shadowOffset: { width: 4, height: 4 },
