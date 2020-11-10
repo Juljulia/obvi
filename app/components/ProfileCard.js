@@ -26,7 +26,10 @@ function ProfileCard({
             style={{ width: 120, height: 120, borderRadius: 75 }}
           ></Image>
         ) : (
-          <Image source={require("../assets/default.png")}></Image>
+          <Image
+            source={require("../assets/default.png")}
+            style={{ width: 120, height: 120 }}
+          ></Image>
         )}
       </ImageBackground>
 
