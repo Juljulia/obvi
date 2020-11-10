@@ -252,12 +252,16 @@ function CheckInScreen({ navigation }) {
               {closeList ? (
                 <SubmitButton style={{ width: 280 }} title="Check in" />
               ) : (
-                <SubmitButton
-                  style={{ width: 280 }}
-                  disabled={true}
-                  disabledStyle
-                  title="Check in"
+                <Image
+                  source={require("../assets/disabled-checkIn.png")}
+                  style={{ alignSelf: "center", marginVertical: 10 }}
                 />
+                // <SubmitButton
+                //   style={{ width: 280 }}
+                //   disabled={true}
+                //   disabledStyle
+                //   title="Check in"
+                // />
               )}
             </Form>
           </View>
