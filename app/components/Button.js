@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Inter_600SemiBold",
     fontSize: 16,
+    lineHeight: 24,
     color: colors.white,
   },
   disabledButton: (disabledStyle) =>

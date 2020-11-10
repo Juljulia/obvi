@@ -87,6 +87,14 @@ function AccountScreen({ navigation }) {
                 source={require("../assets/avatars/6.png")}
                 style={styles.avatar}
               />
+              <Image
+                source={require("../assets/avatars/7.png")}
+                style={styles.avatar}
+              />
+              <Image
+                source={require("../assets/avatars/8.png")}
+                style={styles.avatar}
+              />
             </ScrollView>
             <Text
               style={{ textDecorationLine: "underline", paddingBottom: 32 }}
@@ -121,7 +129,7 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingHorizontal: 30,
-    paddingBottom: 120,
+    paddingBottom: 60,
     position: "relative",
     top: -20,
     zIndex: -1,
