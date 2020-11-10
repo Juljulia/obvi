@@ -22,9 +22,22 @@ function FormScreen({
         <H1 style={headingStyle}>{title}</H1>
         {children}
         {isActive ? (
-          <Button title="Continue" onPress={onPress} />
+          <Button
+            title="Continue"
+            onPress={onPress}
+            textStyle={{ fontSize: 19.6 }}
+          />
         ) : (
-          <Button disabled={true} disabledStyle title="Continue" />
+          <>
+            <Image
+              source={require("../../assets/disabled-button.png")}
+              style={{
+                alignSelf: "center",
+                marginVertical: 10,
+              }}
+            ></Image>
+            {/* <Button disabled={true} disabledStyle title="Continue" /> */}
+          </>
         )}
       </View>
       <Image
