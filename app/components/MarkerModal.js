@@ -114,7 +114,9 @@ function MarkerModal({
               <View style={styles.checkinInfo}>
                 <View style={styles.checkedIn}>
                   <TouchableOpacity onPress={() => setShowMore(true)}>
-                    <Subheading>Now checked in</Subheading>
+                    <Subheading style={styles.checkedInLink(showMore)}>
+                      Now checked in
+                    </Subheading>
                   </TouchableOpacity>
                   <Image source={require("../assets/checked-in.png")} />
                 </View>
@@ -260,6 +262,9 @@ const styles = StyleSheet.create({
     width: 205,
     height: 205,
   },
+  checkedInLink: (showMore) => ({
+    textDecorationLine: !showMore && "underline",
+  }),
 });
 
 export default MarkerModal;
