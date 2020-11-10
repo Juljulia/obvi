@@ -8,6 +8,7 @@ import H1 from "../typography/H1";
 const screenWidth = Dimensions.get("window").width;
 
 function FormScreen({
+  buttonStyle,
   isActive = false,
   title,
   onPress,
@@ -26,6 +27,7 @@ function FormScreen({
             title="Continue"
             onPress={onPress}
             textStyle={{ fontSize: 19.6 }}
+            style={buttonStyle}
           />
         ) : (
           <>

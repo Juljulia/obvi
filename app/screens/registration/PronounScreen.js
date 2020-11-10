@@ -2,6 +2,7 @@ import React, { useState, useLayoutEffect } from "react";
 import {
   Dimensions,
   KeyboardAvoidingView,
+  Platform,
   ScrollView,
   StyleSheet,
   View,
@@ -18,7 +19,8 @@ import pronouns from "../../assets/arrays/pronouns";
 import SelectMultiple from "../../components/registration/SelectMultiple";
 import Text from "../../components/typography/Text";
 
-const windowHeight = Dimensions.get("window").height;
+const screenHeight = Dimensions.get("window").height;
+const screenWidth = Dimensions.get("window").width;
 
 function PronounScreen({ navigation, route }) {
   const { username } = route.params;
@@ -26,7 +28,6 @@ function PronounScreen({ navigation, route }) {
   const [pronoun, setPronoun] = useState(null);
   const [toggleCheckBox, setToggleCheckBox] = useState(true);
   const [viewAll, setViewAll] = useState(false);
-  const screenWidth = Dimensions.get("window").width;
 
   const showPronoun = toggleCheckBox;
 
@@ -75,11 +76,7 @@ function PronounScreen({ navigation, route }) {
               showPronoun,
             })
           }
-          style={{
-            minHeight: windowHeight - 120,
-            paddingHorizontal: screenWidth > 400 ? 18 : 17,
-            paddingBottom: 44,
-          }}
+          style={styles.formScreen}
           headingStyle={{ width: screenWidth * 0.7 }}
         >
           <TextInput
@@ -108,7 +105,7 @@ function PronounScreen({ navigation, route }) {
             )}
           </View>
 
-          <ScrollView style={styles.innerScrollView}>
+          <ScrollView style={styles.innerScrollView} nestedScrollEnabled>
             <SelectMultiple
               group={searchPronouns}
               onSelectedValuesChange={(selectedValues) =>
@@ -141,6 +138,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 10,
     elevation: 3,
+  },
+  formScreen: {
+    minHeight: screenHeight - 120,
+    paddingHorizontal: screenWidth > 400 ? 18 : 17,
+    paddingBottom: 44,
+    paddingTop: Platform.OS === "android" ? 50 : 100,
   },
   innerScrollView: {
     borderWidth: 12,

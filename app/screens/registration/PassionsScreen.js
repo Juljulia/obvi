@@ -1,5 +1,11 @@
 import React, { useState, useLayoutEffect } from "react";
-import { Image, StyleSheet, ScrollView, Dimensions } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+  Platform,
+} from "react-native";
 
 import FormScreen from "../../components/registration/FormScreen";
 import routes from "../../navigation/routes";
@@ -7,6 +13,9 @@ import NavArrow from "../../components/nav/NavArrow";
 import passionsArr from "../../assets/arrays/passionsArr";
 import SelectMultiplePassions from "../../components/registration/SelectMultiplePassions";
 import Text from "../../components/typography/Text";
+
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 
 function PassionsScreen({ navigation, route }) {
   const {
@@ -17,8 +26,6 @@ function PassionsScreen({ navigation, route }) {
     showPronoun,
   } = route.params;
   const [passions, setPassions] = useState(null);
-  const screenWidth = Dimensions.get("window").width;
-  const screenHeight = Dimensions.get("window").height;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -54,7 +61,7 @@ function PassionsScreen({ navigation, route }) {
           showPronoun,
         })
       }
-      style={{ paddingTop: 50, paddingHorizontal: screenWidth > 400 ? 30 : 15 }}
+      style={styles.formScreen}
       pagination={require("../../assets/pagination/5.png")}
     >
       <Text style={{ paddingTop: 12, paddingBottom: 26, lineHeight: 25 }}>
@@ -88,6 +95,10 @@ function PassionsScreen({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {},
+  formScreen: {
+    paddingTop: Platform.OS === "android" ? 25 : 50,
+    paddingHorizontal: screenWidth > 400 ? 30 : 15,
+  },
 });
 
 export default PassionsScreen;
