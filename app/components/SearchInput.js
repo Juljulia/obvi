@@ -41,6 +41,7 @@ function SearchInput({
             <ActivityIndicator />
           ) : (
             <FlatList
+              nestedScrollEnabled={true}
               data={results}
               keyExtractor={keyExtractor}
               ItemSeparatorComponent={ListItemSeparator}
