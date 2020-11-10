@@ -51,8 +51,8 @@ function MarkerModal({
   const getTimeRemaining = () => {
     const activeToInSec = activeTime / 1000;
     const nowInSec = Date.parse(new Date()) / 1000;
-    const timeRemaining = activeToInSec - nowInSec;
-    setTimeRemaining(timeRemaining);
+    const timeRemainingInSec = activeToInSec - nowInSec;
+    setTimeRemaining(timeRemainingInSec);
   };
 
   useEffect(() => {
@@ -132,9 +132,8 @@ function MarkerModal({
                     <TimeBubble text={duration} />
                     <CountdownCircleTimer
                       isPlaying
-                      initialRemainingTime={duration * 3600}
-                      rotation="counterclockwise"
-                      duration={timeRemaining}
+                      initialRemainingTime={timeRemaining}
+                      duration={duration * 3600}
                       colors={[[colors.primary]]}
                       trailColor="#e8e8e8"
                       size={160}
