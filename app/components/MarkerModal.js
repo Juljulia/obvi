@@ -21,6 +21,8 @@ import H2 from "./typography/H2";
 import Subheading from "./typography/Subheading";
 import TimeBubble from "./TimeBubble";
 import useLocation from "../hooks/useLocation";
+import navigation from "../navigation/rootNavigation";
+import routes from "../navigation/routes";
 
 const value = new Animated.Value(0);
 const screenHeight = Dimensions.get("window").height;
@@ -32,11 +34,8 @@ const saveModalTranslationY = value.interpolate({
 
 function MarkerModal({
   visible,
+  user,
   name,
-  orientation,
-  username,
-  pronoun,
-  imageData,
   message,
   activeTime,
   duration,
@@ -91,7 +90,7 @@ function MarkerModal({
           </TouchableOpacity>
           <ProfileImage
             style={styles.profileImg}
-            imageUrl={imageData}
+            imageUrl={user.imageData}
             imgWidth={59}
             imgHeight={59}
             imgBorderRadius={29.5}
@@ -104,9 +103,9 @@ function MarkerModal({
           >
             <View style={styles.info}>
               <View style={styles.userInfo}>
-                <H2 style={styles.h2}>{username}</H2>
-                <Text style={{ lineHeight: 20 }}>{pronoun}</Text>
-                <Text style={{ lineHeight: 20 }}>{orientation}</Text>
+                <H2 style={styles.h2}>{user.username}</H2>
+                <Text style={{ lineHeight: 20 }}>{user.pronoun}</Text>
+                <Text style={{ lineHeight: 20 }}>{user.orientation}</Text>
                 <Text style={{ lineHeight: 20 }}>
                   {distance} kilometers away
                 </Text>
@@ -144,7 +143,9 @@ function MarkerModal({
                         const hours = Math.floor(timeRemaining / 3600);
                         const minutes = Math.floor((timeRemaining % 3600) / 60);
 
-                        const showTimeRemaining = `${hours}:${minutes}`;
+                        const showTimeRemaining = `${hours}:${
+                          minutes < 10 ? "0" + minutes : minutes
+                        }`;
 
                         return (
                           <ImageBackground
@@ -172,6 +173,9 @@ function MarkerModal({
             <Button
               style={{ width: 280, marginTop: 30 }}
               title="Visit Profile"
+              onPress={() =>
+                navigation.navigate(routes.VISITPROFILE, { user, distance })
+              }
             />
           </ScrollView>
         </Animated.View>

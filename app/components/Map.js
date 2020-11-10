@@ -15,6 +15,7 @@ function Map({ initialRegion, parentCallback, pins, region }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalInfo, setModalInfo] = useState({});
   const [loggedInUser, setLoggedInUser] = useState();
+  const [checkedInUser, setCheckedInUser] = useState();
   const location = useLocation();
   const { user } = useAuth();
 
@@ -35,6 +36,7 @@ function Map({ initialRegion, parentCallback, pins, region }) {
     const user = await usersApi.getUser(pin.userId);
     setModalInfo({ ...user, ...pin });
     setModalVisible(true);
+    setCheckedInUser(user);
   };
 
   return (
@@ -73,15 +75,12 @@ function Map({ initialRegion, parentCallback, pins, region }) {
       <MarkerModal
         visible={modalVisible}
         name={modalInfo.name}
-        username={modalInfo.username}
-        orientation={modalInfo.orientation}
         adress={modalInfo.adress}
-        pronoun={modalInfo.pronoun}
-        imageData={modalInfo.imageData}
         message={modalInfo.message}
         activeTime={modalInfo.activeTo}
         duration={modalInfo.duration}
         geoLocation={modalInfo.location}
+        user={checkedInUser}
       />
     </>
   );
