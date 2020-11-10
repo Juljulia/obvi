@@ -7,14 +7,6 @@ export default [
       },
     ],
   },
-  // {
-  //   elementType: 'labels',
-  //   stylers: [
-  //     {
-  //       visibility: 'off',
-  //     },
-  //   ],
-  // },
   {
     elementType: "labels.icon",
     stylers: [
