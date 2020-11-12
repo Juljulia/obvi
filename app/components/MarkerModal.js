@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
     height: 205,
   },
   checkedInLink: (showMore) => ({
-    textDecorationLine: !showMore && "underline",
+    textDecorationLine: showMore ? "none" : "underline",
   }),
 });
 
