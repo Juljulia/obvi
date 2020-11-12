@@ -140,7 +140,7 @@ function HomeScreen({ navigation }) {
                 <Image source={require("../assets/Camera.png")} />
                 <TextInput
                   height={48}
-                  style={{ marginTop: 0, marginBottom: 0 }}
+                  style={{ marginTop: 0, marginBottom: 0, paddingVertical: 1 }}
                   width={screen.width * 0.7}
                   placeholder="Tell/ask the community"
                 />

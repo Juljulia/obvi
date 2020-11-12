@@ -138,6 +138,8 @@ function PhotoScreen({ navigation, route }) {
             name={username}
             pronoun={pronoun}
             orientation={orientation}
+            showOrientation={showOrientation}
+            showPronoun={showPronoun}
           />
 
           {progress > 0 ? (

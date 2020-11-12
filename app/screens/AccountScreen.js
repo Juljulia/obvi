@@ -47,11 +47,14 @@ function AccountScreen({ navigation }) {
             pronoun={pronoun}
             orientation={orientation}
             imageData={imageData}
-          ></ProfileCard>
-          <View style={styles.innerContainer}>
-            <H2 style={styles.innerTitle}>Passions</H2>
-            <Text style={{ lineHeight: 25 }}>{passions}</Text>
-          </View>
+          />
+
+          {passions && (
+            <View style={styles.innerContainer}>
+              <H2 style={styles.innerTitle}>Passions</H2>
+              <Text style={{ lineHeight: 25 }}>{passions}</Text>
+            </View>
+          )}
           <FriendsScroll
             title="Friends"
             style={styles.innerContainer}

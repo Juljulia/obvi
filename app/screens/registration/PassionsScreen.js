@@ -19,6 +19,10 @@ function PassionsScreen({ navigation, route }) {
   } = route.params;
   const [passions, setPassions] = useState(null);
 
+  if (passions === "") {
+    setPassions(null);
+  }
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
