@@ -23,9 +23,10 @@ function OrientationScreen({ navigation, route }) {
   const [orientation, setOrientation] = useState(null);
   const [viewAll, setViewAll] = useState(false);
   const [toggleCheckBox, setToggleCheckBox] = useState(true);
-  const showOrientation = toggleCheckBox;
 
+  const showOrientation = toggleCheckBox;
   let searchOrientations = [];
+
   if (input["input"] !== "") {
     searchOrientations = orientations.filter((el) =>
       el.value.includes(input["input"])
@@ -33,6 +34,10 @@ function OrientationScreen({ navigation, route }) {
   }
   if (viewAll) {
     searchOrientations = orientations.slice();
+  }
+
+  if (orientation === "") {
+    setOrientation(null);
   }
 
   useLayoutEffect(() => {
@@ -82,7 +87,7 @@ function OrientationScreen({ navigation, route }) {
         >
           <TextInput
             value={input["input"]}
-            onChangeText={(input) => setInput({ input })}
+            onChangeText={(input) => setInput({ input }) + setViewAll(false)}
             placeholder={"Start typing"}
             width={screen.width * 0.83}
           />

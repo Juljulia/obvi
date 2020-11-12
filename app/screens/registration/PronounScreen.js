@@ -27,15 +27,19 @@ function PronounScreen({ navigation, route }) {
   const [viewAll, setViewAll] = useState(false);
 
   const showPronoun = toggleCheckBox;
-
   let searchPronouns = [];
 
+  /** Search result */
   if (input["input"] !== "") {
     searchPronouns = pronouns.filter((el) => el.value.includes(input["input"]));
   }
 
   if (viewAll) {
     searchPronouns = pronouns.slice();
+  }
+
+  if (pronoun === "") {
+    setPronoun(null);
   }
 
   useLayoutEffect(() => {
@@ -78,7 +82,7 @@ function PronounScreen({ navigation, route }) {
         >
           <TextInput
             value={input["input"]}
-            onChangeText={(input) => setInput({ input })}
+            onChangeText={(input) => setInput({ input }) + setViewAll(false)}
             placeholder={"Start typing"}
             width={screen.width * 0.83}
           />
