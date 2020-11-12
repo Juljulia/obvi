@@ -13,7 +13,12 @@ function FriendsScroll({ style, friends, title }) {
           <Image source={friend.image} key={key} style={styles.avatar} />
         ))}
       </ScrollView>
-      <Text style={{ textDecorationLine: "underline", paddingBottom: 32 }}>
+      <Text
+        style={{
+          textDecorationLine: "underline",
+          paddingBottom: Platform.OS === "ios" ? 32 : 16,
+        }}
+      >
         View all
       </Text>
     </View>

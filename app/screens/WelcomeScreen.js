@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, Platform, StyleSheet, View } from "react-native";
 
 import Button from "../components/Button";
 import Text from "../components/typography/Text";
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   tagline: {
     fontSize: 24,
-    fontFamily: "Gill Sans",
+    fontFamily: Platform.OS === "ios" ? "Gill Sans" : "Inter_400Regular",
     paddingBottom: 32,
     color: "#4B545A",
   },
