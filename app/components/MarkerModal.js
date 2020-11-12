@@ -33,7 +33,7 @@ const saveModalTranslationY = value.interpolate({
 
 function MarkerModal({
   visible,
-  user,
+  user: checkedInUser,
   name,
   message,
   activeTime,
@@ -45,6 +45,7 @@ function MarkerModal({
   const [timeRemaining, setTimeRemaining] = useState();
   const [distance, setDistance] = useState();
   const userLocation = useLocation();
+  const { user } = useAuth();
 
   const getTimeRemaining = () => {
     const activeToInSec = activeTime / 1000;
@@ -77,6 +78,17 @@ function MarkerModal({
     }
   }, [geoLocation]);
 
+  const handlePress = () => {
+    if (user.uid === checkedInUser.uid) {
+      navigation.navigate(routes.ACCOUNT);
+    } else {
+      navigation.navigate(routes.VISITPROFILE, {
+        user: checkedInUser,
+        distance,
+      });
+    }
+  };
+
   if (showModal) {
     return (
       <View style={styles.container}>
@@ -89,7 +101,7 @@ function MarkerModal({
           </TouchableOpacity>
           <ProfileImage
             style={styles.profileImg}
-            imageUrl={user.imageData}
+            imageUrl={checkedInUser.imageData}
             imgWidth={59}
             imgHeight={59}
             imgBorderRadius={29.5}
@@ -102,9 +114,11 @@ function MarkerModal({
           >
             <View style={styles.info}>
               <View style={styles.userInfo}>
-                <H2 style={styles.h2}>{user.username}</H2>
-                <Text style={{ lineHeight: 20 }}>{user.pronoun}</Text>
-                <Text style={{ lineHeight: 20 }}>{user.orientation}</Text>
+                <H2 style={styles.h2}>{checkedInUser.username}</H2>
+                <Text style={{ lineHeight: 20 }}>{checkedInUser.pronoun}</Text>
+                <Text style={{ lineHeight: 20 }}>
+                  {checkedInUser.orientation}
+                </Text>
                 <Text style={{ lineHeight: 20 }}>
                   {distance} kilometers away
                 </Text>
@@ -172,9 +186,7 @@ function MarkerModal({
             <Button
               style={{ width: 280, marginTop: 30 }}
               title="Visit Profile"
-              onPress={() =>
-                navigation.navigate(routes.VISITPROFILE, { user, distance })
-              }
+              onPress={handlePress}
             />
           </ScrollView>
         </Animated.View>
