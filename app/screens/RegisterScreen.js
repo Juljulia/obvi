@@ -18,10 +18,10 @@ import {
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
   password: Yup.string().required().min(4).label("Password"),
-  passwordConfirmation: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Passwords must match"
-  ),
+  passwordConfirmation: Yup.string()
+    .required()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .label("Verify password"),
 });
 
 function RegisterScreen({ navigation }) {
