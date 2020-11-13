@@ -15,20 +15,11 @@ function AppButton({
 }) {
   return (
     <TouchableOpacity
-      style={[
-        styles.button,
-        { backgroundColor: colors[color] },
-        styles.disabledButton(disabledStyle),
-        style,
-      ]}
+      style={[styles.button, { backgroundColor: colors[color] }, style]}
       onPress={onPress}
       {...otherProps}
     >
-      <Text
-        style={[styles.text, styles.disabledText(disabledStyle), textStyle]}
-      >
-        {title}
-      </Text>
+      <Text style={[styles.text, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 }
@@ -59,22 +50,6 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: colors.white,
   },
-  disabledButton: (disabledStyle) =>
-    disabledStyle && {
-      backgroundColor: colors.light,
-      backgroundColor: "transparent",
-      borderWidth: 0.8,
-      overflow: "hidden",
-      shadowColor: "#BECDE2",
-      shadowRadius: 10,
-      shadowOpacity: 0.8,
-      borderColor: "#d8e0ed",
-      shadowOffset: { width: -20, height: 10 },
-    },
-  disabledText: (disabledStyle) =>
-    disabledStyle && {
-      color: colors.mediumGrey,
-    },
 });
 
 export default AppButton;
