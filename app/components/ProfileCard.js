@@ -38,15 +38,15 @@ function ProfileCard({
       {showPronoun && <Text>{pronoun}</Text>}
       {showOrientation && <Text>{orientation}</Text>}
       <View style={{ alignItems: "flex-start", paddingTop: 8 }}>
-        <View style={styles.info}>
-          <Image
-            source={require("../assets/pin.png")}
-            style={styles.pin}
-          ></Image>
-          <Text style={{ lineHeight: 25 }}>
-            {distance ? distance : 0} kilometers away
-          </Text>
-        </View>
+        {distance && (
+          <View style={styles.info}>
+            <Image
+              source={require("../assets/pin.png")}
+              style={styles.pin}
+            ></Image>
+            <Text style={{ lineHeight: 25 }}>{distance} kilometers away</Text>
+          </View>
+        )}
         <View style={styles.info}>
           <Image
             source={require("../assets/checked-in.png")}

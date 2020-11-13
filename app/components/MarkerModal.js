@@ -39,6 +39,7 @@ function MarkerModal({
   activeTime,
   duration,
   geoLocation,
+  newCheckIn,
 }) {
   const [showModal, setShowModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
@@ -78,13 +79,19 @@ function MarkerModal({
     }
   }, [geoLocation]);
 
+  useEffect(() => {
+    if (newCheckIn) {
+      setShowMore(true);
+    }
+  }, [newCheckIn]);
+
   const handlePress = () => {
     if (user.uid === checkedInUser.uid) {
       navigation.navigate(routes.ACCOUNT);
     } else {
       navigation.navigate(routes.VISITPROFILE, {
         user: checkedInUser,
-        distance,
+        ...(distance && { distance }),
       });
     }
   };
@@ -119,9 +126,11 @@ function MarkerModal({
                 <Text style={{ lineHeight: 20 }}>
                   {checkedInUser.orientation}
                 </Text>
-                <Text style={{ lineHeight: 20 }}>
-                  {distance} kilometers away
-                </Text>
+                {distance && (
+                  <Text style={{ lineHeight: 20 }}>
+                    {distance} kilometers away
+                  </Text>
+                )}
               </View>
               <View style={styles.checkinInfo}>
                 <View style={styles.checkedIn}>
