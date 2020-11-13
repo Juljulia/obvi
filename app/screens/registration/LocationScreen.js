@@ -91,14 +91,14 @@ function LocationScreen({ navigation, route }) {
           {imageData ? (
             <Image
               source={{ uri: imageUri }}
-              style={{ width: 65, height: 65, borderRadius: 75 }}
+              style={{ width: 60, height: 60, borderRadius: 75 }}
             />
           ) : (
             <Image
               source={require("../../assets/default.png")}
               style={{
-                width: 62,
-                height: 62,
+                width: 60,
+                height: 60,
               }}
             />
           )}
