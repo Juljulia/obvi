@@ -11,7 +11,7 @@ import useLocation from "../hooks/useLocation";
 import useAuth from "../auth/useAuth";
 import MapMarker from "./MapMarker";
 
-function Map({ initialRegion, parentCallback, pins, region }) {
+function Map({ initialRegion, parentCallback, pins, newCheckIn, region }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalInfo, setModalInfo] = useState({});
   const [loggedInUser, setLoggedInUser] = useState();
@@ -19,7 +19,7 @@ function Map({ initialRegion, parentCallback, pins, region }) {
   const location = useLocation();
   const { user } = useAuth();
 
-  const passMarkerLocation = (pin) => {
+  const childCallback = (pin) => {
     parentCallback(pin.location);
   };
 
@@ -31,6 +31,13 @@ function Map({ initialRegion, parentCallback, pins, region }) {
   useEffect(() => {
     getLoggedInUser();
   }, []);
+
+  useEffect(() => {
+    if (newCheckIn) {
+      getMarkerInfo(newCheckIn);
+      childCallback(newCheckIn);
+    }
+  }, [newCheckIn]);
 
   const getMarkerInfo = async (pin) => {
     const user = await usersApi.getUser(pin.userId);
@@ -58,8 +65,11 @@ function Map({ initialRegion, parentCallback, pins, region }) {
           pins.map((pin, i) => (
             <Marker
               key={i}
-              coordinate={pin.location}
-              onPress={() => getMarkerInfo(pin) + passMarkerLocation(pin)}
+              coordinate={{
+                latitude: pin.location.latitude - Math.random() * 0.0005 + 0,
+                longitude: pin.location.longitude - Math.random() * 0.0005 + 0,
+              }}
+              onPress={() => getMarkerInfo(pin) + childCallback(pin)}
             >
               <ProfileImage
                 imageUrl={pin.imageUrl}
@@ -81,6 +91,7 @@ function Map({ initialRegion, parentCallback, pins, region }) {
         duration={modalInfo.duration}
         geoLocation={modalInfo.location}
         user={checkedInUser}
+        newCheckIn={newCheckIn}
       />
     </>
   );
