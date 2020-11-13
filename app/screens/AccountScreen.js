@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import * as firebase from "firebase";
+const db = firebase.firestore();
 
 import H2 from "../components/typography/H2";
 import NavArrow from "../components/nav/NavArrow";
@@ -13,6 +15,7 @@ import FriendsScroll from "../components/FriendsScroll";
 function AccountScreen({ navigation }) {
   const { user } = useAuth();
   const [userData, setUserData] = useState({});
+  const [checkIns, setCheckIns] = useState([]);
   const {
     username,
     imageData,
@@ -31,6 +34,29 @@ function AccountScreen({ navigation }) {
   useEffect(() => {
     getUserData();
   }, []);
+
+  useEffect(() => {
+    if (userData.uid !== undefined) {
+      getCheckIns();
+    }
+  }, [userData]);
+
+  const getCheckIns = async () => {
+    let checkInsArr = [];
+    await db
+      .collection("checkIns")
+      .where("userId", "==", userData.uid)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          checkInsArr.push(doc.data());
+        });
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+    setCheckIns(checkInsArr);
+  };
 
   return (
     <ScrollView>
@@ -71,10 +97,17 @@ function AccountScreen({ navigation }) {
           />
           <View style={styles.innerContainer}>
             <H2 style={styles.innerTitle}>Frequent check-ins</H2>
-            <Text style={{ lineHeight: 25, textDecorationLine: "underline" }}>
-              Ocianen Folk, Frilagret, Stadsbiblioteket, Super Sushi, Dansforum,
-              Condeco, Streetlife
-            </Text>
+            <View style={{ flexDirection: "row" }}>
+              {checkIns &&
+                checkIns.map((checkIn, key) => (
+                  <Text
+                    key={key}
+                    style={{ lineHeight: 25, textDecorationLine: "underline" }}
+                  >
+                    {checkIn.name + " "}
+                  </Text>
+                ))}
+            </View>
           </View>
           <View>
             <H2 style={styles.innerTitle}>Calendar</H2>
