@@ -21,7 +21,7 @@ function VisitProfileScreen({ navigation, route }) {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <NavArrow goBack={true}></NavArrow>
         </TouchableOpacity>
-        <ScreenTitle>My Profile</ScreenTitle>
+        <ScreenTitle>Profile</ScreenTitle>
         <View style={styles.container}>
           <ProfileCard
             name={otherUser.username}
@@ -46,10 +46,12 @@ function VisitProfileScreen({ navigation, route }) {
             }}
             title="+ Add friend"
           />
-          <View style={styles.innerContainer}>
-            <H2 style={styles.innerTitle}>Passions</H2>
-            <Text style={{ lineHeight: 25 }}>{otherUser.passions}</Text>
-          </View>
+          {otherUser.passions && (
+            <View style={styles.innerContainer}>
+              <H2 style={styles.innerTitle}>Passions</H2>
+              <Text style={{ lineHeight: 25 }}>{otherUser.passions}</Text>
+            </View>
+          )}
           <FriendsScroll
             title="Mutual friends"
             style={styles.innerContainer}
@@ -87,6 +89,7 @@ function VisitProfileScreen({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 10,
     paddingHorizontal: 30,
     paddingBottom: 60,
     position: "relative",
