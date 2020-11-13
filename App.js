@@ -29,6 +29,7 @@ import { navigationRef } from "./app/navigation/rootNavigation";
 import RegisterNavigator from "./app/navigation/RegisterNavigator";
 import { ActivityIndicator } from "react-native";
 import Screen from "./app/components/Screen";
+import colors from "./app/config/colors";
 
 export default function App() {
   const [user, setUser] = useState();
@@ -72,8 +73,8 @@ export default function App() {
     return <AppLoading />;
   } else if (user && userData === null) {
     return (
-      <Screen>
-        <ActivityIndicator size="large" />
+      <Screen style={{ justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color={colors.primary} />
       </Screen>
     );
   } else if (user && userData === "") {

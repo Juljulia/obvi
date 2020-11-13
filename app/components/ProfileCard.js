@@ -35,8 +35,8 @@ function ProfileCard({
       </ImageBackground>
 
       <H2 style={{ paddingTop: 32 }}>{name}</H2>
-      {showPronoun && <Text>{pronoun}</Text>}
-      {showOrientation && <Text>{orientation}</Text>}
+      {showPronoun && pronoun && <Text>{pronoun}</Text>}
+      {showOrientation && orientation && <Text>{orientation}</Text>}
       <View style={{ alignItems: "flex-start", paddingTop: 8 }}>
         {distance && (
           <View style={styles.info}>
