@@ -17,6 +17,7 @@ import Screen from "../../components/Screen";
 import Text from "../../components/typography/Text";
 import H2 from "../../components/typography/H2";
 import useAuth from "../../auth/useAuth";
+import UploadScreen from "../UploadScreen";
 
 function LocationScreen({ navigation, route }) {
   const {
@@ -32,6 +33,7 @@ function LocationScreen({ navigation, route }) {
   const [infoVisible, setInfoVisible] = useState(false);
   const { user } = useAuth();
   const db = firebase.firestore();
+  const [uploadVisible, setUploadVisible] = useState(false);
 
   const userInfo = {
     orientation,
@@ -48,7 +50,10 @@ function LocationScreen({ navigation, route }) {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <NavArrow style={{ marginTop: 50 }} onPress={addUserInfo} />
+        <NavArrow
+          style={{ marginTop: 50 }}
+          onPress={() => setUploadVisible(true)}
+        />
       ),
     });
   }, [navigation]);
@@ -61,7 +66,7 @@ function LocationScreen({ navigation, route }) {
       console.log(error);
     }
 
-    addUserInfo();
+    setUploadVisible(true);
   };
 
   const addUserInfo = async () => {
@@ -78,6 +83,7 @@ function LocationScreen({ navigation, route }) {
 
   return (
     <Screen>
+      <UploadScreen onDone={addUserInfo} visible={uploadVisible} />
       <ImageBackground
         source={require("../../assets/location-background.png")}
         style={styles.imageBackground}
