@@ -96,6 +96,7 @@ function AccountScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 10,
     paddingHorizontal: 30,
     paddingBottom: 60,
     position: "relative",
