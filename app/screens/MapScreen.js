@@ -12,6 +12,7 @@ function MapScreen({ navigation, route }) {
   const [checkIns, setCheckIns] = useState([]);
   const [initialRegion, setInitialRegion] = useState(null);
   const [region, setRegion] = useState(null);
+  const [newCheckIn, setNewCheckIn] = useState();
 
   const db = firebase.firestore();
   let location = useLocation();
@@ -60,6 +61,12 @@ function MapScreen({ navigation, route }) {
     }
   }, [route.params?.update]);
 
+  useEffect(() => {
+    if (route.params?.newCheckIn) {
+      setNewCheckIn(route.params?.newCheckIn);
+    }
+  }, [route.params?.newCheckIn]);
+
   return (
     <Screen style={styles.container}>
       <View style={styles.container}>
@@ -69,6 +76,7 @@ function MapScreen({ navigation, route }) {
           region={region}
           pins={checkIns}
           parentCallback={handleCallback}
+          newCheckIn={newCheckIn && newCheckIn}
         ></Map>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
