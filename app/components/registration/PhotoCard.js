@@ -7,7 +7,15 @@ import Text from "../typography/Text";
 import ImagePicker from "./ImagePicker";
 import { screen } from "../../config/dimensions";
 
-function PhotoCard({ name, pronoun, orientation, imageUri, onChangeImage }) {
+function PhotoCard({
+  name,
+  pronoun,
+  orientation,
+  imageUri,
+  onChangeImage,
+  showPronoun,
+  showOrientation,
+}) {
   return (
     <View style={styles.container}>
       <Image
@@ -16,8 +24,8 @@ function PhotoCard({ name, pronoun, orientation, imageUri, onChangeImage }) {
       />
       <ImagePicker imageUri={imageUri} onChangeImage={onChangeImage} />
       <H2 style={{ paddingTop: 32 }}>{name}</H2>
-      <Text>{pronoun}</Text>
-      <Text>{orientation}</Text>
+      {showPronoun && <Text>{pronoun}</Text>}
+      {showOrientation && <Text>{orientation}</Text>}
       <View style={{ alignItems: "flex-start", paddingTop: 8 }}>
         <View style={styles.info}>
           <Image
@@ -49,6 +57,7 @@ const styles = StyleSheet.create({
     width: screen.width * 0.82,
     marginBottom: 32,
     paddingTop: 50,
+    paddingHorizontal: 20,
     shadowColor: "#88A0B7",
     shadowOffset: {
       width: 7,
