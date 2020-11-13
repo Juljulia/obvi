@@ -54,7 +54,6 @@ function Map({ initialRegion, parentCallback, pins, newCheckIn, region }) {
         initialRegion={initialRegion}
         region={region}
         customMapStyle={mapStyle}
-        onPanDrag={() => setModalVisible(false)}
       >
         {loggedInUser && location && (
           <Marker coordinate={location}>
@@ -92,6 +91,7 @@ function Map({ initialRegion, parentCallback, pins, newCheckIn, region }) {
         geoLocation={modalInfo.location}
         user={checkedInUser}
         newCheckIn={newCheckIn}
+        onPress={() => setModalVisible(false)}
       />
     </>
   );
