@@ -277,7 +277,9 @@ const styles = StyleSheet.create({
     width: 205,
     height: 205,
   },
-  checkedInLink: (showMore) => !showMore && { textDecorationLine: "underline" },
+  checkedInLink: (showMore) => ({
+    textDecorationLine: showMore ? "none" : "underline",
+  }),
 });
 
 export default MarkerModal;

@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.basicGrey,
     alignItems: "center",
     justifyContent: "center",
+    elevation: 4,
   },
 });
 
