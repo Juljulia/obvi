@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 
 import H2 from "../components/typography/H2";
@@ -12,7 +12,7 @@ import colors from "../config/colors";
 import FriendsScroll from "../components/FriendsScroll";
 
 function VisitProfileScreen({ navigation, route }) {
-  const user = route.params.user;
+  const otherUser = route.params.user;
   const distance = route.params.distance;
 
   return (
@@ -24,12 +24,12 @@ function VisitProfileScreen({ navigation, route }) {
         <ScreenTitle>My Profile</ScreenTitle>
         <View style={styles.container}>
           <ProfileCard
-            name={user.username}
-            showPronoun={user.showPronoun}
-            showOrientation={user.showOrientation}
-            pronoun={user.pronoun}
-            orientation={user.orientation}
-            imageData={user.imageData}
+            name={otherUser.username}
+            showPronoun={otherUser.showPronoun}
+            showOrientation={otherUser.showOrientation}
+            pronoun={otherUser.pronoun}
+            orientation={otherUser.orientation}
+            imageData={otherUser.imageData}
             distance={distance}
           />
           <Button style={{ width: 280 }} title="Message" />
@@ -48,7 +48,7 @@ function VisitProfileScreen({ navigation, route }) {
           />
           <View style={styles.innerContainer}>
             <H2 style={styles.innerTitle}>Passions</H2>
-            <Text style={{ lineHeight: 25 }}>{user.passions}</Text>
+            <Text style={{ lineHeight: 25 }}>{otherUser.passions}</Text>
           </View>
           <FriendsScroll
             title="Mutual friends"
