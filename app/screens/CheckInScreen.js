@@ -45,6 +45,7 @@ function CheckInScreen({ navigation }) {
   const [closeList, setCloseList] = useState(true);
   const [uploadVisible, setUploadVisible] = useState(false);
   const [checkinDuration, setCheckinDuration] = useState([1]);
+  const [newCheckIn, setNewChechIn] = useState();
   const db = firebase.firestore();
 
   useEffect(() => {
@@ -120,6 +121,7 @@ function CheckInScreen({ navigation }) {
         console.error("Error writing document: ", error);
       });
 
+    setNewChechIn(checkIn);
     setUploadVisible(true);
 
     //Reset values
@@ -130,7 +132,7 @@ function CheckInScreen({ navigation }) {
   };
 
   const navigate = () => {
-    navigation.navigate(routes.MAP, { update: true });
+    navigation.navigate(routes.MAP, { update: true, newCheckIn });
     setUploadVisible(false);
   };
 
