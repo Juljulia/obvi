@@ -123,11 +123,17 @@ function MarkerModal({
             <View style={styles.info}>
               <View style={styles.userInfo}>
                 <H2 style={styles.h2}>{checkedInUser.username}</H2>
-                <Text style={{ lineHeight: 20 }}>{checkedInUser.pronoun}</Text>
-                <Text style={{ lineHeight: 20 }}>
-                  {checkedInUser.orientation}
-                </Text>
-                {distance && (
+                {checkedInUser.pronoun && (
+                  <Text style={{ lineHeight: 20 }}>
+                    {checkedInUser.pronoun}
+                  </Text>
+                )}
+                {checkedInUser.orientation && (
+                  <Text style={{ lineHeight: 20 }}>
+                    {checkedInUser.orientation}
+                  </Text>
+                )}
+                {distance !== undefined && (
                   <Text style={{ lineHeight: 20 }}>
                     {distance} kilometers away
                   </Text>
