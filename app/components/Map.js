@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet } from "react-native";
 import "firebase/firestore";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
@@ -11,16 +11,28 @@ import useLocation from "../hooks/useLocation";
 import useAuth from "../auth/useAuth";
 import MapMarker from "./MapMarker";
 
-function Map({ initialRegion, parentCallback, pins, newCheckIn, region }) {
+function Map({ initialRegion, pins, newCheckIn }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalInfo, setModalInfo] = useState({});
   const [loggedInUser, setLoggedInUser] = useState();
   const [checkedInUser, setCheckedInUser] = useState();
   const location = useLocation();
   const { user } = useAuth();
+  const mapRef = useRef();
 
-  const childCallback = (pin) => {
-    parentCallback(pin.location);
+  const deltas = {
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.0121,
+  };
+
+  const animateToRegion = (pin) => {
+    mapRef.current.animateToRegion(
+      {
+        ...pin.location,
+        ...deltas,
+      },
+      700
+    );
   };
 
   const getLoggedInUser = async () => {
@@ -35,7 +47,7 @@ function Map({ initialRegion, parentCallback, pins, newCheckIn, region }) {
   useEffect(() => {
     if (newCheckIn) {
       getMarkerInfo(newCheckIn);
-      childCallback(newCheckIn);
+      animateToRegion(newCheckIn);
     }
   }, [newCheckIn]);
 
@@ -49,11 +61,11 @@ function Map({ initialRegion, parentCallback, pins, newCheckIn, region }) {
   return (
     <>
       <MapView
-        style={styles.map}
-        provider={PROVIDER_GOOGLE}
-        initialRegion={initialRegion}
-        region={region}
         customMapStyle={mapStyle}
+        initialRegion={initialRegion}
+        provider={PROVIDER_GOOGLE}
+        ref={mapRef}
+        style={styles.map}
       >
         {loggedInUser && location && (
           <Marker coordinate={location}>
@@ -68,7 +80,7 @@ function Map({ initialRegion, parentCallback, pins, newCheckIn, region }) {
                 latitude: pin.location.latitude - Math.random() * 0.0005 + 0,
                 longitude: pin.location.longitude - Math.random() * 0.0005 + 0,
               }}
-              onPress={() => getMarkerInfo(pin) + childCallback(pin)}
+              onPress={() => getMarkerInfo(pin) + animateToRegion(pin)}
             >
               <ProfileImage
                 imageUrl={pin.imageUrl}

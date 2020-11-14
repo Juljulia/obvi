@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import * as firebase from "firebase";
 
@@ -11,19 +11,13 @@ import ScreenTitle from "../components/ScreenTitle";
 function MapScreen({ navigation, route }) {
   const [checkIns, setCheckIns] = useState([]);
   const [initialRegion, setInitialRegion] = useState(null);
-  const [region, setRegion] = useState(null);
   const [newCheckIn, setNewCheckIn] = useState();
-
   const db = firebase.firestore();
   let location = useLocation();
 
   const deltas = {
     latitudeDelta: 0.015,
     longitudeDelta: 0.0121,
-  };
-
-  const handleCallback = (markerLocation) => {
-    setRegion({ ...markerLocation, ...deltas });
   };
 
   const getCheckIns = async () => {
@@ -73,9 +67,7 @@ function MapScreen({ navigation, route }) {
         <Map
           style={styles.map}
           initialRegion={initialRegion}
-          region={region}
           pins={checkIns}
-          parentCallback={handleCallback}
           newCheckIn={newCheckIn && newCheckIn}
         ></Map>
         <TouchableOpacity
