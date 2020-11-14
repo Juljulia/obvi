@@ -40,6 +40,7 @@ function MarkerModal({
   duration,
   geoLocation,
   newCheckIn,
+  onPress,
 }) {
   const [showModal, setShowModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
@@ -102,7 +103,7 @@ function MarkerModal({
         <Animated.View style={styles.innerContainer}>
           <TouchableOpacity
             style={{ position: "absolute", top: 15, height: 20, width: 50 }}
-            onPress={() => setShowModal(false)}
+            onPress={onPress}
           >
             <View style={styles.closeButton} />
           </TouchableOpacity>
