@@ -15,6 +15,7 @@ const AppNavigator = () => {
     <Tab.Navigator
       mode="modal"
       tabBarOptions={{
+        keyboardHidesTabBar: true,
         showLabel: false,
         style: {
           backgroundColor: colors.white,
