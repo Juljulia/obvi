@@ -1,7 +1,9 @@
 import { LogBox } from "react-native";
 
-// // Ignore log notification by message:
-// LogBox.ignoreLogs(['Warning: ...']);
+// // Ignore Warning setting a timer for developing in android
+LogBox.ignoreLogs([
+  "Setting a timer for a long period of time, i.e. multiple minutes, is a performance and correctness issue on Android as it keeps the",
+]);
 
 // Ignore all log notifications:
 LogBox.ignoreAllLogs();
