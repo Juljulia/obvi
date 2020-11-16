@@ -66,7 +66,7 @@ function Card({
                 style={{ marginRight: 2 }}
                 size={18}
                 name="autorenew"
-                color={isShared ? colors.basicPurple : colors.mediumGrey}
+                color={isShared ? colors.primary : colors.mediumGrey}
               />
               <Text>{shared}</Text>
             </View>
