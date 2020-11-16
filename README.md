@@ -56,4 +56,4 @@ $ expo start
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under [the MIT License](https://github.com/Juljulia/obvi/blob/master/LICENSE).
