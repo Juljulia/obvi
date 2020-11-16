@@ -2,7 +2,7 @@
 
 <div style="display: flex">
 <img src="./reg.gif" style="display: inline-block" width="250px">
-<img src="./welcome.png" style="display: inline-block" width="250px">
+<img src="./start.png" style="display: inline-block" width="250px">
 <img src="./checkin.gif" style="display: inline-block " width="250px">
 </div>
 
