@@ -135,7 +135,7 @@ function HomeScreen({ navigation }) {
               <NavIcon icon={require("../assets/icons/calender.png")} />
               <NavIcon icon={require("../assets/icons/chat.png")} />
             </View>
-            <View style={styles.cardContainer}>
+            <View>
               <H2 style={styles.heading}>Community forum</H2>
               <View style={styles.inputContainer}>
                 <Image source={require("../assets/Camera.png")} />
@@ -180,7 +180,6 @@ function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  cardContainer: {},
   container: {
     flex: 1,
   },

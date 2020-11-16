@@ -142,7 +142,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
   },
-  logo: {},
   navButton: {
     backgroundColor: colors.basicGrey,
     width: 280,
