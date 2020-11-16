@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import colors from "../../config/colors";
 
+import colors from "../../config/colors";
 import Text from "./Text";
 
 function H2({ children, style }) {

@@ -36,7 +36,7 @@ function InfoModal({ onPress, onPressButton, visible }) {
 
 const styles = StyleSheet.create({
   arrow: {
-    marginBottom: 14, //10 + 14 button has 10 marginVertical
+    marginBottom: 14,
   },
   container: {
     alignItems: "center",
