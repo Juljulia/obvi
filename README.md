@@ -1,10 +1,10 @@
 # Obvi
 
-<div style="display: flex">
+<p align="center">
 <img src="./reg.gif" style="display: inline-block" width="250px">
 <img src="./start.png" style="display: inline-block" width="250px">
 <img src="./checkin.gif" style="display: inline-block " width="250px">
-</div>
+</p>
 
 ## A communication mobile application for HBTQIA+
 
@@ -41,4 +41,4 @@ $ expo start
 
 ## License
 
-This project is licensed under [the MIT License](https://github.com/Juljulia/obvi/blob/master/LICENSE).
+This project is licensed under the MIT License.
