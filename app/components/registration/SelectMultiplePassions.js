@@ -22,9 +22,9 @@ function SelectMultiplePassions({ group, onSelectedValuesChange }) {
       }}
       highLightStyle={{
         //not selected
-        borderColor: colors.light,
-        backgroundColor: colors.light,
-        textColor: colors.medium,
+        borderColor: colors.basicGrey,
+        backgroundColor: colors.basicGrey,
+        textColor: colors.text,
 
         //selected
         borderTintColor: colors.primary,

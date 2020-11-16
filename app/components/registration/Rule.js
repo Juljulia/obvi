@@ -12,22 +12,18 @@ function Rule({ title, text }) {
         <Image source={require("../../assets/rules-check.png")}></Image>
         <H2 style={{ paddingLeft: 24 }}>{title}</H2>
       </View>
-      <Text
-        style={{
-          lineHeight: 25,
-          paddingTop: 8,
-          paddingLeft: 4,
-          paddingRight: screen.width > 400 ? 40 : 0,
-        }}
-      >
-        {text}
-      </Text>
+      <Text style={styles.text}>{text}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  text: {
+    lineHeight: 25,
+    paddingTop: 8,
+    paddingLeft: 4,
+    paddingRight: screen.width > 400 ? 40 : 0,
+  },
 });
 
 export default Rule;
