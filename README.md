@@ -13,15 +13,18 @@
 This is a mobile application that is build with React Native, Expo and Firebase. The functionalites are to register a user, the ability to create a check-in and get search suggestions close to your location. You can also see other users check-ins on a map and visit their profile page.
 
 ### Features
-Below you'll find a list of user stories the Picture This application must include.
 
-- [x] As a user I should be able to create an account.
+- [x] As a user you are able to create an account.
 
-- [x] As a user I should be able to login.
+- [x] As a user you are able to login and logout.
 
-- [x] As a user I should be able to logout.
+- [x] As a user you are able to check in at a choosen location.
 
-- [x] As a user I should be able to edit my account email, password and biography.
+- [x] As a user your are able to see other user's check-ins on a map.
+
+- [x] As a user your are able to visit other user's profiles, and see their recent check-ins.
+
+- [x] As a user your are able to see your own profile, and see your recent check-ins.
 
 
 ## Installation
