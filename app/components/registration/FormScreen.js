@@ -29,16 +29,13 @@ function FormScreen({
             style={buttonStyle}
           />
         ) : (
-          <>
-            <Image
-              source={require("../../assets/disabled-button.png")}
-              style={{
-                alignSelf: "center",
-                marginVertical: 10,
-              }}
-            ></Image>
-            {/* <Button disabled={true} disabledStyle title="Continue" /> */}
-          </>
+          <Image
+            source={require("../../assets/disabled-button.png")}
+            style={{
+              alignSelf: "center",
+              marginVertical: 10,
+            }}
+          ></Image>
         )}
       </View>
       <Image
