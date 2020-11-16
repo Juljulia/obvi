@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import * as firebase from "firebase";
+const db = firebase.firestore();
 
 import H2 from "../components/typography/H2";
 import NavArrow from "../components/nav/NavArrow";
@@ -14,6 +16,42 @@ import FriendsScroll from "../components/FriendsScroll";
 function VisitProfileScreen({ navigation, route }) {
   const otherUser = route.params.user;
   const distance = route.params.distance;
+  const [checkIns, setCheckIns] = useState([]);
+
+  useEffect(() => {
+    if (otherUser.uid !== undefined) {
+      getCheckIns();
+    }
+  }, [otherUser]);
+
+  const getCheckIns = async () => {
+    let checkInsArr = [];
+    await db
+      .collection("checkIns")
+      .where("userId", "==", otherUser.uid)
+      .limit(8)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          checkInsArr.push(doc.data());
+        });
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+
+    setCheckIns(checkInsArr.reverse());
+  };
+
+  for (let i = 0; i < checkIns.length; i++) {
+    const element = checkIns[i];
+
+    for (let j = 0; j < checkIns.length; j++) {
+      if (i !== j && element.name === checkIns[j].name) {
+        checkIns.splice(i, 1);
+      }
+    }
+  }
 
   return (
     <ScrollView>
@@ -63,11 +101,18 @@ function VisitProfileScreen({ navigation, route }) {
             ]}
           />
           <View style={styles.innerContainer}>
-            <H2 style={styles.innerTitle}>Frequent check-ins</H2>
-            <Text style={{ lineHeight: 25, textDecorationLine: "underline" }}>
-              Ocianen, Folk, Frilagret, Stadsbiblioteket, Super Sushi,
-              Dansforum, Condeco, Streetlife
-            </Text>
+            <H2 style={styles.innerTitle}>Recent check-ins</H2>
+            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+              {checkIns &&
+                checkIns.map((checkIn, key) => (
+                  <Text
+                    key={key}
+                    style={{ lineHeight: 25, textDecorationLine: "underline" }}
+                  >
+                    {checkIn.name + "  "}
+                  </Text>
+                ))}
+            </View>
           </View>
           <View>
             <H2 style={styles.innerTitle}>Calendar</H2>

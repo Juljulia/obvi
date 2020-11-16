@@ -46,6 +46,7 @@ function AccountScreen({ navigation }) {
     await db
       .collection("checkIns")
       .where("userId", "==", userData.uid)
+      .limit(8)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -55,8 +56,19 @@ function AccountScreen({ navigation }) {
       .catch((error) => {
         console.log("Error getting documents: ", error);
       });
-    setCheckIns(checkInsArr);
+
+    setCheckIns(checkInsArr.reverse());
   };
+
+  for (let i = 0; i < checkIns.length; i++) {
+    const element = checkIns[i];
+
+    for (let j = 0; j < checkIns.length; j++) {
+      if (i !== j && element.name === checkIns[j].name) {
+        checkIns.splice(i, 1);
+      }
+    }
+  }
 
   return (
     <ScrollView>
@@ -96,15 +108,15 @@ function AccountScreen({ navigation }) {
             ]}
           />
           <View style={styles.innerContainer}>
-            <H2 style={styles.innerTitle}>Frequent check-ins</H2>
-            <View style={{ flexDirection: "row" }}>
+            <H2 style={styles.innerTitle}>Recent check-ins</H2>
+            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
               {checkIns &&
                 checkIns.map((checkIn, key) => (
                   <Text
                     key={key}
                     style={{ lineHeight: 25, textDecorationLine: "underline" }}
                   >
-                    {checkIn.name + " "}
+                    {checkIn.name + "  "}
                   </Text>
                 ))}
             </View>
