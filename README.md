@@ -32,7 +32,7 @@ $ expo install
 $ expo start
 ```
 
-- Run the project on a [simulator](https://docs.expo.io/workflow/ios-simulator/) for ios or [emulator](https://docs.expo.io/workflow/android-studio-emulator/) for android. You can also run it from the Expo Client app. Here on [AppStore](https://apps.apple.com/se/app/expo-client/id982107779) or [Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_US&gl=US) You need to create an expo account, then from the Expo app choose the running Obvi project or scan the QR-code from your running local server.
+- Run the project on a [simulator](https://docs.expo.io/workflow/ios-simulator/) for ios or [emulator](https://docs.expo.io/workflow/android-studio-emulator/) for android. You can also run it from the Expo Client app. Here on [AppStore](https://apps.apple.com/se/app/expo-client/id982107779) or [Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_US&gl=US). You need to create an expo account, then from the Expo app choose the running Obvi project or scan the QR-code from your running local server.
 
 ## Authors
 
