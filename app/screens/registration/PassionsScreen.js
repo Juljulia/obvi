@@ -91,7 +91,6 @@ function PassionsScreen({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
   formScreen: {
     paddingTop: Platform.OS === "android" ? 25 : 50,
     paddingHorizontal: screen.width > 400 ? 30 : 15,

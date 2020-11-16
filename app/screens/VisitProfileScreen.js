@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 
 import H2 from "../components/typography/H2";
