@@ -1,6 +1,6 @@
 # Obvi
 
-<div style="display: flex;">
+<div style="display: flex; justify-content: center">
 <img src="./checkin.gif" style="display: inline-block" width="250px">
 <img src="./reg.gif" style="display: inline-block" width="250px">
 </div>
