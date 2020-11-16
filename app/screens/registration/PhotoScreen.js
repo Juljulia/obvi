@@ -96,8 +96,8 @@ function PhotoScreen({ navigation, route }) {
         function progress(snapshot) {
           // Observe state change events such as progress, pause, and resume
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-          let progress = snapshot.bytesTransferred / snapshot.totalBytes;
-          setProgress(progress);
+          let uploadProgress = snapshot.bytesTransferred / snapshot.totalBytes;
+          setProgress(uploadProgress);
         },
         function (error) {
           console.log(`Error uploading photo: ${error}`);
