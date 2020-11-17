@@ -24,8 +24,16 @@ function PhotoCard({
       />
       <ImagePicker imageUri={imageUri} onChangeImage={onChangeImage} />
       <H2 style={{ paddingTop: 32 }}>{name}</H2>
-      {showPronoun && <Text>{pronoun}</Text>}
-      {showOrientation && <Text>{orientation}</Text>}
+      <View style={{ paddingHorizontal: 24 }}>
+        {showPronoun && pronoun && (
+          <Text style={{ textAlign: "center", marginBottom: 4 }}>
+            {pronoun}
+          </Text>
+        )}
+        {showOrientation && orientation && (
+          <Text style={{ textAlign: "center" }}>{orientation}</Text>
+        )}
+      </View>
       <View style={{ alignItems: "flex-start", paddingTop: 8 }}>
         <View style={styles.info}>
           <Image
