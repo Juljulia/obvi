@@ -10,7 +10,7 @@
 
 <!-- ![Image description]() -->
 
-This is a mobile application that is build with React Native, Expo and Firebase. The functionalites are to register a user, the ability to create a check-in and get search suggestions close to your location. You can also see other users check-ins on a map and visit their profile page.
+This is a mobile application that is built with React Native, Expo and Firebase. The functionalities are to register a user, the ability to create a check-in and get search suggestions close to your location. You can also see other users check-ins on a map and visit their profile page.
 
 ### Features
 
