@@ -6,7 +6,7 @@
 <img src="./checkin.gif" style="display: inline-block " width="250px">
 </p>
 
-## A communication mobile application for HBTQIA+
+## A communication platform for HBTQIA+ as a mobile application 
 
 <!-- ![Image description]() -->
 
